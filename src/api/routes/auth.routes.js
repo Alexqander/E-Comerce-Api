@@ -4,7 +4,7 @@ import passport from 'passport';
 import '../middlewares/auth/google.js';
 
 const router = Router();
-//* /apiEcomerce/1.0/auth
+//* /apiEcomerce/1.0/auth/goggle
 router.get(
   '/google',
   passport.authenticate('auth-google', {
