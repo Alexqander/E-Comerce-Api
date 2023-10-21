@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
 
 // * encryptacion de contraseña
 export const encrypt = async (textPlain) => {

@@ -1,5 +1,5 @@
-import { validationResult } from "express-validator";
-import { getResponse400 } from "./Responses.js";
+import { validationResult } from 'express-validator';
+import { getResponse400 } from './Responses.js';
 
 export const validateResult = (req, res, next) => {
   try {

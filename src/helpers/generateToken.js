@@ -1,16 +1,16 @@
-import jwt from "jsonwebtoken";
-import config from "../config/index.js";
+import jwt from 'jsonwebtoken';
+import config from '../config/index.js';
 
 export const tokenSign = async (user, expiresIn) => {
   // ? Genera token
   return jwt.sign(
     {
       id: user.id, // ? Payload
-      roles: user.Roles,
+      roles: user.Roles
     },
     config.jwt.jwtSecret, // ? Clave secreta
     {
-      expiresIn, // ? Tiempo de expiracion
+      expiresIn // ? Tiempo de expiracion
     }
   );
 };

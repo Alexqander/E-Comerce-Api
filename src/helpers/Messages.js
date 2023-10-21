@@ -1,3 +1,3 @@
 export const getMessage = (error, data, message) => {
-  return { error: error, data: data, message: message };
+  return { error, data, message };
 };

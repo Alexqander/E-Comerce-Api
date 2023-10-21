@@ -2,12 +2,12 @@
 // ? este es el código de estado estándar “OK” para una solicitud HTTP correcta.
 // ?La respuesta que se devuelve depende de la solicitud
 
-import { NotFoundError } from "./handleErrors.js";
+import { NotFoundError } from './handleErrors.js';
 
 export function getResponse200(res, data, operation) {
   return res
     .status(200)
-    .json({ message: `succesful operation ${operation}`, data: data });
+    .json({ message: `succesful operation ${operation}`, data });
 }
 
 // ? Cádigo de estado 201:es el código de estado que confirma que la solicitud se realizó correctamente
@@ -17,7 +17,7 @@ export function getResponse200(res, data, operation) {
 export function getResponse201(res, resource, operation) {
   return res.status(201).json({
     message: `your resource ${resource} has been successfully ${operation}`,
-    data: resource,
+    data: resource
   });
 }
 
@@ -25,14 +25,14 @@ export function getResponse201(res, resource, operation) {
 // ? a un error de cliente.Los datos que faltan, la validación de dominio y el formato no válido
 // ? son algunos ejemplos que hacen que se envíe el código de estado 400.
 export function getResponse400(res, error) {
-  return res.status(400).json({ message: "Bad Request", error: error });
+  return res.status(400).json({ message: 'Bad Request', error });
 }
 
 // ? Código de estado 401: esta solicitud de código de estado se produce cuando se requiere autenticación,
 // ? pero se ha producido un error o no se ha proporcionado.
 
 export function getResponse401(res) {
-  return res.status(401).json({ message: "Unauthorized" });
+  return res.status(401).json({ message: 'Unauthorized' });
 }
 
 // ? Código de estado 403: muy similar al código de estado 401, se produce un código de estado 403
@@ -42,7 +42,7 @@ export function getResponse401(res) {
 export function getResponse403(res) {
   return res
     .status(403)
-    .json({ message: "You do not have permission to access this resource" });
+    .json({ message: 'You do not have permission to access this resource' });
 }
 export function getResponse404(res) {
   const error404 = new NotFoundError();
@@ -50,7 +50,7 @@ export function getResponse404(res) {
 }
 export function getResponse500(res, errors) {
   return res.status(500).json({
-    message: "ah ocurrido un error en el servidor",
-    errors,
+    message: 'ah ocurrido un error en el servidor',
+    errors
   });
 }
