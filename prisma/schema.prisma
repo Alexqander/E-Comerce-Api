@@ -46,4 +46,138 @@ model Order {
   Address   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String               @id @default(uuid())
+  email              String               @unique
+  name               String?
+  lastName           String?
+  password           String
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @updatedAt
+  role               Roles                @relation(fields: [roleId], references: [id])
+  roleId             String
+  products           Product[]
+  ShoppingCart       ShoppingCart[]
+  Reviews            Reviews[]
+  ShippingDirections ShippingDirections[]
+}
+
+model Roles {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model Product {
+  id             String         @id @default(uuid())
+  name           String
+  price          Float
+  description    String
+  stock          Int
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  category       Category       @relation(fields: [categoryId], references: [id])
+  categoryId     String
+  vendor         User           @relation(fields: [vendorId], references: [id])
+  vendorId       String
+  ShoppingCart   ShoppingCart?  @relation(fields: [shoppingCartId], references: [id])
+  shoppingCartId String?
+  Reviews        Reviews[]
+  Images         Images[]
+  OrderDetails   OrderDetails[]
+}
+
+model Category {
+  id          String        @id @default(uuid())
+  name        String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  products    Product[]
+  SubCategory SubCategory[]
+}
+
+model SubCategory {
+  id          String   @id @default(uuid())
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  description String
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
+}
+
+model ShoppingCart {
+  id          String    @id @default(uuid())
+  quantity    Int
+  orderStatus String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  products    Product[]
+}
+
+model Reviews {
+  id        String   @id @default(uuid())
+  rating    Int
+  comment   String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Images {
+  id        String  @id @default(uuid())
+  url       String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Orders {
+  id           String         @id @default(uuid())
+  orderedAt    DateTime       @default(now())
+  deliverDate  DateTime
+  orderStatus  String
+  OrderDetails OrderDetails[]
+}
+
+model OrderDetails {
+  id        String  @id @default(uuid())
+  quantity  Int
+  order     Orders  @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model ShippingDirections {
+  id             String   @id @default(uuid())
+  street         String
+  interiorNumber String
+  exteriorNumber String
+  city           String
+  state          String
+  postalCode     String
+  country        String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
 }
