@@ -12,3 +12,4 @@ export default async ({ app }) => {
   app.use('/apiEcomerce/1.0', indexRoutes);
   app.use(handlRoutesErrors);
 };
+// * http//localhost:3000/apiEcomerce/1.0/ -> indexRoutes

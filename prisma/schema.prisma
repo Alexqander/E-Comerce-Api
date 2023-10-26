@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
@@ -35,4 +36,14 @@ model Category {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   products  Product[]
+}
+
+
+model Order {
+  id        String   @id @default(uuid())
+  client    String
+  totalAmount Float
+  Address   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

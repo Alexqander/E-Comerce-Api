@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { sigIn } from '../controllers/auth.controller.js';
+import { sigIn } from '../controllers/auth/auth.controller.js';
 import passport from 'passport';
 import '../middlewares/auth/google.js';
 

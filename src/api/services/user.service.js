@@ -18,7 +18,8 @@ export const findUserByEmail = async (email) => {
       where: {
         email
       }
-    });
+    }); // * SELECT * FROM user WHERE email = email [{},{}]
+    // * null * undefined
 
     return user
       ? getMessage(false, user, 'Data successfully obtained')
