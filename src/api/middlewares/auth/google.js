@@ -1,7 +1,11 @@
 import passport from 'passport';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import config from '../../../config/index.js';
-import { createUser, findUserByEmail } from '../../services/user.service.js';
+import {
+  createUser,
+  findUserByEmail,
+  signInUser
+} from '../../services/user.service.js';
 
 passport.use(
   'auth-google',
@@ -13,8 +17,12 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, done) {
       const userExist = await findUserByEmail(profile.emails[0].value);
+
       if (!userExist.error) {
-        done(null, profile);
+        const userSession = await signInUser(profile.emails[0].value);
+        if (!userSession.error) {
+          done(userSession.error, null);
+        }
       } else {
         const savedUser = await createUser({
           name: profile.displayName,
@@ -22,7 +30,10 @@ passport.use(
           password: profile.id
         });
         if (!savedUser.error) {
-          done(null, profile);
+          const userSession = await signInUser(profile.emails[0].value);
+          if (!userSession.error) {
+            done(userSession.error, null);
+          }
         } else {
           done(savedUser.error, null);
         }
