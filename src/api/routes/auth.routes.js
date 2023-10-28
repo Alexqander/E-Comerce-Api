@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { sigIn } from '../controllers/auth/auth.controller.js';
+import {
+  logOutAllUserSessions,
+  loginUser,
+  logoutUser,
+  registerUser,
+  sigIn
+} from '../controllers/auth/auth.controller.js';
 import passport from 'passport';
 import '../middlewares/auth/google.js';
 
@@ -16,5 +22,10 @@ router.get(
   }),
   sigIn
 );
+
+router.post('/login', loginUser);
+router.post('/register', registerUser);
+router.get('/logOutSession', logoutUser);
+router.delete('/logOutAll/:id', logOutAllUserSessions);
 
 export default router;

@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 import config from '../config/index.js';
 
 export const tokenSign = async (user, expiresIn) => {
+  console.log('esta es la duracion del token ----->');
+  console.log(expiresIn);
   // ? Genera token
   return jwt.sign(
     {
@@ -10,7 +12,7 @@ export const tokenSign = async (user, expiresIn) => {
     },
     config.jwt.jwtSecret, // ? Clave secreta
     {
-      expiresIn // ? Tiempo de expiracion
+      expiresIn: config.jwt.jwtExpire // ? Tiempo de expiracion
     }
   );
 };

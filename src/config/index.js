@@ -13,8 +13,8 @@ export default {
     dbConnection: process.env.DATABASE_URL
   },
   jwt: {
-    jwtSecret: process.env.jwtSecret,
-    jwtExpire: process.env.JWT_EXPIRE_IN
+    jwtSecret: process.env.JWT_SECRET,
+    jwtExpire: process.env.JWT_EXPIRES_IN
   },
   stripe: {
     stripeSecret: process.env.STRIPE_SECRET,

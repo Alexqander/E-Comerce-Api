@@ -29,7 +29,24 @@ export const findUserByEmail = async (email) => {
   }
 };
 
-export const signInUser = async (email) => {
+export const findUserById = async (id) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id
+      }
+    }); // * SELECT * FROM user WHERE email = email [{},{}]
+    // * null * undefined
+
+    return user
+      ? getMessage(false, user, 'Data successfully obtained')
+      : getMessage(true, user, 'User not exists');
+  } catch (error) {
+    return getMessage(true, error.message, 'User not exists');
+  }
+};
+
+export const signInUser = async (email, token) => {
   try {
     const signedUser = await prisma.user.update({
       where: {
@@ -49,16 +66,22 @@ export const signInUser = async (email) => {
   }
 };
 
-export const createUser = async (user) => {
+export const createUser = async (user, idRole, passwordHash) => {
+  const { name, lastname, email } = user;
   try {
     const newUser = await prisma.user.create({
       data: {
-        ...user
+        name,
+        lastName: lastname,
+        email,
+        password: passwordHash,
+        roleId: idRole
       }
     });
 
     return getMessage(false, newUser, 'User created successfully');
   } catch (error) {
+    console.log(error);
     return getMessage(true, error.message, 'Error creating user');
   }
 };
@@ -66,12 +89,15 @@ export const createUser = async (user) => {
 //* Funcion que guarda el token sesion del usuario en la base de datos
 export const asignSessionToken = async (id, token, expiresAt) => {
   try {
-    /* const sessionUser = await Session.create({
-      token,
-      userId: id,
-      expiresAt,
-    }); */
-    return getMessage(false, sessionUser.toJSON(), 'ok');
+    const tokenUser = await prisma.sessions.create({
+      data: {
+        token,
+        expiresAt,
+        userId: id
+      }
+    });
+
+    return getMessage(false, tokenUser, 'ok');
   } catch (error) {
     console.log(error);
     return getMessage(true, error, 'error');

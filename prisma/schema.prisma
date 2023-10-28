@@ -19,7 +19,7 @@ model User {
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
   role               Roles                @relation(fields: [roleId], references: [id])
-  roleId             String
+  roleId             Int
   products           Product[]
   ShoppingCart       ShoppingCart[]
   Reviews            Reviews[]
@@ -29,19 +29,11 @@ model User {
 }
 
 model Roles {
-  id        String   @id @default(uuid())
+  id        Int   @id @default(autoincrement())
   name      String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt// Esto indica que una sesión solo puede pertenecer a un User
-}
-
-model Sessions {
-  id        String   @id @default(uuid())
-  token     String   @unique
-  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  users     User[]
 }
 
 model Product {
@@ -53,7 +45,7 @@ model Product {
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
   category             Category               @relation(fields: [categoryId], references: [id])
-  categoryId           String
+  categoryId           Int
   vendor               User                   @relation(fields: [vendorId], references: [id])
   vendorId             String
   ShoppingCart         ShoppingCart?          @relation(fields: [shoppingCartId], references: [id])
@@ -65,7 +57,7 @@ model Product {
 }
 
 model Category {
-  id          String        @id @default(uuid())
+  id          Int        @id @default(autoincrement())
   name        String
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
@@ -74,13 +66,13 @@ model Category {
 }
 
 model SubCategory {
-  id          String   @id @default(uuid())
+  id          Int   @id @default(autoincrement())
   name        String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   description String
   category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  String
+  categoryId  Int
 }
 
 model ShoppingCart {
@@ -164,3 +156,11 @@ model TransactionsProducts {
   quantity      Int
 }
 
+model Sessions {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  token     String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
