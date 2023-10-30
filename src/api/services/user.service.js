@@ -1,5 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import { getMessage } from '../../helpers/Messages.js';
+import config from '../../config/index.js';
+import { tokenSign } from '../../helpers/generateToken.js';
+import { asignSessionToken } from './session.service.js';
 
 const prisma = new PrismaClient();
 
@@ -46,23 +49,29 @@ export const findUserById = async (id) => {
   }
 };
 
-export const signInUser = async (email, token) => {
+export const signInUser = async (user) => {
   try {
-    const signedUser = await prisma.user.update({
-      where: {
-        email
-      },
-      data: {
-        sessions: {
-          create: {
-            token
-          }
-        }
-      }
-    });
-    return getMessage(false, signedUser, 'User created successfully');
+    const tokenSession = await tokenSign(user.id, config.jwt.jwtExpire);
+
+    const expiresAt = new Date();
+    const tokenDurationHours = Number(
+      process.env.JWT_EXPIRES_IN.replace('h', '')
+    );
+    expiresAt.setHours(expiresAt.getHours() + tokenDurationHours);
+    const userSession = await asignSessionToken(
+      user.id,
+      tokenSession,
+      expiresAt
+    );
+    const userWithoutPassword = { ...userSession };
+    delete userWithoutPassword.password;
+    return getMessage(
+      false,
+      { userWithoutPassword, token: userSession },
+      'User session successfully obtained'
+    );
   } catch (error) {
-    return getMessage(true, error.message, 'Error creating user');
+    return getMessage(true, error.message, 'Error creating session ');
   }
 };
 
@@ -85,21 +94,21 @@ export const createUser = async (user, idRole, passwordHash) => {
     return getMessage(true, error.message, 'Error creating user');
   }
 };
-
-//* Funcion que guarda el token sesion del usuario en la base de datos
-export const asignSessionToken = async (id, token, expiresAt) => {
+export const createGoogleUser = async (user, passwordHash) => {
+  const { name, lastname, email } = user;
   try {
-    const tokenUser = await prisma.sessions.create({
+    const newUser = await prisma.user.create({
       data: {
-        token,
-        expiresAt,
-        userId: id
+        name,
+        lastName: lastname,
+        email,
+        password: passwordHash
       }
     });
 
-    return getMessage(false, tokenUser, 'ok');
+    return getMessage(false, newUser, 'User created successfully');
   } catch (error) {
     console.log(error);
-    return getMessage(true, error, 'error');
+    return getMessage(true, error.message, 'Error creating user');
   }
 };

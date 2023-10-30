@@ -16,6 +16,23 @@ export const findSessionByToken = async (token) => {
     return getMessage(true, error.message, 'Session not exists');
   }
 };
+//* Funcion que guarda el token sesion del usuario en la base de datos
+export const asignSessionToken = async (id, token, expiresAt) => {
+  try {
+    const tokenUser = await prisma.sessions.create({
+      data: {
+        token,
+        expiresAt,
+        userId: id
+      }
+    });
+
+    return getMessage(false, tokenUser, 'ok');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, error, 'error');
+  }
+};
 export const deleteSession = async (id) => {
   try {
     const session = await prisma.sessions.delete({
@@ -30,7 +47,6 @@ export const deleteSession = async (id) => {
     return getMessage(true, error.message, 'Session not exists');
   }
 };
-
 export const clearAllSessionsByUser = async (userId) => {
   try {
     const sessions = await prisma.sessions.deleteMany({

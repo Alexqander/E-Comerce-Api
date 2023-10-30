@@ -2,10 +2,11 @@ import passport from 'passport';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
 import config from '../../../config/index.js';
 import {
-  createUser,
+  createGoogleUser,
   findUserByEmail,
   signInUser
 } from '../../services/user.service.js';
+import { encrypt } from '../../../helpers/handleBcrypt.js';
 
 passport.use(
   'auth-google',
@@ -17,20 +18,24 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, done) {
       const userExist = await findUserByEmail(profile.emails[0].value);
-
       if (!userExist.error) {
-        const userSession = await signInUser(profile.emails[0].value);
+        const userSession = await signInUser(userExist.data);
         if (!userSession.error) {
-          done(userSession.error, null);
+          done(null, { user: userSession.data, profile });
         }
       } else {
-        const savedUser = await createUser({
-          name: profile.displayName,
-          email: profile.emails[0].value,
-          password: profile.id
-        });
+        const passwordHash = await encrypt(profile.id);
+
+        const savedUser = await createGoogleUser(
+          {
+            email: profile.emails[0].value,
+            name: profile.name.givenName,
+            lastName: profile.name.familyName
+          },
+          passwordHash
+        );
         if (!savedUser.error) {
-          const userSession = await signInUser(profile.emails[0].value);
+          const userSession = await signInUser(savedUser.data);
           if (!userSession.error) {
             done(userSession.error, null);
           }

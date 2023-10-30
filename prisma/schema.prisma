@@ -18,14 +18,15 @@ model User {
   password           String
   createdAt          DateTime             @default(now())
   updatedAt          DateTime             @updatedAt
-  role               Roles                @relation(fields: [roleId], references: [id])
-  roleId             Int
+  role               Roles?                @relation(fields: [roleId], references: [id])
+  roleId             Int?
   products           Product[]
   ShoppingCart       ShoppingCart[]
   Reviews            Reviews[]
   ShippingDirections ShippingDirections[]
   Transactions       Transactions[]
   Sessions           Sessions[]
+  Orders             Orders[]
 }
 
 model Roles {
@@ -111,6 +112,8 @@ model Orders {
   deliverDate  DateTime
   orderStatus  String
   OrderDetails OrderDetails[]
+  user         User           @relation(fields: [userId], references: [id])
+  userId       String
 }
 
 model OrderDetails {

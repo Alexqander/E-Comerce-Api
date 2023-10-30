@@ -7,6 +7,6 @@ export const getUsers = async (req, res) => {
   if (users.error) {
     return getResponse500(users.data.message, res);
   } else {
-    getResponse200(res, users, 'ok');
+    getResponse200(res, users.data, 'ok');
   }
 };

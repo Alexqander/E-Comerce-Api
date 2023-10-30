@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 
 export const findOrders = async () => {
   try {
-    const orders = await prisma.order.findMany();
+    const orders = await prisma.orders.findMany();
     return getMessage(false, orders, 'Data successfully obtained');
   } catch (error) {
     return getMessage(true, error.message, 'Error al obtener los usuarios');
@@ -26,6 +26,8 @@ export const findOrderById = async (id) => {
     return getMessage(true, error.message, 'Order not exists');
   }
 };
+
+export const findOrderByUserId = async (id) => {};
 export const sevedOrder = async (order) => {
   try {
     const newOrder = await prisma.order.create({

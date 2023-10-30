@@ -5,7 +5,7 @@ import { handlRoutesErrors } from '../api/middlewares/utils/utils.js';
 import passport from 'passport';
 
 export default async ({ app }) => {
-  app.use(cors());
+  app.use(cors({ origin: 'http:/localhost:3001' }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(passport.initialize());

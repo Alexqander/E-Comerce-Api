@@ -8,18 +8,19 @@ import {
 } from '../../../helpers/Responses.js';
 import { tokenSign, verifyToken } from '../../../helpers/generateToken.js';
 import {
-  asignSessionToken,
   createUser,
   findUserByEmail,
   findUserById
 } from '../../services/user.service.js';
-import { compare, encrypt } from '../../../helpers/handleBcrypt.js';
-import config from '../../../config/index.js';
 import {
+  asignSessionToken,
   clearAllSessionsByUser,
   deleteSession,
   findSessionByToken
 } from '../../services/session.service.js';
+import { compare, encrypt } from '../../../helpers/handleBcrypt.js';
+import config from '../../../config/index.js';
+
 export const sigIn = async (req, res) => {
   return getResponse200(res, req.user, 'login');
 };
