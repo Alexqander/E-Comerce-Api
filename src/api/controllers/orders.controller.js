@@ -31,12 +31,12 @@ export const updateOrder = async (req, res) => {
   const order = await modifiedOrder(id, req.body);
   order.error
     ? getResponse500(order.data.message, res)
-    : getResponse200(res, order, 'ok');
+    : getResponse200(res, order.data, 'ok');
 };
 export const deleteOrder = async (req, res) => {
   const { id } = req.params;
   const order = await removeOrder(id);
   order.error
     ? getResponse500(order.data.message, res)
-    : getResponse200(res, order, 'ok');
+    : getResponse200(res, order.data, 'ok');
 };

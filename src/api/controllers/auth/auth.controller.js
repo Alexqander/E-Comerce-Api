@@ -2,16 +2,11 @@ import {
   getResponse200,
   getResponse201,
   getResponse401,
-  getResponse403,
   getResponse404,
   getResponse500
 } from '../../../helpers/Responses.js';
-import { tokenSign, verifyToken } from '../../../helpers/generateToken.js';
-import {
-  createUser,
-  findUserByEmail,
-  findUserById
-} from '../../services/user.service.js';
+import { tokenSign } from '../../../helpers/generateToken.js';
+import { createUser, findUserByEmail } from '../../services/user.service.js';
 import {
   asignSessionToken,
   clearAllSessionsByUser,
@@ -60,8 +55,6 @@ export const loginUser = async (req, res) => {
 };
 
 export const registerUser = async (req, res) => {
-  console.log('Entre al register');
-  console.log(req.body);
   const { user, role } = req.body;
   const { password } = user;
   const passwordHash = await encrypt(password);
@@ -74,50 +67,6 @@ export const registerUser = async (req, res) => {
   }
 };
 
-export const checkAuth = async (req, res, next) => {
-  try {
-    if (!req.headers.authorization) {
-      return getResponse401(res);
-    }
-    // * Check authorization Bearer asdsfsfsdhjfdshfsdfhskahuwe4
-    const token = req.headers.authorization.split(' ').pop(); // ?asdsfsfsdhjfdshfsdfhskahuwe4
-    const tokenData = await verifyToken(token);
-
-    if (!tokenData) {
-      return getResponse401(res);
-    }
-    if (tokenData.id) {
-      next();
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const checkRoleAuth = (roles) => async (req, res, next) => {
-  try {
-    if (!req.headers.authorization) {
-      return getResponse401(res);
-    }
-    // * Check authorization Bearer asdsfsfsdhjfdshfsdfhskahuwe4
-    const token = req.headers.authorization.split(' ').pop(); // ?asdsfsfsdhjfdshfsdfhskahuwe4
-    const tokenData = await verifyToken(token);
-    const userData = await findUserById(tokenData.id);
-
-    // ? Comprueba si el usuario tiene algún rol permitido|
-    const userHasAllowedRole = userData.data.Roles.some((role) =>
-      roles.includes(role.nombre)
-    );
-    if (userHasAllowedRole) {
-      next();
-    } else {
-      return getResponse403(res);
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const logoutUser = async (req, res) => {
   if (!req.headers.authorization) {
     return getResponse401(res);
@@ -125,7 +74,6 @@ export const logoutUser = async (req, res) => {
   const token = req.headers.authorization.split(' ').pop(); // ?asdsfsfsdhjfdshfsdfhskahuwe4
 
   const session = await findSessionByToken(token);
-  console.log(session);
   const clearUserSession = await deleteSession(session.data.id);
   if (clearUserSession.error) {
     return getResponse500(res, clearUserSession.message);
