@@ -8,6 +8,11 @@ import {
 } from '../controllers/auth/auth.controller.js';
 import passport from 'passport';
 import '../middlewares/auth/google.js';
+import { validateSchema } from '../middlewares/validations/validationSchemas.js';
+import {
+  LoginSchema,
+  registerSchema
+} from '../middlewares/validations/dtos/auth.dto.js';
 
 const router = Router();
 //* /apiEcomerce/1.0/auth/goggle
@@ -23,8 +28,8 @@ router.get(
   sigIn
 );
 
-router.post('/login', loginUser);
-router.post('/register', registerUser);
+router.post('/login', validateSchema(LoginSchema), loginUser);
+router.post('/register', validateSchema(registerSchema), registerUser);
 router.get('/logOutSession', logoutUser);
 router.delete('/logOutAll/:id', logOutAllUserSessions);
 

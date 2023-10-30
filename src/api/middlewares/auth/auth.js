@@ -1,6 +1,6 @@
 import { getResponse401, getResponse403 } from '../../../helpers/Responses.js';
 import { verifyToken } from '../../../helpers/generateToken.js';
-import { getUserById } from '../../../Entities/Usuario/service/Users.services.js';
+import { findUserById } from '../../services/user.service.js';
 
 export const checkAuth = async (req, res, next) => {
   try {
@@ -19,7 +19,7 @@ export const checkAuth = async (req, res, next) => {
       next();
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -31,12 +31,11 @@ export const checkRoleAuth = (roles) => async (req, res, next) => {
     // * Check authorization Bearer asdsfsfsdhjfdshfsdfhskahuwe4
     const token = req.headers.authorization.split(' ').pop(); // ?asdsfsfsdhjfdshfsdfhskahuwe4
     const tokenData = await verifyToken(token);
-    const userData = await getUserById(tokenData.id);
+    const userData = await findUserById(tokenData.id);
 
     // ? Comprueba si el usuario tiene algún rol permitido|
-    const userHasAllowedRole = userData.data.Roles.some((role) =>
-      roles.includes(role.nombre)
-    );
+    const userHasAllowedRole = roles.includes(userData.data.role.name);
+
     if (userHasAllowedRole) {
       next();
     } else {

@@ -24,4 +24,27 @@ const registerOders = async () => {
   }
 };
 
-registerOders();
+const findUserById = async (id) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id
+    },
+    include: {
+      role: true
+    }
+  });
+  console.log(user);
+  return user;
+};
+
+const deleteUser = async (id) => {
+  const deletedUser = await prisma.user.delete({
+    where: {
+      id
+    }
+  });
+  console.log(deletedUser);
+  return deletedUser;
+};
+
+deleteUser('b8832d7a-8c33-4b02-a41f-f1260a28c3e4');

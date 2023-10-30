@@ -37,6 +37,9 @@ export const findUserById = async (id) => {
     const user = await prisma.user.findUnique({
       where: {
         id
+      },
+      include: {
+        role: true
       }
     }); // * SELECT * FROM user WHERE email = email [{},{}]
     // * null * undefined
@@ -46,6 +49,50 @@ export const findUserById = async (id) => {
       : getMessage(true, user, 'User not exists');
   } catch (error) {
     return getMessage(true, error.message, 'User not exists');
+  }
+};
+
+export const modifiedUser = async (id, user) => {
+  try {
+    const userModified = await prisma.user.update({
+      where: {
+        id
+      },
+      data: user
+    });
+    return getMessage(false, userModified, 'User modified successfully');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, error.message, 'Error modifying user');
+  }
+};
+
+export const removeUser = async (id) => {
+  try {
+    const userDeleted = await prisma.user.delete({
+      where: {
+        id
+      }
+    });
+    return getMessage(false, userDeleted, 'User deleted successfully');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error deleting user');
+  }
+};
+
+export const asignRoleUser = async (id, idRole) => {
+  try {
+    const user = await prisma.user.update({
+      where: {
+        id
+      },
+      data: {
+        roleId: idRole
+      }
+    });
+    return getMessage(false, user, 'Role assigned successfully');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error assigning role');
   }
 };
 
@@ -76,13 +123,14 @@ export const signInUser = async (user) => {
 };
 
 export const createUser = async (user, idRole, passwordHash) => {
-  const { name, lastname, email } = user;
+  const { name, lastName, email, phoneNumber } = user;
   try {
     const newUser = await prisma.user.create({
       data: {
         name,
-        lastName: lastname,
+        lastName,
         email,
+        phoneNumber,
         password: passwordHash,
         roleId: idRole
       }

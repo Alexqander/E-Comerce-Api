@@ -13,13 +13,12 @@ datasource db {
 model User {
   id                 String               @id @default(uuid())
   email              String               @unique
+  phoneNumber        String?               @unique
   name               String?
   lastName           String?
   password           String
-  createdAt          DateTime             @default(now())
-  updatedAt          DateTime             @updatedAt
-  role               Roles?                @relation(fields: [roleId], references: [id])
   roleId             Int?
+  role               Roles?                @relation(fields: [roleId], references: [id])
   products           Product[]
   ShoppingCart       ShoppingCart[]
   Reviews            Reviews[]
@@ -27,6 +26,19 @@ model User {
   Transactions       Transactions[]
   Sessions           Sessions[]
   Orders             Orders[]
+  requestResetPassword ResuqestResetPassword[]
+  updatedAt          DateTime             @updatedAt
+  createdAt          DateTime             @default(now())
+}
+
+model ResuqestResetPassword {
+  id              String   @id @default(uuid())
+  phoneNumber     String
+  codeVerify           String
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  expiresAt       DateTime
 }
 
 model Roles {
