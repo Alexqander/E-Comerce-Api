@@ -6,3 +6,4 @@ package-lock.json
 thunder-tests
 uploads
 prisma/migrations
+prisma/migration_lock.toml

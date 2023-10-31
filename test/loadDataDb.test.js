@@ -5,13 +5,13 @@ const registerOders = async () => {
     const orders = await prisma.orders.createMany({
       data: [
         {
-          userId: 'cf7949ff-0e83-4fe3-8660-67dcfb22f4b0',
+          userId: '9e9ad194-2465-4b96-bf4e-68d60e656e6f',
           orderStatus: 'pending',
           orderedAt: new Date(),
           deliverDate: new Date()
         },
         {
-          userId: 'cf7949ff-0e83-4fe3-8660-67dcfb22f4b0',
+          userId: '9e9ad194-2465-4b96-bf4e-68d60e656e6f',
           orderStatus: 'pending',
           orderedAt: new Date(),
           deliverDate: new Date()
@@ -46,5 +46,3 @@ const deleteUser = async (id) => {
   console.log(deletedUser);
   return deletedUser;
 };
-
-deleteUser('b8832d7a-8c33-4b02-a41f-f1260a28c3e4');

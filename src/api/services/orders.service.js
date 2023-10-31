@@ -13,9 +13,19 @@ export const findOrders = async () => {
 };
 export const findOrderById = async (id) => {
   try {
-    const order = await prisma.order.findUnique({
+    const order = await prisma.orders.findUnique({
       where: {
         id
+      },
+      include: {
+        user: {
+          select: {
+            email: true,
+            name: true,
+            lastName: true,
+            phoneNumber: true
+          }
+        }
       }
     });
 
@@ -30,7 +40,7 @@ export const findOrderById = async (id) => {
 export const findOrderByUserId = async (id) => {};
 export const sevedOrder = async (order) => {
   try {
-    const newOrder = await prisma.order.create({
+    const newOrder = await prisma.orders.create({
       data: {
         ...order
       }
@@ -43,7 +53,7 @@ export const sevedOrder = async (order) => {
 };
 export const modifiedOrder = async (id, order) => {
   try {
-    const updateOrder = await prisma.order.update({
+    const updateOrder = await prisma.orders.update({
       where: {
         id
       },
@@ -59,7 +69,7 @@ export const modifiedOrder = async (id, order) => {
 };
 export const removeOrder = async (id) => {
   try {
-    const deleteOrder = await prisma.order.delete({
+    const deleteOrder = await prisma.orders.delete({
       where: {
         id
       }
