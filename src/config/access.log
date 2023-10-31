@@ -43,3 +43,11 @@ POST /apiEcomerce/1.0/auth/register 201 384 - 196.781 ms Mon, 30 Oct 2023 19:46:
 POST /apiEcomerce/1.0/auth/register 201 392 - 358.799 ms Mon, 30 Oct 2023 19:48:07 GMT application/json
 POST /apiEcomerce/1.0/auth/login 200 663 - 552.614 ms Mon, 30 Oct 2023 19:48:43 GMT application/json
 POST /apiEcomerce/1.0/auth/login 400 277 - 0.869 ms Mon, 30 Oct 2023 19:48:51 GMT application/json
+GET /apiEcomerce/1.0/users 200 978 - 862.463 ms Mon, 30 Oct 2023 22:14:32 GMT -
+GET /apiEcomerce/1.0/roles/ 200 567 - 502.303 ms Mon, 30 Oct 2023 22:15:01 GMT -
+GET /apiEcomerce/1.0/roles/ 401 26 - 1.111 ms Mon, 30 Oct 2023 22:15:26 GMT -
+POST /apiEcomerce/1.0/auth/login 400 277 - 89.083 ms Mon, 30 Oct 2023 22:17:28 GMT application/json
+POST /apiEcomerce/1.0/auth/login 404 36 - 615.573 ms Mon, 30 Oct 2023 22:17:51 GMT application/json
+POST /apiEcomerce/1.0/auth/login 200 663 - 1191.046 ms Mon, 30 Oct 2023 22:18:03 GMT application/json
+POST /apiEcomerce/1.0/auth/register 400 254 - 91.974 ms Mon, 30 Oct 2023 22:23:09 GMT application/json
+POST /apiEcomerce/1.0/auth/register 400 297 - 84.108 ms Mon, 30 Oct 2023 22:23:29 GMT application/json

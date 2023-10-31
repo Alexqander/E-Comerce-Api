@@ -26,6 +26,7 @@ model User {
   Transactions       Transactions[]
   Sessions           Sessions[]
   Orders             Orders[]
+  WishList           WishList[]
   requestResetPassword ResuqestResetPassword[]
   updatedAt          DateTime             @updatedAt
   createdAt          DateTime             @default(now())
@@ -34,7 +35,7 @@ model User {
 model ResuqestResetPassword {
   id              String   @id @default(uuid())
   phoneNumber     String
-  codeVerify           String
+  codeVerify      String
   userId          String
   user            User     @relation(fields: [userId], references: [id])
   createdAt       DateTime @default(now())
@@ -50,23 +51,27 @@ model Roles {
 }
 
 model Product {
-  id                   String                 @id @default(uuid())
-  name                 String
-  price                Float
-  description          String
-  stock                Int
-  createdAt            DateTime               @default(now())
-  updatedAt            DateTime               @updatedAt
-  category             Category               @relation(fields: [categoryId], references: [id])
-  categoryId           Int
-  vendor               User                   @relation(fields: [vendorId], references: [id])
-  vendorId             String
-  ShoppingCart         ShoppingCart?          @relation(fields: [shoppingCartId], references: [id])
-  shoppingCartId       String?
-  Reviews              Reviews[]
-  Images               Images[]
-  OrderDetails         OrderDetails[]
-  TransactionsProducts TransactionsProducts[]
+  id             String        @id @default(uuid())
+  name           String
+  price          Float
+  description    String
+  stock          Int
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime?     @updatedAt
+  vendor         User          @relation(fields: [vendorId], references: [id])
+  vendorId       String
+  ShoppingCart   ShoppingCart? @relation(fields: [shoppingCartId], references: [id])
+  shoppingCartId String?
+  SubCategory    SubCategory   @relation(fields: [subCategoryId], references: [id])
+  subCategoryId  Int
+  Reviews        Reviews[]
+  Images         Images[]
+  WishList       WishList?     @relation(fields: [wishListId], references: [id])
+  wishListId     String?
+  Transactions   Transactions? @relation(fields: [transactionsId], references: [id])
+  transactionsId String?
+  Orders         Orders?       @relation(fields: [ordersId], references: [id])
+  ordersId       String?
 }
 
 model Category {
@@ -74,7 +79,6 @@ model Category {
   name        String
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
-  products    Product[]
   SubCategory SubCategory[]
 }
 
@@ -86,6 +90,7 @@ model SubCategory {
   description String
   category    Category @relation(fields: [categoryId], references: [id])
   categoryId  Int
+  Product     Product[]
 }
 
 model ShoppingCart {
@@ -97,6 +102,15 @@ model ShoppingCart {
   user        User      @relation(fields: [userId], references: [id])
   userId      String
   products    Product[]
+}
+
+model WishList {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  products  Product[]
 }
 
 model Reviews {
@@ -119,23 +133,15 @@ model Images {
 }
 
 model Orders {
-  id           String         @id @default(uuid())
-  orderedAt    DateTime       @default(now())
-  deliverDate  DateTime
-  orderStatus  String
-  OrderDetails OrderDetails[]
-  user         User           @relation(fields: [userId], references: [id])
-  userId       String
+  id          String    @id @default(uuid())
+  orderedAt   DateTime  @default(now())
+  deliverDate DateTime
+  orderStatus String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  products    Product[]
 }
 
-model OrderDetails {
-  id        String  @id @default(uuid())
-  quantity  Int
-  order     Orders  @relation(fields: [orderId], references: [id])
-  orderId   String
-  product   Product @relation(fields: [productId], references: [id])
-  productId String
-}
 
 model ShippingDirections {
   id             String   @id @default(uuid())
@@ -153,22 +159,12 @@ model ShippingDirections {
 }
 
 model Transactions {
-  id                   String                 @id @default(uuid())
-  createdAt            DateTime               @default(now())
-  user                 User                   @relation(fields: [userId], references: [id])
-  userId               String
-  totalAmount          Float
-  TransactionsProducts TransactionsProducts[]
-}
-
-model TransactionsProducts {
-  id            String       @id @default(uuid())
-  createdAt     DateTime     @default(now())
-  transaction   Transactions @relation(fields: [transactionId], references: [id])
-  transactionId String
-  product       Product      @relation(fields: [productId], references: [id])
-  productId     String
-  quantity      Int
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
+  totalAmount Float
+  products    Product[]
 }
 
 model Sessions {
