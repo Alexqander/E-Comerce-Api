@@ -6,8 +6,8 @@ services:
     environment:
       POSTGRES_DB: mydatabase
       POSTGRES_USER: kevin
-      POSTGRES_PASSWORD: ale
+      POSTGRES_PASSWORD: kevin
     ports:
       - "5432:5432"
     volumes:
-      - D:/Dessarrollo/PostgresSql:/var/lib/postgresql/data
+      - C:/Users/progr/Documents/integradora/PostgresSql:/var/lib/postgresql/data
