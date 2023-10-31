@@ -6,6 +6,6 @@ const router = Router();
 
 // * /apiEcomerce/1.0/roles/
 router.get('/', checkAuth, checkRoleAuth(['ADMIN']), getRoles);
-router.post('/', checkAuth, checkRoleAuth(['ADMIN']), createRole);
+router.post('/', createRole);
 
 export default router;

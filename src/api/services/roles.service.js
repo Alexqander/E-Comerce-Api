@@ -18,6 +18,7 @@ export const saveRole = async (role) => {
     });
     return getMessage(false, roles, 'Role created successfully');
   } catch (error) {
+    console.log(error);
     return getMessage(true, error.message, 'Error al crear el rol');
   }
 };
