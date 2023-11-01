@@ -144,3 +144,8 @@ GET /apiEcomerce/1.0/orders 403 64 - 33.001 ms Tue, 31 Oct 2023 00:49:49 GMT -
 POST /apiEcomerce/1.0/auth/register 201 384 - 164.802 ms Tue, 31 Oct 2023 00:50:39 GMT application/json
 POST /apiEcomerce/1.0/auth/login 200 655 - 146.070 ms Tue, 31 Oct 2023 00:50:57 GMT application/json
 GET /apiEcomerce/1.0/orders 200 899 - 96.031 ms Tue, 31 Oct 2023 00:51:09 GMT -
+POST /apiEcomerce/1.0/products/upload 401 26 - 8.175 ms Wed, 01 Nov 2023 03:57:03 GMT multipart/form-data; boundary=--------------------------289673673689144798653360
+POST /apiEcomerce/1.0/products/upload 500 49 - 386.389 ms Wed, 01 Nov 2023 03:57:29 GMT multipart/form-data; boundary=--------------------------226999647283795200623589
+POST /apiEcomerce/1.0/products/upload 500 33678022 - 5232.299 ms Wed, 01 Nov 2023 04:00:24 GMT multipart/form-data; boundary=--------------------------836557193819614932035423
+POST /apiEcomerce/1.0/products/upload 500 159 - 6714.314 ms Wed, 01 Nov 2023 04:06:52 GMT multipart/form-data; boundary=--------------------------672185945874737994442224
+POST /apiEcomerce/1.0/products/upload 200 716 - 1227.430 ms Wed, 01 Nov 2023 04:07:48 GMT multipart/form-data; boundary=--------------------------470541674622660001781531
