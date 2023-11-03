@@ -258,3 +258,6 @@ POST /apiEcomerce/1.0/auth/login 200 664 - 382.347 ms Thu, 02 Nov 2023 23:07:50 
 GET /apiEcomerce/1.0/auth/logOutSession/ 200 418 - 25.144 ms Thu, 02 Nov 2023 23:10:20 GMT -
 POST /apiEcomerce/1.0/auth/login 200 681 - 130.086 ms Thu, 02 Nov 2023 23:10:32 GMT application/json
 GET /apiEcomerce/1.0/auth/logOutSession/ 200 418 - 243.548 ms Thu, 02 Nov 2023 23:20:55 GMT -
+POST /apiEcomerce/1.0/auth/login 200 681 - 905.134 ms Fri, 03 Nov 2023 03:54:27 GMT application/json
+GET /apiEcomerce/1.0/auth/logOutSession/ 200 418 - 49.593 ms Fri, 03 Nov 2023 03:55:36 GMT -
+POST /apiEcomerce/1.0/auth/login 200 664 - 119.831 ms Fri, 03 Nov 2023 03:55:51 GMT application/json

@@ -1,0 +1,9 @@
+export const getCategories = async (req, res) => {};
+export const getSubCategories = async (req, res) => {};
+export const getSubCategoryById = async (req, res) => {};
+export const getCategoryById = async (req, res) => {};
+export const createCategory = async (req, res) => {};
+export const creatSubcategory = async (req, res) => {};
+export const updateCategory = async (req, res) => {};
+export const deleteCategory = async (req, res) => {};
+export const deleteSubCategory = async (req, res) => {};
