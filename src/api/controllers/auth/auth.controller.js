@@ -16,10 +16,6 @@ import {
 import { compare, encrypt } from '../../../helpers/handleBcrypt.js';
 import config from '../../../config/index.js';
 
-export const sigIn = async (req, res) => {
-  return getResponse200(res, req.user, 'login');
-};
-
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await findUserByEmail(email);

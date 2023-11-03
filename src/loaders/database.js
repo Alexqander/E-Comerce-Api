@@ -5,6 +5,7 @@ const databasePrismaClient = new PrismaClient();
 export default async () => {
   try {
     await databasePrismaClient.$connect();
+
     console.log('✅ Conexion a la base de datos exitosa ');
     await databasePrismaClient.$disconnect();
   } catch (error) {
