@@ -11,26 +11,63 @@ datasource db {
 }
 
 model User {
-  id                 String               @id @default(uuid())
-  email              String               @unique
-  phoneNumber        String?               @unique
-  name               String?
-  lastName           String?
-  password           String
-  roleId             Int?
-  role               Roles?                @relation(fields: [roleId], references: [id])
-  products           Product[]
-  ShoppingCart       ShoppingCart[]
-  Reviews            Reviews[]
-  ShippingDirections ShippingDirections[]
-  Transactions       Transactions[]
-  Sessions           Sessions[]
-  Orders             Orders[]
-  WishList           WishList[]
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  phoneNumber         String?              @unique
+  name                String?
+  lastName            String?
+  password            String
+  profilePicture      String?
+  roleId              Int
+  role                Roles                @relation(fields: [roleId], references: [id])
+  buyerProfile        BuyerProfile?        
+  sellerProfile       SellerProfile?       
+  courierProfile      CourierProfile?
+  paymentMethod       PaymentMethod[]      
+  Reviews             Reviews[]
+  Sessions            Sessions[]
   requestResetPassword ResuqestResetPassword[]
-  updatedAt          DateTime             @updatedAt
-  createdAt          DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  createdAt           DateTime             @default(now())
 }
+
+model BuyerProfile {
+  id                  String      @id @default(uuid())
+  user                User        @relation(fields: [userId], references: [id])
+  userId              String      @unique
+  ShoppingCart        ShoppingCart[]
+  shippingAddresses   ShippingDirections[] // Usar ShippingDirections para direcciones de envío
+  billingAddresses    Address[]             // Usar Address para direcciones de facturación
+  Transactions        Transactions[]
+  Orders              Orders[]
+  WishList            WishList[]
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+
+model SellerProfile {
+  id          String   @id @default(uuid())
+  storeName   String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @unique
+  store       Store[]
+  transactionItems TransactionItem[] // Relación con TransactionItem
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CourierProfile {
+  id           String    @id @default(uuid())
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String    @unique
+  vehicle      String    // E.g., "Bike", "Car", "Van", etc.
+  availability String    // E.g., "Full-Time", "Part-Time", "Weekends", etc.
+  deliveryArea Json      // Podría ser un JSON con coordenadas o zonas.
+  orders       Orders[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
 
 model ResuqestResetPassword {
   id              String   @id @default(uuid())
@@ -58,8 +95,8 @@ model Product {
   stock          Int
   createdAt      DateTime      @default(now())
   updatedAt      DateTime?     @updatedAt
-  vendor         User          @relation(fields: [vendorId], references: [id])
-  vendorId       String
+  store        Store          @relation(fields: [storeId], references: [id])
+  storeId      String
   ShoppingCart   ShoppingCart? @relation(fields: [shoppingCartId], references: [id])
   shoppingCartId String?
   SubCategory    SubCategory   @relation(fields: [subCategoryId], references: [id])
@@ -68,8 +105,7 @@ model Product {
   Images         Images[]
   WishList       WishList?     @relation(fields: [wishListId], references: [id])
   wishListId     String?
-  Transactions   Transactions? @relation(fields: [transactionsId], references: [id])
-  transactionsId String?
+  transactionItems TransactionItem[] // Relación con TransactionItem
   Orders         Orders?       @relation(fields: [ordersId], references: [id])
   ordersId       String?
 }
@@ -99,8 +135,8 @@ model ShoppingCart {
   orderStatus String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
+  buyer       BuyerProfile @relation(fields: [buyerId], references: [id])
+  buyerId     String
   products    Product[]
 }
 
@@ -108,8 +144,8 @@ model WishList {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  buyer     BuyerProfile @relation(fields: [buyerId], references: [id])
+  buyerId   String
   products  Product[]
 }
 
@@ -137,14 +173,17 @@ model Orders {
   orderedAt   DateTime  @default(now())
   deliverDate DateTime
   orderStatus String
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
   products    Product[]
+  courierId    String?
+  courier      CourierProfile?  @relation(fields: [courierId], references: [id])
+  buyer        BuyerProfile @relation(fields: [buyerId], references: [id])
+  buyerId      String
+  deliveryStatus String         // E.g., "Waiting for Pickup", "In Transit", "Delivered", etc.
 }
 
 
 model ShippingDirections {
-  id             String   @id @default(uuid())
+  id             String        @id @default(uuid())
   street         String
   interiorNumber String
   exteriorNumber String
@@ -152,21 +191,39 @@ model ShippingDirections {
   state          String
   postalCode     String
   country        String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  user           User     @relation(fields: [userId], references: [id])
-  userId         String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  buyer          BuyerProfile  @relation(fields: [buyerId], references: [id])
+  buyerId        String
 }
 
 model Transactions {
-  id          String    @id @default(uuid())
-  createdAt   DateTime  @default(now())
-  user        User      @relation(fields: [userId], references: [id])
-  userId      String
+  id          String            @id @default(uuid())
+  buyer       BuyerProfile      @relation(fields: [buyerId], references: [id])
+  buyerId     String
   totalAmount Float
-  products    Product[]
+  items       TransactionItem[] // Lista de items en la transacción
+  paymentMethod PaymentMethod   @relation(fields: [paymentMethodId], references: [id])
+  paymentMethodId String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 }
 
+model TransactionItem {
+  id           String       @id @default(uuid())
+  transaction  Transactions @relation(fields: [transactionId], references: [id])
+  transactionId String
+  product      Product      @relation(fields: [productId], references: [id])
+  productId    String
+  seller       SellerProfile @relation(fields: [sellerId], references: [id])
+  sellerId     String
+  quantity     Int          // Cantidad del producto comprado
+  unitPrice    Float        // Precio del producto al momento de la transacción
+  total        Float        // unitPrice * quantity
+  discount     Float?       // Cualquier descuento aplicado a este producto
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
 model Sessions {
   id        String   @id @default(uuid())
   userId    String
@@ -174,4 +231,41 @@ model Sessions {
   token     String
   createdAt DateTime @default(now())
   expiresAt DateTime
+}
+
+model Store {
+  id          String    @id @default(uuid())
+  name        String
+  seller      SellerProfile @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Address {
+  id             String        @id @default(uuid())
+  street         String
+  interiorNumber String
+  exteriorNumber String
+  city           String
+  state          String
+  postalCode     String
+  country        String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  buyer          BuyerProfile? @relation(fields: [buyerId], references: [id])
+  buyerId        String?       @unique
+  // Si en el futuro otros perfiles necesitan direcciones de facturación, puedes agregar más relaciones aquí.
+}
+
+model PaymentMethod {
+  id        String   @id @default(uuid())
+  type      String   // E.g., "Credit Card", "PayPal", etc.
+  details   Json     // Store details as JSON, e.g., card number (hashed), expiry, etc.
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  transactions Transactions[] // Relación con Transactions
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
