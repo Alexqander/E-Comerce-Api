@@ -7,7 +7,12 @@ import morgan from 'morgan';
 import { accessLogStream } from '../config/morgan.js';
 
 export default async ({ app }) => {
-  app.use(cors({ origin: 'http:/localhost:3001' }));
+  app.use(
+    cors({
+      origin: 'http://localhost:3000',
+      methods: 'GET,PUT,PATCH,POST,DELETE'
+    })
+  );
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(passport.initialize());
@@ -24,4 +29,4 @@ export default async ({ app }) => {
   app.use('/apiEcomerce/1.0', indexRoutes);
   app.use(handlRoutesErrors);
 };
-// * http//localhost:3000/apiEcomerce/1.0/ -> indexRoutes
+// * http//localhost:4000/apiEcomerce/1.0/ -> indexRoutes

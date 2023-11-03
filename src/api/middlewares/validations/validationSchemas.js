@@ -27,6 +27,7 @@ export const validateSchema = (schema) => {
     if (!valid) {
       //! Si la validación falla, envía una respuesta 400 con los detalles del error
       const error = new ValidationError(validate.errors);
+      console.log(error);
       res.status(400).json({
         error: {
           name: error.name,

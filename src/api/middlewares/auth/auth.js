@@ -1,5 +1,6 @@
 import { getResponse401, getResponse403 } from '../../../helpers/Responses.js';
 import { verifyToken } from '../../../helpers/generateToken.js';
+import { findSessionByToken } from '../../services/session.service.js';
 import { findUserById } from '../../services/user.service.js';
 
 export const checkAuth = async (req, res, next) => {
@@ -10,9 +11,11 @@ export const checkAuth = async (req, res, next) => {
     // * Check authorization Bearer asdsfsfsdhjfdshfsdfhskahuwe4
     const token = req.headers.authorization.split(' ').pop(); // ?asdsfsfsdhjfdshfsdfhskahuwe4
     const tokenData = await verifyToken(token);
-    console.log('verfificando el token');
-    console.log(tokenData);
     if (!tokenData) {
+      return getResponse401(res);
+    }
+    const sessionExists = await findSessionByToken(token);
+    if (sessionExists.error) {
       return getResponse401(res);
     }
     if (tokenData.id) {

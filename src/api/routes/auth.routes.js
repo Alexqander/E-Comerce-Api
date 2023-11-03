@@ -13,7 +13,7 @@ import {
   LoginSchema,
   registerSchema
 } from '../middlewares/validations/dtos/auth.dto.js';
-
+import { checkAuth } from '../middlewares/auth/auth.js';
 const router = Router();
 //* /apiEcomerce/1.0/auth/goggle
 router.get(
@@ -30,7 +30,7 @@ router.get(
 
 router.post('/login', validateSchema(LoginSchema), loginUser);
 router.post('/register', validateSchema(registerSchema), registerUser);
-router.get('/logOutSession', logoutUser);
+router.get('/logOutSession', checkAuth, logoutUser);
 router.delete('/logOutAll/:id', logOutAllUserSessions);
 
 export default router;

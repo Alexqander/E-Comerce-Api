@@ -46,3 +46,22 @@ const deleteUser = async (id) => {
   console.log(deletedUser);
   return deletedUser;
 };
+
+const findSessionByToken = async (token) => {
+  try {
+    const session = await prisma.sessions.findFirst({
+      where: {
+        token
+      }
+    });
+    console.log(session);
+    return session ? 'sesion existe' : 'sesion no existe';
+  } catch (error) {
+    return error;
+  }
+};
+
+const session = await findSessionByToken(
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg2ZTA4ODczLWVkM2MtNDY4Yy04ZjM5LTYyM2UwMDg3NWQwYSIsImlhdCI6MTY5ODkwMjQ5MiwiZXhwIjoxNjk5MjYyNDkyfQ.jRjn-sNFlORQxZp5uT9ulOYljPgWuWRLBR_Zxxk_-EA'
+);
+console.log(session);
