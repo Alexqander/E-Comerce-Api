@@ -44,9 +44,9 @@ export function getResponse403(res) {
     .status(403)
     .json({ message: 'You do not have permission to access this resource' });
 }
-export function getResponse404(res) {
-  const error404 = new NotFoundError();
-  return res.status(404).json({ message: error404 });
+const error404 = new NotFoundError();
+export function getResponse404(res, message = error404) {
+  return res.status(404).json({ message });
 }
 export function getResponse500(res, errors) {
   return res.status(500).json({

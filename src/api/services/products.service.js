@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../loaders/database.js';
 import { getMessage } from '../../helpers/Messages';
-
-const prisma = new PrismaClient();
 
 export const findAllProductsPage = async (page = 1, limit = 10) => {
   try {

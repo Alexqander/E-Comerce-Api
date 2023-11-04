@@ -1,9 +1,7 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/index.js';
 
-export const tokenSign = async (user, expiresIn) => {
-  console.log('esta es la duracion del token ----->');
-  console.log(expiresIn);
+export const tokenSign = async (user) => {
   // ? Genera token
   return jwt.sign(
     {

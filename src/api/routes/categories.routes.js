@@ -11,11 +11,11 @@ import {
 const router = Router();
 
 router.get('/', getCategories);
-router.get('/subcategory/', getSubCategories);
+router.get('/sub/', getSubCategories);
 router.get('/:id', getSubCategoryById);
 router.get('/:id', getCategoryById);
 router.post('/', createCategory);
-router.post('/subcategory/', creatSubcategory);
+router.post('/sub/', creatSubcategory);
 router.put('/:id');
 router.delete('/:id');
 

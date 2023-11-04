@@ -47,7 +47,6 @@ model BuyerProfile {
 
 model SellerProfile {
   id          String   @id @default(uuid())
-  storeName   String
   user        User     @relation(fields: [userId], references: [id])
   userId      String   @unique
   store       Store[]
@@ -67,8 +66,15 @@ model CourierProfile {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
-
-
+model Store {
+  id          String    @id @default(uuid())
+  name        String
+  seller      SellerProfile @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
 model ResuqestResetPassword {
   id              String   @id @default(uuid())
   phoneNumber     String
@@ -95,8 +101,8 @@ model Product {
   stock          Int
   createdAt      DateTime      @default(now())
   updatedAt      DateTime?     @updatedAt
-  store        Store          @relation(fields: [storeId], references: [id])
-  storeId      String
+  store          Store          @relation(fields: [storeId], references: [id])
+  storeId        String
   ShoppingCart   ShoppingCart? @relation(fields: [shoppingCartId], references: [id])
   shoppingCartId String?
   SubCategory    SubCategory   @relation(fields: [subCategoryId], references: [id])
@@ -233,15 +239,6 @@ model Sessions {
   expiresAt DateTime
 }
 
-model Store {
-  id          String    @id @default(uuid())
-  name        String
-  seller      SellerProfile @relation(fields: [sellerId], references: [id])
-  sellerId    String
-  products    Product[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-}
 
 model Address {
   id             String        @id @default(uuid())

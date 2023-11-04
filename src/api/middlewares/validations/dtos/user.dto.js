@@ -11,5 +11,6 @@ export const UserRegisterSchema = Type.Object({
   email: Type.String({ format: 'email' }),
   phoneNumber: Type.String({ minLength: 10 }),
   name: Type.String({ minLength: 3 }),
-  lastName: Type.String({ minLength: 3 })
+  lastName: Type.String({ minLength: 3 }),
+  storeName: Type.Optional(Type.String({ minLength: 3 }))
 });

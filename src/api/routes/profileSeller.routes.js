@@ -13,7 +13,7 @@ import {
 const router = Router();
 
 // Información del perfil
-router.get('/profile', getInfoProfileSeller);
+router.get('/profile/:id', getInfoProfileSeller);
 router.post('/profile', createInfoProfileSeller);
 router.put('/profile', updateInfoProfileSeller);
 

@@ -1,8 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../loaders/database.js';
 import { getMessage } from '../../helpers/Messages.js';
-
-const prisma = new PrismaClient();
-
 export const fetchProfileInfo = async (userId) => {
   try {
     const profile = await prisma.curierProfile.findUnique({

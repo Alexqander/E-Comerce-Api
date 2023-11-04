@@ -1,7 +1,8 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../loaders/database.js';
 import { getMessage } from '../../helpers/Messages.js';
+import config from '../../config/index.js';
+import { tokenSign } from '../../helpers/generateToken.js';
 
-const prisma = new PrismaClient();
 export const findSessionByToken = async (token) => {
   try {
     const session = await prisma.sessions.findFirst({
@@ -17,13 +18,18 @@ export const findSessionByToken = async (token) => {
   }
 };
 //* Funcion que guarda el token sesion del usuario en la base de datos
-export const asignSessionToken = async (id, token, expiresAt) => {
+export const asignSessionToken = async (user) => {
   try {
+    // firmo el token y le doy una expiracion
+    const token = await tokenSign(user);
+    const expiresAt = new Date();
+    const tokenDurationHours = Number(config.jwt.jwtExpire.replace('h', ''));
+    expiresAt.setHours(expiresAt.getHours() + tokenDurationHours);
     const tokenUser = await prisma.sessions.create({
       data: {
         token,
         expiresAt,
-        userId: id
+        userId: user.id
       }
     });
 
