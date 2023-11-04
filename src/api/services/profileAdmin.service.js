@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../loaders/database.js';
 import { getMessage } from '../../helpers/Messages.js';
 
-const prisma = new PrismaClient();
 export const fetchAllUsers = async () => {
   try {
     const users = await prisma.user.findMany();

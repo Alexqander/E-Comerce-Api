@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../../loaders/database.js';
 import { getMessage } from '../../helpers/Messages.js';
 // inicialiso prisma
-const prisma = new PrismaClient();
 
 export const fetchSellerProfileInfo = async (sellerId) => {
   try {
@@ -76,9 +75,16 @@ export const updateExistingProduct = async (productId, productData) => {
 export const createSellerProfileInfo = async (profileData) => {
   try {
     const profile = await prisma.sellerProfile.create({ data: profileData });
+    const store = await prisma.store.create({
+      data: {
+        name: profile.storeName,
+        sellerId: profile.userId
+      }
+    });
+    await prisma.$transaction([profile, store]);
     return getMessage(
       false,
-      profile,
+      { profile, store },
       'Seller profile info successfully created'
     );
   } catch (error) {

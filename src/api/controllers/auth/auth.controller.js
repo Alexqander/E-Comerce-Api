@@ -5,8 +5,11 @@ import {
   getResponse404,
   getResponse500
 } from '../../../helpers/Responses.js';
-import { tokenSign } from '../../../helpers/generateToken.js';
-import { createUser, findUserByEmail } from '../../services/user.service.js';
+import {
+  createUser,
+  findUserByEmail,
+  signInUser
+} from '../../services/user.service.js';
 import {
   asignSessionToken,
   clearAllSessionsByUser,
@@ -14,7 +17,6 @@ import {
   findSessionByToken
 } from '../../services/session.service.js';
 import { compare, encrypt } from '../../../helpers/handleBcrypt.js';
-import config from '../../../config/index.js';
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -24,20 +26,7 @@ export const loginUser = async (req, res) => {
   }
   const checkPassword = await compare(password, user.data.password);
   if (checkPassword) {
-    const tokenSession = await tokenSign(user.data, config.jwt.jwtExpire);
-    // ? Convierte la duración del token a una fecha de expiración
-    const expiresAt = new Date();
-    const tokenDurationHours = Number(
-      process.env.JWT_EXPIRES_IN.replace('h', '')
-    );
-    expiresAt.setHours(expiresAt.getHours() + tokenDurationHours);
-
-    const userSession = await asignSessionToken(
-      user.data.id,
-      tokenSession,
-      expiresAt
-    );
-
+    const userSession = await asignSessionToken(user.data);
     const userWithoutPassword = { ...user.data };
     delete userWithoutPassword.password;
     return getResponse200(
@@ -54,13 +43,21 @@ export const registerUser = async (req, res) => {
   const { user, role } = req.body;
   const { password } = user;
   const passwordHash = await encrypt(password);
+  // creamos el usuario
   const newUser = await createUser(user, role, passwordHash);
   if (newUser.error) {
     console.log(newUser.error);
     return getResponse500(res, newUser.error);
-  } else {
-    return getResponse201(res, newUser.data, 'created');
   }
+  // inicio sesion
+  const newSignIn = await signInUser(newUser.data.user);
+  if (newSignIn.error) {
+    return getResponse500(res, {
+      error: newSignIn.message,
+      newUser: newSignIn.data
+    });
+  }
+  return getResponse201(res, newSignIn.data, 'User createdAndLogged');
 };
 
 export const logoutUser = async (req, res) => {
@@ -70,11 +67,18 @@ export const logoutUser = async (req, res) => {
   const token = req.headers.authorization.split(' ').pop(); // ?asdsfsfsdhjfdshfsdfhskahuwe4
 
   const session = await findSessionByToken(token);
-  const clearUserSession = await deleteSession(session.data.id);
-  if (clearUserSession.error) {
-    return getResponse500(res, clearUserSession.message);
+  const {
+    error: clearSessionError,
+    data: clearSessionData,
+    message: clearSessionMessage
+  } = await deleteSession(session.data.id);
+  if (clearSessionError) {
+    return getResponse500(res, {
+      message: clearSessionMessage,
+      data: clearSessionData
+    });
   } else {
-    return getResponse200(res, clearUserSession.data, 'Log out');
+    return getResponse200(res, clearSessionData, 'Log out');
   }
 };
 

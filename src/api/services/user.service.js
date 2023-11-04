@@ -1,11 +1,23 @@
-import { PrismaClient } from '@prisma/client';
 import { getMessage } from '../../helpers/Messages.js';
-import config from '../../config/index.js';
-import { tokenSign } from '../../helpers/generateToken.js';
 import { asignSessionToken } from './session.service.js';
+import { prisma } from '../../loaders/database.js';
 
-const prisma = new PrismaClient();
-
+const profileSelect = {
+  1: { role: true },
+  2: {
+    sellerProfile: {
+      include: {
+        store: true
+      }
+    }
+  },
+  3: {
+    courierProfile: true
+  },
+  4: {
+    buyerProfile: true
+  }
+};
 export const findUsers = async () => {
   try {
     const users = await prisma.user.findMany();
@@ -21,12 +33,19 @@ export const findUserByEmail = async (email) => {
       where: {
         email
       }
-    }); // * SELECT * FROM user WHERE email = email [{},{}]
-    // * null * undefined
-
-    return user
-      ? getMessage(false, user, 'Data successfully obtained')
-      : getMessage(true, user, 'User not exists');
+    });
+    if (!user.id) {
+      getMessage(true, user, 'User not exists');
+    }
+    const userDetails = await prisma.user.findUnique({
+      where: {
+        id: user.id
+      },
+      include: profileSelect[user.roleId]
+    });
+    return userDetails
+      ? getMessage(false, userDetails, 'Data successfully obtained')
+      : getMessage(true, userDetails, 'User not exists');
   } catch (error) {
     return getMessage(true, error.message, 'User not exists');
   }
@@ -97,35 +116,118 @@ export const asignRoleUser = async (id, idRole) => {
 };
 
 export const signInUser = async (user) => {
+  console.log('este es mi usuario');
+  console.log(user);
   try {
-    const tokenSession = await tokenSign(user.id, config.jwt.jwtExpire);
-
-    const expiresAt = new Date();
-    const tokenDurationHours = Number(
-      process.env.JWT_EXPIRES_IN.replace('h', '')
-    );
-    expiresAt.setHours(expiresAt.getHours() + tokenDurationHours);
-    const userSession = await asignSessionToken(
-      user.id,
-      tokenSession,
-      expiresAt
-    );
-    const userWithoutPassword = { ...userSession };
+    // guardo el token en la base de datos
+    const userSession = await asignSessionToken(user);
+    // obtengo el usuario con su perfil
+    const userInfo = await prisma.user.findUnique({
+      where: {
+        id: user.id
+      },
+      include: profileSelect[user.roleId]
+    });
+    // elimino la contraseña del usuario
+    const userWithoutPassword = { ...userInfo };
     delete userWithoutPassword.password;
     return getMessage(
       false,
-      { userWithoutPassword, token: userSession },
+      { userWithoutPassword, token: userSession.data },
       'User session successfully obtained'
     );
   } catch (error) {
+    console.log(error);
     return getMessage(true, error.message, 'Error creating session ');
   }
 };
 
 export const createUser = async (user, idRole, passwordHash) => {
-  const { name, lastName, email, phoneNumber } = user;
+  const { name, lastName, email, phoneNumber, storeName } = user;
+
+  const profileCreators = {
+    // admin
+    1: {
+      name,
+      lastName,
+      email,
+      phoneNumber,
+      password: passwordHash,
+      roleId: idRole
+    },
+    // seller vendedor
+    2: {
+      name,
+      lastName,
+      email,
+      phoneNumber,
+      password: passwordHash,
+      roleId: idRole,
+      sellerProfile: {
+        create: {
+          store: {
+            create: {
+              name: storeName
+            }
+          }
+        }
+      }
+    },
+    // courier repartidor
+    3: {
+      name,
+      lastName,
+      email,
+      phoneNumber,
+      password: passwordHash,
+      roleId: idRole,
+      courierProfile: {
+        create: {}
+      }
+    },
+    // buyer comprador usuario normal
+    4: {
+      name,
+      lastName,
+      email,
+      phoneNumber,
+      password: passwordHash,
+      roleId: idRole,
+      buyerProfile: {
+        create: {}
+      }
+    }
+  };
   try {
     const newUser = await prisma.user.create({
+      data: profileCreators[idRole]
+    });
+    return getMessage(
+      false,
+      { user: newUser },
+      'User and profile created successfully'
+    );
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, error.message, 'Error creating user and profile');
+  }
+};
+/* export const createUserAndSignIn = async (user, idRole, passwordHash) => {
+  const { name, lastName, email, phoneNumber, storeName } = user;
+  const profileCreators = {
+    2: (transaction, userId, storeName) =>
+      transaction.sellerProfile.create({
+        data: { userId, store: { create: { name: storeName } } }
+      }),
+    3: (transaction, userId) =>
+      transaction.courierProfile.create({ data: { userId } }),
+    4: (transaction, userId) =>
+      transaction.buyerProfile.create({ data: { userId } })
+  };
+
+  return await prisma.$transaction(async (transaction) => {
+    // Primero, creamos al usuario
+    const userCreated = await transaction.user.create({
       data: {
         name,
         lastName,
@@ -136,27 +238,40 @@ export const createUser = async (user, idRole, passwordHash) => {
       }
     });
 
-    return getMessage(false, newUser, 'User created successfully');
-  } catch (error) {
-    console.log(error);
-    return getMessage(true, error.message, 'Error creating user');
-  }
-};
-export const createGoogleUser = async (user, passwordHash) => {
-  const { name, lastname, email } = user;
-  try {
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        lastName: lastname,
-        email,
-        password: passwordHash
-      }
-    });
+    // Si el roleId corresponde a un perfil, lo creamos
+    let profileCreated;
+    if (profileCreators[idRole]) {
+      profileCreated = await profileCreators[idRole](
+        transaction,
+        userCreated.id,
+        storeName
+      );
+    }
+    // Aquí, asumimos que asignSessionToken se modifica para usar la transacción pasada como argumento
+    const tokenSession = await tokenSign(userCreated, config.jwt.jwtExpire); // Modificamos el primer argumento de tokenSign
+    const expiresAt = new Date();
+    const tokenDurationHours = Number(
+      process.env.JWT_EXPIRES_IN.replace('h', '')
+    );
+    expiresAt.setHours(expiresAt.getHours() + tokenDurationHours);
+    const userSession = await asignSessionToken(
+      transaction, // Aquí pasamos la transacción
+      userCreated.id,
+      tokenSession,
+      expiresAt
+    );
+    console.log('aqui ya no llegue papi');
 
-    return getMessage(false, newUser, 'User created successfully');
-  } catch (error) {
-    console.log(error);
-    return getMessage(true, error.message, 'Error creating user');
-  }
+    const userWithoutPassword = {
+      ...userSession.data,
+      profile: profileCreated
+    };
+    delete userWithoutPassword.password;
+
+    return {
+      user: userWithoutPassword,
+      token: tokenSession
+    };
+  });
 };
+ */

@@ -1,4 +1,8 @@
-import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
+import {
+  getResponse200,
+  getResponse404,
+  getResponse500
+} from '../../../helpers/Responses.js';
 import {
   createNewProduct,
   createSellerProfileInfo,
@@ -11,10 +15,14 @@ import {
 } from '../../services/profileSeller.service.js';
 
 export const getInfoProfileSeller = async (req, res) => {
-  const result = await fetchSellerProfileInfo(req.user.id); // Asumiendo que el ID del vendedor está en req.user.id
-  result.error
-    ? getResponse500(res, result)
-    : getResponse200(res, result.data, 'ok');
+  const { id } = req.params;
+  const result = await fetchSellerProfileInfo(id); // Asumiendo que el ID del vendedor está en req.user.id
+  if (result.error) {
+    return getResponse500(res, result);
+  }
+  return result.data
+    ? getResponse200(res, result.data, 'ok')
+    : getResponse404(res, 'Seller profile info not found');
 };
 
 export const getInfoProductsSeller = async (req, res) => {
@@ -45,6 +53,7 @@ export const updateProductSeller = async (req, res) => {
 };
 
 export const createInfoProfileSeller = async (req, res) => {
+  console.log(req.body);
   const result = await createSellerProfileInfo(req.body);
   result.error
     ? getResponse500(res, result)
