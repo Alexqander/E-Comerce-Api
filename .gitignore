@@ -7,4 +7,4 @@ thunder-tests
 uploads
 prisma/migrations
 prisma/migration_lock.toml
-src/logs/*
+src/logs/
