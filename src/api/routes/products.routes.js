@@ -8,16 +8,25 @@ import {
   updateProduct,
   uploadProductImage
 } from '../controllers/products/products.controller.js';
+import { ProductSchema } from '../middlewares/validations/dtos/product.dto.js';
+import { validateSchema } from '../middlewares/validations/validationSchemas.js';
+import { convertAndValidateProductData } from '../middlewares/validations/convertAndValidateProductData.js';
 const router = Router();
 
 // eslint-disable-next-line new-cap
-const storage = new multer.memoryStorage();
-const upload = multer({ storage });
 
+const upload = multer({ storage: multer.memoryStorage() });
+
+router.post(
+  '/upload',
+  upload.array('images'),
+  convertAndValidateProductData,
+  validateSchema(ProductSchema),
+  uploadProductImage
+);
 router.get('/', getProducts);
 router.get('/:id', getProduct);
 router.post('/', checkAuth, createProduct);
 router.put('/:id', checkAuth, updateProduct);
-router.post('/upload', upload.single('file'), uploadProductImage);
 
 export default router;

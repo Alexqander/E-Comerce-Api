@@ -1,5 +1,5 @@
 import { prisma } from '../../loaders/database.js';
-import { getMessage } from '../../helpers/Messages';
+import { getMessage } from '../../helpers/Messages.js';
 
 export const findAllProductsPage = async (page = 1, limit = 10) => {
   try {
@@ -30,6 +30,22 @@ export const saveProduct = async (product) => {
     return getMessage(true, null, error);
   }
 };
+
+export const saveImageProduct = async (imageUrl, productId) => {
+  try {
+    const newImageProduct = await prisma.images.create({
+      data: {
+        url: imageUrl,
+        productId
+      }
+    });
+    return getMessage(false, newImageProduct, 'successfull operation');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
 export const findProductsByVendor = async (vendorId, page = 1, limit = 10) => {
   const skip = (page - 1) * limit;
   try {
