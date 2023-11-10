@@ -37,3 +37,33 @@ export const findAllSubcategoriesPage = async (page = 1, limit = 10) => {
     return getMessage(true, null, error);
   }
 };
+
+export const saveCategory = async (name) => {
+  try {
+    const newCategory = await prisma.category.create({
+      data: {
+        name
+      }
+    });
+    return getMessage(false, newCategory, 'successfull operation');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
+export const saveSubcategory = async (name, categoryId, description) => {
+  try {
+    const newSubcategory = await prisma.subCategory.create({
+      data: {
+        name,
+        categoryId,
+        description
+      }
+    });
+    return getMessage(false, newSubcategory, 'successfull operation');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
