@@ -16,7 +16,7 @@ import {
   updateWishListService
 } from '../../services/profileBuyer.service.js';
 
-// 1. Información del Comprador
+// * 1. Información del Comprador
 export const getInfoBuyer = async (req, res) => {
   const result = await fetchBuyerInfoService();
   result.error
@@ -38,7 +38,7 @@ export const updateInfoBuyer = async (req, res) => {
     : getResponse200(res, result.data, 'Buyer info updated successfully');
 };
 
-// 2. Listas de Deseos
+// * 2. Listas de Deseos
 export const getInfoWishListsBuyer = async (req, res) => {
   const result = await fetchWishListsService();
   result.error
@@ -78,7 +78,7 @@ export const getInfoProductsWishListBuyer = async (req, res) => {
       );
 };
 
-// 3. Carrito de Compras
+// * 3. Carrito de Compras
 export const getInfoShoppingCartBuyer = async (req, res) => {
   const result = await fetchProductsFromShoppingCartService();
   result.error

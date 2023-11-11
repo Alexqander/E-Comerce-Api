@@ -34,7 +34,7 @@ export const findUserByEmail = async (email) => {
         email
       }
     });
-    if (!user.id) {
+    if (!user) {
       getMessage(true, user, 'User not exists');
     }
     const userDetails = await prisma.user.findUnique({

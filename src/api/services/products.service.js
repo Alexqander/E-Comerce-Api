@@ -6,7 +6,26 @@ export const findAllProductsPage = async (page = 1, limit = 10) => {
     const skip = (page - 1) * limit;
     const products = await prisma.product.findMany({
       skip,
-      take: limit
+      take: limit,
+      select: {
+        id: true,
+        name: true,
+        price: true,
+        description: true,
+        storeId: true,
+        subCategoryId: true,
+        SubCategory: {
+          select: {
+            name: true
+          }
+        },
+        Images: {
+          take: 1,
+          select: {
+            url: true
+          }
+        }
+      }
     });
     const totalProducts = await prisma.product.count();
     return getMessage(
@@ -14,6 +33,58 @@ export const findAllProductsPage = async (page = 1, limit = 10) => {
       { products, totalPages: Math.ceil(totalProducts / limit) },
       'successfull operation'
     );
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
+export const findProductById = async (id) => {
+  try {
+    const product = await prisma.product.findUnique({
+      where: {
+        id
+      },
+      select: {
+        id: true,
+        name: true,
+        price: true,
+        description: true,
+        stock: true,
+        storeId: true,
+        store: {
+          select: {
+            name: true
+          }
+        },
+        subCategoryId: true,
+        SubCategory: {
+          select: {
+            name: true
+          }
+        },
+        Images: {
+          select: {
+            url: true
+          }
+        },
+        Reviews: {
+          select: {
+            id: true,
+            comment: true,
+            rating: true,
+            user: {
+              select: {
+                name: true,
+                lastName: true,
+                profilePicture: true
+              }
+            }
+          }
+        }
+      }
+    });
+    return getMessage(false, product, 'successfull operation');
   } catch (error) {
     console.log(error);
     return getMessage(true, null, error);

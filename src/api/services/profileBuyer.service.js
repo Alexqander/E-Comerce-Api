@@ -1,7 +1,7 @@
 import { prisma } from '../../loaders/database.js';
 import { getMessage } from '../../helpers/Messages.js';
 
-// Fetch buyer info
+// * Fetch buyer info
 export const fetchBuyerInfoService = async () => {
   try {
     const buyerInfo = await prisma.buyerProfile.findUnique({
@@ -15,7 +15,7 @@ export const fetchBuyerInfoService = async () => {
   }
 };
 
-// Create buyer info
+// * Create buyer info
 export const createBuyerInfoService = async (buyerData) => {
   try {
     const newBuyerInfo = await prisma.buyerProfile.create({
@@ -27,7 +27,7 @@ export const createBuyerInfoService = async (buyerData) => {
   }
 };
 
-// Update buyer info
+// * Update buyer info
 export const updateBuyerInfoService = async (buyerData) => {
   try {
     const updatedBuyerInfo = await prisma.buyerProfile.update({
@@ -41,8 +41,8 @@ export const updateBuyerInfoService = async (buyerData) => {
     return getMessage(true, error.message, 'Error updating buyer info');
   }
 };
-// Operaciones para Wish Lists
-export const fetchWishListsService = async () => {
+// * Operaciones para Wish Lists
+export const fetchWishListsService = async (id) => {
   try {
     const wishLists = await prisma.wishList.findMany({
       where: {
@@ -108,7 +108,7 @@ export const fetchProductsFromWishListService = async (wishListId) => {
   }
 };
 
-// Operaciones para Shopping Cart
+// * Operaciones para Shopping Cart
 export const createShoppingCartService = async (cartData) => {
   try {
     const newCart = await prisma.shoppingCart.create({
@@ -161,7 +161,7 @@ export const fetchProductsFromShoppingCartService = async (cartId) => {
     );
   }
 };
-// 4. Direcciones
+// * 4. Direcciones
 export const createShippingAddressService = async (addressData) => {
   try {
     const newAddress = await prisma.address.create({
