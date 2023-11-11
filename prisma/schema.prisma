@@ -59,9 +59,9 @@ model CourierProfile {
   id           String    @id @default(uuid())
   user         User      @relation(fields: [userId], references: [id])
   userId       String    @unique
-  vehicle      String    // E.g., "Bike", "Car", "Van", etc.
-  availability String    // E.g., "Full-Time", "Part-Time", "Weekends", etc.
-  deliveryArea Json      // Podría ser un JSON con coordenadas o zonas.
+  vehicle      String?    // E.g., "Bike", "Car", "Van", etc.
+  availability String?    // E.g., "Full-Time", "Part-Time", "Weekends", etc.
+  deliveryArea Json?      // Podría ser un JSON con coordenadas o zonas.
   orders       Orders[]
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -103,17 +103,14 @@ model Product {
   updatedAt      DateTime?     @updatedAt
   store          Store          @relation(fields: [storeId], references: [id])
   storeId        String
-  ShoppingCart   ShoppingCart? @relation(fields: [shoppingCartId], references: [id])
-  shoppingCartId String?
+  ShoppingCart   ShoppingCart[]   @relation("ProductShoppingCart")
   SubCategory    SubCategory   @relation(fields: [subCategoryId], references: [id])
   subCategoryId  Int
   Reviews        Reviews[]
   Images         Images[]
-  WishList       WishList?     @relation(fields: [wishListId], references: [id])
-  wishListId     String?
+  WishList       WishList[]   @relation("ProductWishList")
   transactionItems TransactionItem[] // Relación con TransactionItem
-  Orders         Orders?       @relation(fields: [ordersId], references: [id])
-  ordersId       String?
+  Orders         Orders[]       @relation("ProductOrders")
 }
 
 model Category {
@@ -143,7 +140,7 @@ model ShoppingCart {
   updatedAt   DateTime  @updatedAt
   buyer       BuyerProfile @relation(fields: [buyerId], references: [id])
   buyerId     String
-  products    Product[]
+ products    Product[]    @relation("ProductShoppingCart")
 }
 
 model WishList {
@@ -152,7 +149,7 @@ model WishList {
   updatedAt DateTime @updatedAt
   buyer     BuyerProfile @relation(fields: [buyerId], references: [id])
   buyerId   String
-  products  Product[]
+  products  Product[] @relation("ProductWishList")
 }
 
 model Reviews {
@@ -179,7 +176,7 @@ model Orders {
   orderedAt   DateTime  @default(now())
   deliverDate DateTime
   orderStatus String
-  products    Product[]
+  products    Product[] @relation("ProductOrders")
   courierId    String?
   courier      CourierProfile?  @relation(fields: [courierId], references: [id])
   buyer        BuyerProfile @relation(fields: [buyerId], references: [id])

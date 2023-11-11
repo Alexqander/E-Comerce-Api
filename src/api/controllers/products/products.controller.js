@@ -1,12 +1,38 @@
 import { handleUpload } from '../../../config/cloudinary.js';
 import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
 import {
+  findAllProductsPage,
+  findProductById,
   saveImageProduct,
   saveProduct
 } from '../../services/products.service.js';
 
-export const getProducts = async (req, res) => {};
-export const getProduct = async (req, res) => {};
+export const getProducts = async (req, res) => {
+  const { page, limit } = req.query;
+
+  parseInt(limit);
+  try {
+    const products = await findAllProductsPage(parseInt(page), parseInt(limit));
+    return products.error
+      ? getResponse500(res, products.message)
+      : getResponse200(res, products.data);
+  } catch (error) {
+    console.log(error);
+    return getResponse500(res, error);
+  }
+};
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const product = await findProductById(id);
+    product.error
+      ? getResponse500(res, product.message)
+      : getResponse200(res, product.data);
+  } catch (error) {
+    console.log(error);
+    return getResponse500(res, error);
+  }
+};
 export const createProduct = async (req, res) => {};
 export const updateProduct = async (req, res) => {};
 export const uploadProductImage = async (req, res) => {

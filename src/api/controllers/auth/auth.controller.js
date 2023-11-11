@@ -21,7 +21,8 @@ import { compare, encrypt } from '../../../helpers/handleBcrypt.js';
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await findUserByEmail(email);
-  if (!user.data) {
+
+  if (user.error) {
     return getResponse404(res);
   }
   const checkPassword = await compare(password, user.data.password);
