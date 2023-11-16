@@ -39,6 +39,76 @@ export const findAllProductsPage = async (page = 1, limit = 10) => {
   }
 };
 
+export const findProductsByQuery = async (page = 1, limit = 10, search) => {
+  console.log(search);
+  const skip = (page - 1) * limit;
+  try {
+    const products = await prisma.product.findMany({
+      skip,
+      take: limit,
+      where: {
+        OR: [
+          {
+            name: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive'
+            }
+          }
+        ]
+      },
+      select: {
+        id: true,
+        name: true,
+        price: true,
+        description: true,
+        storeId: true,
+        subCategoryId: true,
+        SubCategory: {
+          select: {
+            name: true
+          }
+        },
+        Images: {
+          take: 1,
+          select: {
+            url: true
+          }
+        }
+      }
+    });
+    const totalProducts = await prisma.product.count({
+      where: {
+        OR: [
+          {
+            name: {
+              contains: search
+            }
+          },
+          {
+            description: {
+              contains: search
+            }
+          }
+        ]
+      }
+    });
+    return getMessage(
+      false,
+      { products, totalPages: Math.ceil(totalProducts / limit) },
+      'successfull operation'
+    );
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
 export const findProductById = async (id) => {
   try {
     const product = await prisma.product.findUnique({

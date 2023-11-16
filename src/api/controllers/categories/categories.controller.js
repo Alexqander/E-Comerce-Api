@@ -8,11 +8,12 @@ import {
 
 export const getCategories = async (req, res) => {
   const { page, limit } = req.query;
+
   const {
     error: errorConsult,
     data: dataConsult,
     message: messageConsult
-  } = await findAllCategoriesPage(page, limit);
+  } = await findAllCategoriesPage(page, parseInt(limit));
   return errorConsult
     ? getResponse500(res, { messageConsult, dataConsult })
     : getResponse200(res, dataConsult);

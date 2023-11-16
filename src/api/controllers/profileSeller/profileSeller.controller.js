@@ -26,7 +26,8 @@ export const getInfoProfileSeller = async (req, res) => {
 };
 
 export const getInfoProductsSeller = async (req, res) => {
-  const result = await fetchSellerProducts(req.user.id);
+  const { id } = req.query;
+  const result = await fetchSellerProducts(id);
   result.error
     ? getResponse500(res, result)
     : getResponse200(res, result.data, 'ok');
