@@ -5,6 +5,7 @@ import {
   createProduct,
   getProduct,
   getProducts,
+  searchProducts,
   updateProduct,
   uploadProductImage
 } from '../controllers/products/products.controller.js';
@@ -25,6 +26,7 @@ router.post(
   uploadProductImage
 );
 router.get('/', getProducts);
+router.get('/search', searchProducts);
 router.get('/:id', getProduct);
 router.post('/', checkAuth, createProduct);
 router.put('/:id', checkAuth, updateProduct);

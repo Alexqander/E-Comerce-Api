@@ -4,12 +4,17 @@ import {
   deleteUser,
   getUser,
   getUsers,
+  updateProfilePicture,
   updateUser
 } from '../controllers/users/user.controller.js';
 import { validateSchema } from '../middlewares/validations/validationSchemas.js';
 import { UserSchema } from '../middlewares/validations/dtos/user.dto.js';
 import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
+import multer from 'multer';
 const router = Router();
+
+const upload = multer({ storage: multer.memoryStorage() });
+
 // * /apiEcomerce/1.0/users/
 router.get('/', checkAuth, checkRoleAuth(['ADMIN']), getUsers);
 router.get(
@@ -24,6 +29,13 @@ router.put(
   checkRoleAuth(['ADMIN', 'USUARIO', 'VENDEDOR', 'REPARTADOR']),
   validateSchema(UserSchema),
   updateUser
+);
+router.patch(
+  '/image/:id',
+  checkAuth,
+  checkRoleAuth(['ADMIN', 'USUARIO', 'VENDEDOR', 'REPARTADOR']),
+  upload.single('imageFile'),
+  updateProfilePicture
 );
 router.delete(
   '/:id',

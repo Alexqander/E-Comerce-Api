@@ -9,6 +9,7 @@ import {
   getInfoTransactionsProductSeller,
   getInfoProductsSeller
 } from '../controllers/profileSeller/profileSeller.controller.js';
+import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
 
 const router = Router();
 
@@ -18,7 +19,12 @@ router.post('/profile', createInfoProfileSeller);
 router.put('/profile', updateInfoProfileSeller);
 
 // Productos
-router.get('/profile/products', getInfoProductsSeller);
+router.get(
+  '/profile/products/:id',
+  checkAuth,
+  checkRoleAuth(['VENDEDOR']),
+  getInfoProductsSeller
+);
 router.post('/profile/products', createProductSeller);
 router.put('/profile/products/:id', updateProductSeller);
 router.delete('/profile/products/:id', deleteProductSeller);

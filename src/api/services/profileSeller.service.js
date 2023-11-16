@@ -21,10 +21,29 @@ export const fetchSellerProfileInfo = async (sellerId) => {
   }
 };
 
-export const fetchSellerProducts = async (sellerId) => {
+export const fetchSellerProducts = async (storeId) => {
   try {
     const products = await prisma.product.findMany({
-      where: { vendorId: sellerId }
+      where: { storeId },
+      select: {
+        id: true,
+        name: true,
+        price: true,
+        description: true,
+        storeId: true,
+        subCategoryId: true,
+        SubCategory: {
+          select: {
+            name: true
+          }
+        },
+        Images: {
+          take: 1,
+          select: {
+            url: true
+          }
+        }
+      }
     });
     return getMessage(false, products, 'Products successfully fetched');
   } catch (error) {

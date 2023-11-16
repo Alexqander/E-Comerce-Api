@@ -3,6 +3,7 @@ import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
 import {
   findAllProductsPage,
   findProductById,
+  findProductsByQuery,
   saveImageProduct,
   saveProduct
 } from '../../services/products.service.js';
@@ -13,6 +14,22 @@ export const getProducts = async (req, res) => {
   parseInt(limit);
   try {
     const products = await findAllProductsPage(parseInt(page), parseInt(limit));
+    return products.error
+      ? getResponse500(res, products.message)
+      : getResponse200(res, products.data);
+  } catch (error) {
+    console.log(error);
+    return getResponse500(res, error);
+  }
+};
+export const searchProducts = async (req, res) => {
+  const { page, limit, search } = req.query;
+  try {
+    const products = await findProductsByQuery(
+      parseInt(page),
+      parseInt(limit),
+      search
+    );
     return products.error
       ? getResponse500(res, products.message)
       : getResponse200(res, products.data);

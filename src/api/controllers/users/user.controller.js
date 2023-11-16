@@ -1,3 +1,4 @@
+import { handleUpload } from '../../../config/cloudinary.js';
 import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
 import {
   asignRoleUser,
@@ -31,6 +32,22 @@ export const updateUser = async (req, res) => {
   user.error
     ? getResponse500(res, user.data.message, res)
     : getResponse200(res, user.data, 'ok');
+};
+
+export const updateProfilePicture = async (req, res) => {
+  const { id } = req.params;
+  const file = req.files;
+  if (!file) return getResponse500(res, 'No se ha subido ningún archivo');
+
+  const b64 = Buffer.from(file.buffer).toString('base64');
+  const dataUri = 'data:' + file.mimetype + ';base64,' + b64;
+  const uploadResult = await handleUpload(dataUri);
+
+  const imageUrl = uploadResult.url;
+  const profilePicture = await modifiedUser(id, { profilePicture: imageUrl });
+  profilePicture.error
+    ? getResponse500(profilePicture.data.message, res)
+    : getResponse200(res, profilePicture.data, 'ok');
 };
 
 export const deleteUser = async (req, res) => {
