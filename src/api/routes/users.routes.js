@@ -30,13 +30,7 @@ router.put(
   validateSchema(UserSchema),
   updateUser
 );
-router.patch(
-  '/image/:id',
-  checkAuth,
-  checkRoleAuth(['ADMIN', 'USUARIO', 'VENDEDOR', 'REPARTADOR']),
-  upload.single('imageFile'),
-  updateProfilePicture
-);
+router.patch('/image/:id', upload.single('imageFile'), updateProfilePicture);
 router.delete(
   '/:id',
   checkAuth,
@@ -44,4 +38,6 @@ router.delete(
   deleteUser
 );
 
+/*   checkAuth,
+  checkRoleAuth(['ADMIN', 'USUARIO', 'VENDEDOR', 'REPARTADOR']), */
 export default router;

@@ -36,7 +36,8 @@ export const updateUser = async (req, res) => {
 
 export const updateProfilePicture = async (req, res) => {
   const { id } = req.params;
-  const file = req.files;
+  const file = req.file;
+  console.log(file);
   if (!file) return getResponse500(res, 'No se ha subido ningún archivo');
 
   const b64 = Buffer.from(file.buffer).toString('base64');
