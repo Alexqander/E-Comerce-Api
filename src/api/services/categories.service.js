@@ -1,6 +1,21 @@
 import { getMessage } from '../../helpers/Messages.js';
 import { prisma } from '../../loaders/database.js';
 
+export const findAllCategories = async () => {
+  try {
+    const categories = await prisma.category.findMany({
+      select: {
+        id: true,
+        name: true
+      }
+    });
+    return getMessage(false, categories, 'successfull operation');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
 export const findAllCategoriesPage = async (page = 1, limit = 10) => {
   try {
     const skip = (page - 1) * limit;
@@ -19,6 +34,22 @@ export const findAllCategoriesPage = async (page = 1, limit = 10) => {
     return getMessage(true, null, error);
   }
 };
+
+export const findAllSubcategories = async () => {
+  try {
+    const subcategories = await prisma.subCategory.findMany({
+      select: {
+        id: true,
+        name: true
+      }
+    });
+    return getMessage(false, subcategories, 'successfull operation');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
 export const findAllSubcategoriesPage = async (page = 1, limit = 10) => {
   try {
     const skip = (page - 1) * limit;
@@ -32,6 +63,24 @@ export const findAllSubcategoriesPage = async (page = 1, limit = 10) => {
       { subcategories, totalPages: Math.ceil(totalSubcategories / limit) },
       'successfull operation'
     );
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
+export const findSubcategoryByCategory = async (categoryId) => {
+  try {
+    const subcategories = await prisma.subCategory.findMany({
+      where: {
+        categoryId
+      },
+      select: {
+        id: true,
+        name: true
+      }
+    });
+    return getMessage(false, subcategories, 'successfull operation');
   } catch (error) {
     console.log(error);
     return getMessage(true, null, error);

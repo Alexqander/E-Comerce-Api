@@ -55,6 +55,8 @@ export const updateProduct = async (req, res) => {};
 export const uploadProductImage = async (req, res) => {
   try {
     const files = req.files;
+    console.log(files);
+    console.log(req.body);
     if (!files || files.length === 0) {
       return getResponse500(res, 'No se ha subido ningún archivo');
     }
