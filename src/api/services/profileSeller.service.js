@@ -32,9 +32,16 @@ export const fetchSellerProducts = async (storeId) => {
         description: true,
         storeId: true,
         subCategoryId: true,
+        stock: true,
         SubCategory: {
           select: {
-            name: true
+            name: true,
+            category: {
+              select: {
+                id: true,
+                name: true
+              }
+            }
           }
         },
         Images: {

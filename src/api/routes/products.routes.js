@@ -20,7 +20,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 router.post(
   '/upload',
-  upload.array('images'),
+  upload.array('files'),
   convertAndValidateProductData,
   validateSchema(ProductSchema),
   uploadProductImage
