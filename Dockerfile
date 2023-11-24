@@ -12,6 +12,9 @@ COPY prisma ./prisma
 RUN npx prisma generate
 # Copiar archivos
 COPY . .
+
+RUN mkdir -p /app/src/logs
+
 # Exponer puerto
 EXPOSE 4000
 # Ejecutar comando
