@@ -6,6 +6,7 @@ WORKDIR /app
 COPY package*.json ./
 # Instalar dependencias
 RUN npm install
+RUN npx prisma generate
 # Copiar archivos
 COPY . .
 # Exponer puerto
