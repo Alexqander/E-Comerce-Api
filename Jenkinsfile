@@ -2,6 +2,15 @@ pipeline {
     agent any
 
     stages {
+        stage('📦 Construir Imagen') {
+            steps {
+                script {
+                    // Construye la imagen de Docker para la aplicación
+                    sh 'docker-compose build app'
+                }
+            }
+        }
+
         stage('📒 Iniciar Base de Datos') {
             steps {
                 script {
@@ -23,10 +32,6 @@ pipeline {
 
         stage('📊 Cargar Datos Iniciales') {
             steps {
-                script{
-                    // Ejecuta el comando para Inicializar la base de datos
-                    sh 'docker-compose run app npx prisma generate'
-                }
                 script {
                     // Ejecuta el comando para cargar datos iniciales
                     sh 'docker-compose run app npm run data'
@@ -34,11 +39,11 @@ pipeline {
             }
         }
 
-        stage('🚀 Construir y Desplegar Aplicación') {
+        stage('🚀 Desplegar Aplicación') {
             steps {
                 script {
                     // Construye y despliega la aplicación
-                    sh 'docker-compose up -d --build app'
+                   sh 'docker-compose up -d app'
                 }
             }
         }
