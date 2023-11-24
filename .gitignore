@@ -1,11 +1,8 @@
 node_modules
-
 .vscode/*
 .idea/*
 package-lock.json
 thunder-tests
 uploads
-prisma/migrations
-prisma/migration_lock.toml
 src/logs/
 

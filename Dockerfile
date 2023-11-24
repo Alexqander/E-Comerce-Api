@@ -8,6 +8,10 @@ COPY package*.json ./
 RUN npm install
 # Copia la carpeta prisma a la imagen
 COPY prisma ./prisma
+
+# Copia el directorio de migraciones de Prisma al contenedor
+COPY prisma/migrations /app/prisma/migrations
+
 # Genera el cliente de prisma
 RUN npx prisma generate
 # Copiar archivos
