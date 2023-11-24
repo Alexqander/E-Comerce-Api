@@ -2,14 +2,14 @@ import path from 'path';
 import fs from 'fs';
 import { randomUUID } from 'crypto';
 import chalk from 'chalk';
-const dirname = path.dirname(new URL(import.meta.url).pathname).substring(1);
-const logsDir = path.join(dirname, '..', 'logs'); // Define una carpeta 'logs'
-
+const __dirname = path.dirname(new URL(import.meta.url).pathname).substring(1);
+const logsDir = path.resolve(__dirname, 'logs');
 console.log('Ruta del directorio de logs:', logsDir);
+
 // Asegúrate de que la carpeta 'logs' exista
 if (!fs.existsSync(logsDir)) {
   console.log('Creando directorio de logs...');
-  fs.mkdirSync(logsDir);
+  fs.mkdirSync(logsDir, { recursive: true });
 }
 
 // Crea nombres de archivo basados en la fecha, por ejemplo: '2023-05-01.log'
