@@ -1,8 +1,14 @@
 import dotenv from 'dotenv';
 
-const envFound = dotenv.config();
+// Determinar el entorno y cargar el archivo .env correspondiente
+const envFile =
+  process.env.NODE_ENV === 'production'
+    ? '.env.production'
+    : '.env.development';
+
+const envFound = dotenv.config({ path: envFile });
 if (!envFound) {
-  throw new Error("⚠️Couldn't find .env file⚠️ ");
+  throw new Error(`⚠️ Couldn't find ${envFile} file ⚠️`);
 }
 
 export default {
