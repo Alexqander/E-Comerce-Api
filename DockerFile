@@ -1,5 +1,5 @@
 # Imagen Base
-FROM node:20.9.0-alpine3.14
+FROM node:20.9.0-alpine3.17
 # Establecer directorio de trabajo
 WORKDIR /app
 # Copiar archivos
