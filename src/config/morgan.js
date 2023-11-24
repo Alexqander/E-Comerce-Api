@@ -5,8 +5,10 @@ import chalk from 'chalk';
 const dirname = path.dirname(new URL(import.meta.url).pathname).substring(1);
 const logsDir = path.join(dirname, '..', 'logs'); // Define una carpeta 'logs'
 
+console.log('Ruta del directorio de logs:', logsDir);
 // Asegúrate de que la carpeta 'logs' exista
 if (!fs.existsSync(logsDir)) {
+  console.log('Creando directorio de logs...');
   fs.mkdirSync(logsDir);
 }
 
