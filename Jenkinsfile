@@ -43,6 +43,7 @@ pipeline {
     post {
         always {
             // Pasos a ejecutar después de completar el pipeline, como limpieza
+             echo 'Este mensaje siempre se mostrará, independientemente del resultado del pipeline.'
         }
     }
 }
