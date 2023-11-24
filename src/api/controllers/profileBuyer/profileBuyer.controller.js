@@ -1,16 +1,20 @@
 import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
 import {
+  addProductsToShoppingCart,
   createBillingAddressService,
   createBuyerInfoService,
   createShippingAddressService,
   createShoppingCartService,
-  createWishListService,
+  createWishList,
+  deleteProductFromWishList,
+  deleteProductFromShoppingCart,
   deleteShoppingCartService,
   deleteWishListService,
   fetchBuyerInfoService,
-  fetchProductsFromShoppingCartService,
   fetchProductsFromWishListService,
   fetchWishListsService,
+  findLastShoppingCart,
+  saveProductToWishList,
   updateBuyerInfoService,
   updateShoppingCartService,
   updateWishListService
@@ -47,10 +51,32 @@ export const getInfoWishListsBuyer = async (req, res) => {
 };
 
 export const createWishListBuyer = async (req, res) => {
-  const result = await createWishListService(req.body);
+  const result = await createWishList(req.body);
   result.error
     ? getResponse500(res, result)
     : getResponse200(res, result.data, 'Wish list created successfully');
+};
+
+export const addProductToWishList = async (req, res) => {
+  const result = await saveProductToWishList(req.body);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(
+        res,
+        result.data,
+        'Product added to wish list successfully'
+      );
+};
+
+export const removeProductFromWishList = async (req, res) => {
+  const result = await deleteProductFromWishList(req.body);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(
+        res,
+        result.data,
+        'Product removed from wish list successfully'
+      );
 };
 
 export const updateWishListBuyer = async (req, res) => {
@@ -79,11 +105,17 @@ export const getInfoProductsWishListBuyer = async (req, res) => {
 };
 
 // * 3. Carrito de Compras
-export const getInfoShoppingCartBuyer = async (req, res) => {
-  const result = await fetchProductsFromShoppingCartService();
+
+export const getLastShoppingCart = async (req, res) => {
+  // * Se busca el ultimo carrito de compras activo por el id de usuario
+  const result = await findLastShoppingCart(req.params.id);
   result.error
-    ? getResponse500(res, result)
-    : getResponse200(res, result.data, 'Shopping cart fetched successfully');
+    ? getResponse500(res, result.data)
+    : getResponse200(
+        res,
+        result.data,
+        'Last shopping cart fetched successfully'
+      );
 };
 
 export const createShoppingCartBuyer = async (req, res) => {
@@ -93,6 +125,38 @@ export const createShoppingCartBuyer = async (req, res) => {
     : getResponse200(res, result.data, 'Shopping cart created successfully');
 };
 
+export const savedProductsToShoppingCart = async (req, res) => {
+  const { id } = req.params;
+  const { products } = req.body;
+  const result = await addProductsToShoppingCart(id, products);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(
+        res,
+        result.data,
+        'Product added to shopping cart successfully'
+      );
+};
+
+export const createAndAddProductsToShoppingCart = async (req, res) => {
+  const result = await createShoppingCartService(req.body);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(res, result.data, 'Shopping cart created successfully');
+};
+
+export const removeProductToShopingCart = async (req, res) => {
+  const { id } = req.params;
+  const result = await deleteProductFromShoppingCart(id, req.body);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(
+        res,
+        result.data,
+        'Product removed from wish list successfully'
+      );
+};
+
 export const updateShoppingCartBuyer = async (req, res) => {
   const result = await updateShoppingCartService(req.body);
   result.error
@@ -100,25 +164,14 @@ export const updateShoppingCartBuyer = async (req, res) => {
     : getResponse200(res, result.data, 'Shopping cart updated successfully');
 };
 
-export const deleteShoppingCartBuyer = async (req, res) => {
+export const deleteShoppingCart = async (req, res) => {
   const result = await deleteShoppingCartService(req.params.id);
   result.error
     ? getResponse500(res, result)
     : getResponse200(res, result.data, 'Shopping cart deleted successfully');
 };
 
-export const getInfoProductsShoppingCartBuyer = async (req, res) => {
-  const result = await fetchProductsFromShoppingCartService(req.params.id);
-  result.error
-    ? getResponse500(res, result)
-    : getResponse200(
-        res,
-        result.data,
-        'Products from shopping cart fetched successfully'
-      );
-};
-
-// 4. Direcciones
+// * 4. Direcciones
 export const createShippingAddressBuyer = async (req, res) => {
   const result = await createShippingAddressService(req.body);
   result.error

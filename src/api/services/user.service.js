@@ -20,7 +20,20 @@ const profileSelect = {
 };
 export const findUsers = async () => {
   try {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        lastName: true,
+        email: true,
+        phoneNumber: true,
+        profilePicture: true,
+        role: true,
+        buyerProfile: true,
+        sellerProfile: true,
+        courierProfile: true
+      }
+    });
     return getMessage(false, users, 'Data successfully obtained');
   } catch (error) {
     return getMessage(true, error.message, 'Error al obtener los usuarios');
@@ -57,7 +70,13 @@ export const findUserById = async (id) => {
       where: {
         id
       },
-      include: {
+      select: {
+        id: true,
+        name: true,
+        lastName: true,
+        email: true,
+        phoneNumber: true,
+        profilePicture: true,
         role: true
       }
     }); // * SELECT * FROM user WHERE email = email [{},{}]
@@ -146,7 +165,7 @@ export const createUser = async (user, idRole, passwordHash) => {
   const { name, lastName, email, phoneNumber, storeName } = user;
 
   const profileCreators = {
-    // admin
+    // * admin
     1: {
       name,
       lastName,
@@ -155,7 +174,7 @@ export const createUser = async (user, idRole, passwordHash) => {
       password: passwordHash,
       roleId: idRole
     },
-    // seller vendedor
+    // * seller vendedor
     2: {
       name,
       lastName,
@@ -173,7 +192,7 @@ export const createUser = async (user, idRole, passwordHash) => {
         }
       }
     },
-    // courier repartidor
+    // * courier repartidor
     3: {
       name,
       lastName,
@@ -185,7 +204,7 @@ export const createUser = async (user, idRole, passwordHash) => {
         create: {}
       }
     },
-    // buyer comprador usuario normal
+    // * buyer comprador usuario normal
     4: {
       name,
       lastName,

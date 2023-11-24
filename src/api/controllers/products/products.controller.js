@@ -23,12 +23,14 @@ export const getProducts = async (req, res) => {
   }
 };
 export const searchProducts = async (req, res) => {
-  const { page, limit, search } = req.query;
+  const { page, limit, search, category, minPrice } = req.query;
   try {
     const products = await findProductsByQuery(
       parseInt(page),
       parseInt(limit),
-      search
+      search,
+      parseInt(category),
+      parseInt(minPrice)
     );
     return products.error
       ? getResponse500(res, products.message)

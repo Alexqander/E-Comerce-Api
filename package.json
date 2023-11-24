@@ -7,7 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.js",
+    "start": "node ./src/app.js",
     "migration": "prisma migrate dev",
+    "migrate": "prisma migrate deploy",
     "data": "node ./scripts/initialData.js"
   },
   "keywords": [],

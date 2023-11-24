@@ -20,21 +20,27 @@ router.get('/', checkAuth, checkRoleAuth(['ADMIN']), getUsers);
 router.get(
   '/:id',
   checkAuth,
-  checkRoleAuth(['USUARIO', 'VENDEDOR', 'REPARTIDOR']),
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
   getUser
 );
 router.put(
   '/:id',
   checkAuth,
-  checkRoleAuth(['ADMIN', 'USUARIO', 'VENDEDOR', 'REPARTADOR']),
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTADOR']),
   validateSchema(UserSchema),
   updateUser
 );
-router.patch('/image/:id', upload.single('imageFile'), updateProfilePicture);
+router.patch(
+  '/image/:id',
+  checkAuth,
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTADOR']),
+  upload.single('imageFile'),
+  updateProfilePicture
+);
 router.delete(
   '/:id',
   checkAuth,
-  checkRoleAuth(['ADMIN', 'USUARIO', 'VENDEDOR', 'REPARTADOR']),
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTADOR']),
   deleteUser
 );
 

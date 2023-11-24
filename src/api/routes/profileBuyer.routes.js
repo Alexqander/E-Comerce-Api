@@ -1,23 +1,32 @@
 import { Router } from 'express';
 import {
+  addProductToWishList,
+  createAndAddProductsToShoppingCart,
   createBillingAddressBuyer,
   createInfoBuyer,
   createShippingAddressBuyer,
   createShoppingCartBuyer,
   createWishListBuyer,
-  deleteShoppingCartBuyer,
+  deleteShoppingCart,
   deleteWishListBuyer,
   getInfoBuyer,
-  getInfoProductsShoppingCartBuyer,
   getInfoProductsWishListBuyer,
-  getInfoShoppingCartBuyer,
   getInfoWishListsBuyer,
+  getLastShoppingCart,
+  removeProductFromWishList,
+  removeProductToShopingCart,
+  savedProductsToShoppingCart,
   updateInfoBuyer,
   updateShoppingCartBuyer,
   updateWishListBuyer
 } from '../controllers/profileBuyer/profileBuyer.controller.js';
 import { validateSchema } from '../middlewares/validations/validationSchemas.js';
-import { ShoppingCartSchema } from '../middlewares/validations/dtos/shoppingCart.dto.js';
+import {
+  ArrayCartItemSchema,
+  ShoppingCartSchema,
+  newShoppingCartSchema
+} from '../middlewares/validations/dtos/shoppingCart.dto.js';
+import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
 const router = Router();
 
 // ? Profile
@@ -28,22 +37,61 @@ router.put('/profile', updateInfoBuyer);
 // ? WishLists
 router.get('/profile/wishLists', getInfoWishListsBuyer);
 router.post('/profile/wishLists', createWishListBuyer);
+router.patch('/profile/wishLists/:id', addProductToWishList);
+router.patch('/profile/wishLists/:id', removeProductFromWishList);
 router.put('/profile/wishLists/:id', updateWishListBuyer);
 router.delete('/profile/wishLists/:id', deleteWishListBuyer);
 router.get('/profile/wishLists/:id/products', getInfoProductsWishListBuyer);
 
 // ? ShoppingCart
-router.get('/profile/shoppingCart', getInfoShoppingCartBuyer);
+// * 1. Obtener el último carrito de compras
+router.get(
+  '/profile/shoppingCart/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  getLastShoppingCart
+);
+// * 2. Crear un carrito de compras
 router.post(
   '/profile/shoppingCart',
+  checkAuth,
+  checkRoleAuth(['USER']),
   validateSchema(ShoppingCartSchema),
   createShoppingCartBuyer
 );
-router.put('/profile/shoppingCart/:id', updateShoppingCartBuyer);
-router.delete('/profile/shoppingCart/:id', deleteShoppingCartBuyer);
-router.get(
-  '/profile/shoppingCart/:id/products',
-  getInfoProductsShoppingCartBuyer
+// * 3. Agregar productos a un carrito de compras
+router.post(
+  '/profile/shoppingCart/add',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  validateSchema(newShoppingCartSchema),
+  createAndAddProductsToShoppingCart
+);
+router.patch(
+  '/profile/shoppingCart/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  validateSchema(ArrayCartItemSchema),
+  savedProductsToShoppingCart
+);
+router.patch(
+  '/profile/shoppingCart/remove/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  removeProductToShopingCart
+);
+router.put(
+  '/profile/shoppingCart/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  updateShoppingCartBuyer
+);
+// * 4. Eliminar un carrito de compras
+router.delete(
+  '/profile/shoppingCart/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  deleteShoppingCart
 );
 
 // ? Addresses

@@ -3,6 +3,7 @@ import {
   creatSubcategory,
   createCategory,
   getAllCategories,
+  getAllCategoriesWithSubcategories,
   getAllSubCategories,
   getCategories,
   getCategoryById,
@@ -16,6 +17,7 @@ const router = Router();
 router.get('/', getCategories);
 router.get('/all', getAllCategories);
 router.get('/sub/', getSubCategories);
+router.get('/with/all', getAllCategoriesWithSubcategories);
 router.get('/sub/all', getAllSubCategories);
 router.get('/sub/:id', getSubCategoryByCategoryId);
 router.get('/:id', getCategoryById);

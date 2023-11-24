@@ -2,6 +2,7 @@ import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
 import {
   findAllCategories,
   findAllCategoriesPage,
+  findAllCategoriesWithSubcategories,
   findAllSubcategories,
   findAllSubcategoriesPage,
   findSubcategoryByCategory,
@@ -15,6 +16,17 @@ export const getAllCategories = async (req, res) => {
     data: dataConsult,
     message: messageConsult
   } = await findAllCategories();
+  return errorConsult
+    ? getResponse500(res, { messageConsult, dataConsult })
+    : getResponse200(res, dataConsult);
+};
+
+export const getAllCategoriesWithSubcategories = async (req, res) => {
+  const {
+    error: errorConsult,
+    data: dataConsult,
+    message: messageConsult
+  } = await findAllCategoriesWithSubcategories();
   return errorConsult
     ? getResponse500(res, { messageConsult, dataConsult })
     : getResponse200(res, dataConsult);

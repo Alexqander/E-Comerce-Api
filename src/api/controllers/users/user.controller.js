@@ -22,7 +22,7 @@ export const getUser = async (req, res) => {
   const { id } = req.params;
   const user = await findUserById(id);
   user.error
-    ? getResponse500(user.data.message, res)
+    ? getResponse500(res, user.data)
     : getResponse200(res, user.data, 'ok');
 };
 
@@ -30,7 +30,7 @@ export const updateUser = async (req, res) => {
   const { id } = req.params;
   const user = await modifiedUser(id, req.body);
   user.error
-    ? getResponse500(res, user.data.message, res)
+    ? getResponse500(res, user.data.message)
     : getResponse200(res, user.data, 'ok');
 };
 
@@ -47,7 +47,7 @@ export const updateProfilePicture = async (req, res) => {
   const imageUrl = uploadResult.url;
   const profilePicture = await modifiedUser(id, { profilePicture: imageUrl });
   profilePicture.error
-    ? getResponse500(profilePicture.data.message, res)
+    ? getResponse500(res, profilePicture.data)
     : getResponse200(res, profilePicture.data, 'ok');
 };
 

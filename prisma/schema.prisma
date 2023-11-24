@@ -103,14 +103,14 @@ model Product {
   updatedAt      DateTime?     @updatedAt
   store          Store          @relation(fields: [storeId], references: [id])
   storeId        String
-  ShoppingCart   ShoppingCart[]   @relation("ProductShoppingCart")
+  cartItems   CartItem[]
   SubCategory    SubCategory   @relation(fields: [subCategoryId], references: [id])
   subCategoryId  Int
   Reviews        Reviews[]
   Images         Images[]
-  WishList       WishList[]   @relation("ProductWishList")
+  wishListItems  WishListItem[]
   transactionItems TransactionItem[] // Relación con TransactionItem
-  Orders         Orders[]       @relation("ProductOrders")
+  orderItems  OrderItem[]
 }
 
 model Category {
@@ -140,17 +140,38 @@ model ShoppingCart {
   updatedAt   DateTime  @updatedAt
   buyer       BuyerProfile @relation(fields: [buyerId], references: [id])
   buyerId     String
- products    Product[]    @relation("ProductShoppingCart")
+  cartItems   CartItem[]
 }
+
+model CartItem {
+    id            String      @id @default(uuid())
+    cartId        String
+    productId     String
+    quantity      Int
+    ShoppingCart  ShoppingCart @relation(fields: [cartId], references: [id])
+    Product       Product      @relation(fields: [productId], references: [id])
+}
+
 
 model WishList {
   id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  name      String
   buyer     BuyerProfile @relation(fields: [buyerId], references: [id])
   buyerId   String
-  products  Product[] @relation("ProductWishList")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ wishListItems  WishListItem[]
 }
+model WishListItem {
+  id         String      @id @default(uuid())
+  wishListId String
+  productId  String
+  note       String?     // Nota personal opcional
+  addedAt    DateTime    @default(now()) // Fecha en que se añadió el producto
+  WishList   WishList    @relation(fields: [wishListId], references: [id])
+  Product    Product     @relation(fields: [productId], references: [id])
+}
+
 
 model Reviews {
   id        String   @id @default(uuid())
@@ -176,13 +197,23 @@ model Orders {
   orderedAt   DateTime  @default(now())
   deliverDate DateTime
   orderStatus String
-  products    Product[] @relation("ProductOrders")
+   orderItems  OrderItem[]
   courierId    String?
   courier      CourierProfile?  @relation(fields: [courierId], references: [id])
   buyer        BuyerProfile @relation(fields: [buyerId], references: [id])
   buyerId      String
   deliveryStatus String         // E.g., "Waiting for Pickup", "In Transit", "Delivered", etc.
 }
+model OrderItem {
+  id        String      @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  Order     Orders      @relation(fields: [orderId], references: [id])
+  Product   Product     @relation(fields: [productId], references: [id])
+}
+
 
 
 model ShippingDirections {

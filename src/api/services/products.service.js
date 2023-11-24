@@ -39,29 +39,53 @@ export const findAllProductsPage = async (page = 1, limit = 10) => {
   }
 };
 
-export const findProductsByQuery = async (page = 1, limit = 10, search) => {
-  console.log(search);
+export const findProductsByQuery = async (
+  page = 1,
+  limit = 10,
+  search,
+  category,
+  minPrice
+) => {
+  console.log(
+    `page: ${page}, limit: ${limit}, search: ${search} , category: ${category}, minPrice: ${minPrice}`
+  );
   const skip = (page - 1) * limit;
   try {
+    // Construcción del objeto de condiciones de búsqueda
+    const searchConditions = {};
+
+    // Agregar condiciones de búsqueda basadas en los parámetros proporcionados
+    if (search) {
+      searchConditions.OR = [
+        {
+          name: {
+            contains: search,
+            mode: 'insensitive'
+          }
+        },
+        {
+          description: {
+            contains: search,
+            mode: 'insensitive'
+          }
+        }
+      ];
+    }
+
+    if (category) {
+      searchConditions.subCategoryId = parseInt(category);
+    }
+
+    if (minPrice) {
+      searchConditions.price = {
+        gte: parseFloat(minPrice)
+      };
+    }
+
     const products = await prisma.product.findMany({
       skip,
       take: limit,
-      where: {
-        OR: [
-          {
-            name: {
-              contains: search,
-              mode: 'insensitive'
-            }
-          },
-          {
-            description: {
-              contains: search,
-              mode: 'insensitive'
-            }
-          }
-        ]
-      },
+      where: searchConditions,
       select: {
         id: true,
         name: true,
@@ -82,33 +106,21 @@ export const findProductsByQuery = async (page = 1, limit = 10, search) => {
         }
       }
     });
+
     const totalProducts = await prisma.product.count({
-      where: {
-        OR: [
-          {
-            name: {
-              contains: search
-            }
-          },
-          {
-            description: {
-              contains: search
-            }
-          }
-        ]
-      }
+      where: searchConditions
     });
+
     return getMessage(
       false,
       { products, totalPages: Math.ceil(totalProducts / limit) },
-      'successfull operation'
+      'successful operation'
     );
   } catch (error) {
     console.log(error);
     return getMessage(true, null, error);
   }
 };
-
 export const findProductById = async (id) => {
   try {
     const product = await prisma.product.findUnique({

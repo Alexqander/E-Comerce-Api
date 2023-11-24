@@ -16,6 +16,27 @@ export const findAllCategories = async () => {
   }
 };
 
+export const findAllCategoriesWithSubcategories = async () => {
+  try {
+    const categories = await prisma.category.findMany({
+      select: {
+        id: true,
+        name: true,
+        SubCategory: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    });
+    return getMessage(false, categories, 'successfull operation');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, null, error);
+  }
+};
+
 export const findAllCategoriesPage = async (page = 1, limit = 10) => {
   try {
     const skip = (page - 1) * limit;
