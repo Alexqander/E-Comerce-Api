@@ -25,19 +25,19 @@ pipeline {
                 script {
                     // Ejecuta las migraciones de la base de datos
                     // Asegúrate de que este comando se ejecute dentro del contexto adecuado donde pueda acceder a la base de datos
-                    sh 'docker-compose run --rm app npx prisma migrate deploy'
+                    sh 'docker-compose run --rm app npm run migrate'
                 }
             }
         }
 
-        stage('📊 Cargar Datos Iniciales') {
+/*         stage('📊 Cargar Datos Iniciales') {
             steps {
                 script {
                     // Ejecuta el comando para cargar datos iniciales
                     sh 'docker-compose run app npm run data'
                 }
             }
-        }
+        } */
 
         stage('🚀 Desplegar Aplicación') {
             steps {
