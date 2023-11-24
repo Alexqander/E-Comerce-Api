@@ -12,7 +12,7 @@
     "dev": "nodemon ./src/app.js",
     "migration": "prisma migrate dev",
     "migrate": "prisma migrate deploy",
-    "start": "node app.js",
+    "start": "node src/app.js",
     "data": "node ./scripts/initialData.js"
   },
   "keywords": [],
