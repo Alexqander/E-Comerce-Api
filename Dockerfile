@@ -6,6 +6,9 @@ WORKDIR /app
 COPY package*.json ./
 # Instalar dependencias
 RUN npm install
+# Copia la carpeta prisma a la imagen
+COPY prisma ./prisma
+# Genera el cliente de prisma
 RUN npx prisma generate
 # Copiar archivos
 COPY . .
