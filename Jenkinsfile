@@ -30,14 +30,14 @@ pipeline {
             }
         }
 
-/*         stage('📊 Cargar Datos Iniciales') {
+        stage('📊 Cargar Datos Iniciales') {
             steps {
                 script {
                     // Ejecuta el comando para cargar datos iniciales
                     sh 'docker-compose run app npm run data'
                 }
             }
-        } */
+        }
 
         stage('🚀 Desplegar Aplicación') {
             steps {
