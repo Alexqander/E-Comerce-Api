@@ -9,8 +9,8 @@
     "dev": "nodemon ./src/app.js",
     "migration": "prisma migrate dev",
     "migrate": "prisma migrate deploy",
-    "start": "npx prisma generate && node app.js",
-    "data": "npx prisma generate && node ./scripts/initialData.js"
+    "start": "node app.js",
+    "data": "node ./scripts/initialData.js"
   },
   "keywords": [],
   "author": "",

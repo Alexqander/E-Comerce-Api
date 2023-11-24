@@ -23,6 +23,10 @@ pipeline {
 
         stage('📊 Cargar Datos Iniciales') {
             steps {
+                script{
+                    // Ejecuta el comando para Inicializar la base de datos
+                    sh 'docker-compose run app npx prisma generate'
+                }
                 script {
                     // Ejecuta el comando para cargar datos iniciales
                     sh 'docker-compose run app npm run data'
