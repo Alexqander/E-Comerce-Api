@@ -215,6 +215,32 @@ export const findLastShoppingCart = async (id) => {
   }
 };
 
+export const findShoppingCart = async (id) => {
+  try {
+    const cart = await prisma.shoppingCart.findUnique({
+      where: { id },
+      include: {
+        cartItems: {
+          select: {
+            Product: {
+              select: {
+                id: true,
+                Images: true,
+                name: true,
+                price: true
+              }
+            },
+            quantity: true
+          }
+        }
+      }
+    });
+    return getMessage(false, cart, 'Shopping cart successfully found');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error finding shopping cart');
+  }
+};
+
 export const addProductsToShoppingCart = async (cartId, products) => {
   console.log('cartId', cartId);
   try {
