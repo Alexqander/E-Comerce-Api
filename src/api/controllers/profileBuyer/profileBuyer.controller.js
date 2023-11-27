@@ -17,7 +17,8 @@ import {
   saveProductToWishList,
   updateBuyerInfoService,
   updateShoppingCartService,
-  updateWishListService
+  updateWishListService,
+  findShoppingCart
 } from '../../services/profileBuyer.service.js';
 
 // * 1. Información del Comprador
@@ -116,6 +117,13 @@ export const getLastShoppingCart = async (req, res) => {
         result.data,
         'Last shopping cart fetched successfully'
       );
+};
+
+export const getShoppingCart = async (req, res) => {
+  const result = await findShoppingCart(req.params.id);
+  result.error
+    ? getResponse500(res, result.data)
+    : getResponse200(res, result.data, 'Shopping cart fetched successfully');
 };
 
 export const createShoppingCartBuyer = async (req, res) => {

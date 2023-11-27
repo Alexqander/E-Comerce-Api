@@ -13,6 +13,7 @@ import {
   getInfoProductsWishListBuyer,
   getInfoWishListsBuyer,
   getLastShoppingCart,
+  getShoppingCart,
   removeProductFromWishList,
   removeProductToShopingCart,
   savedProductsToShoppingCart,
@@ -51,6 +52,16 @@ router.get(
   checkRoleAuth(['USER']),
   getLastShoppingCart
 );
+
+// * Obtener carrito de compras por id
+
+router.get(
+  '/profile/shoppingCart/detail/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  getShoppingCart
+);
+
 // * 2. Crear un carrito de compras
 router.post(
   '/profile/shoppingCart',

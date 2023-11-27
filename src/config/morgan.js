@@ -4,11 +4,9 @@ import { randomUUID } from 'crypto';
 import chalk from 'chalk';
 const __dirname = path.dirname(new URL(import.meta.url).pathname).substring(1);
 const logsDir = path.resolve(__dirname, 'logs');
-console.log('Ruta del directorio de logs:', logsDir);
 
 // Asegúrate de que la carpeta 'logs' exista
 if (!fs.existsSync(logsDir)) {
-  console.log('Creando directorio de logs...');
   fs.mkdirSync(logsDir, { recursive: true });
 }
 
