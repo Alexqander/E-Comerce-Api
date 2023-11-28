@@ -12,8 +12,20 @@ export default async ({ app }) => {
       methods: 'GET,PUT,PATCH,POST,DELETE'
     })
   );
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+  app.use((req, res, next) => {
+    if (req.path === '/apiEcomerce/1.0/payment/webhook-stripe') {
+      next();
+    } else {
+      express.json()(req, res, next);
+    }
+  });
+  app.use((req, res, next) => {
+    if (req.path === '/apiEcomerce/1.0/payment/webhook-stripe') {
+      next();
+    } else {
+      express.urlencoded({ extended: true })(req, res, next);
+    }
+  });
   // ? Morgan config
   morgan.token('id', (req, res) => {
     return req.id;
