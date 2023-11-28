@@ -1,13 +1,23 @@
 import { Router } from 'express';
+
 import {
   cancel,
   checkoutSession,
-  createSession
+  createSession,
+  webHookStripe
 } from '../controllers/payment/payment.controller.js';
+import bodyParser from 'body-parser';
 
 const router = Router();
 
-router.get('/create-checkout-session', createSession);
+//* Checkout
+router.post('/create-checkout-session', createSession);
+router.post(
+  '/webhook-stripe',
+  bodyParser.raw({ type: 'application/json' }),
+  webHookStripe
+);
 router.get('/success', checkoutSession);
 router.get('/cancel', cancel);
+
 export default router;
