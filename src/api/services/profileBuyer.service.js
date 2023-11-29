@@ -215,6 +215,46 @@ export const findLastShoppingCart = async (id) => {
   }
 };
 
+export const findLastPendingShoppingCart = async (id) => {
+  try {
+    const lastPendingCart = await prisma.shoppingCart.findFirst({
+      where: {
+        id,
+        orderStatus: 'pending_payment'
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      include: {
+        cartItems: {
+          select: {
+            Product: {
+              select: {
+                id: true,
+                Images: true,
+                name: true,
+                price: true
+              }
+            },
+            quantity: true
+          }
+        }
+      }
+    });
+    return getMessage(
+      false,
+      lastPendingCart,
+      'Last pending shopping cart successfully found'
+    );
+  } catch (error) {
+    return getMessage(
+      true,
+      error.message,
+      'Error finding last pending shopping cart'
+    );
+  }
+};
+
 export const findShoppingCart = async (id) => {
   try {
     const cart = await prisma.shoppingCart.findUnique({
@@ -238,6 +278,18 @@ export const findShoppingCart = async (id) => {
     return getMessage(false, cart, 'Shopping cart successfully found');
   } catch (error) {
     return getMessage(true, error.message, 'Error finding shopping cart');
+  }
+};
+
+export const updateShoppingCart = async (id, orderStatus) => {
+  try {
+    const updatedCart = await prisma.shoppingCart.update({
+      where: { id },
+      data: { orderStatus }
+    });
+    return getMessage(false, updatedCart, 'Shopping cart successfully updated');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error updating shopping cart');
   }
 };
 
