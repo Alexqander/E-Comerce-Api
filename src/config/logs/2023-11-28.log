@@ -1008,3 +1008,143 @@
 [32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
 [31mStatus and Content Length: 304 undefined - 21.818 ms[39m
 [36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 51eec13b-5c3e-4740-9706-ae0d28973d1c[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:04:02 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/auth/login[39m
+[31mStatus and Content Length: 200 949 - 457.927 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 58063e1c-6767-436f-8bbe-fcb0f5904de1[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:04:02 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 108.243 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: ac033fb2-fcd2-447e-ab3a-017bea8a1aeb[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:04:17 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/detail/7c498460-6d73-4a6e-a34b-5071c65da826[39m
+[31mStatus and Content Length: 200 1326 - 24.883 ms[39m
+[36mUser Agent: axios/1.6.0[39m
+[34mRequest ID: 7ea3b62e-605e-4e6d-bc10-8302087a5551[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:04:25 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/create-checkout-session[39m
+[31mStatus and Content Length: 200 410 - 905.595 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: fecae03b-6927-40d9-915b-73d839bea87e[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:04 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 22.302 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: b3d36ba6-7e10-4a4f-91b3-206cb8b084e9[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:11 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 25.362 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 06dd2eab-e7ef-40d6-ad8d-c16a6963c29d[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:29 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/detail/7c498460-6d73-4a6e-a34b-5071c65da826[39m
+[31mStatus and Content Length: 200 1326 - 27.885 ms[39m
+[36mUser Agent: axios/1.6.0[39m
+[34mRequest ID: 1dc5f4f4-cff0-49e9-a7e6-1d875d7b2bfe[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:31 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/create-checkout-session[39m
+[31mStatus and Content Length: 200 410 - 606.598 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 347b618a-0d77-445e-9449-1fc6c37ee23c[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:57 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 4.245 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: 9d7b5ccf-1a4c-40ca-84a9-79d2ac5f71e7[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:57 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1.115 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: 8bb80614-8efc-45ce-9b39-6c8794539cc1[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:57 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1.143 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: aa8efa99-236c-48e6-864a-1cec5354ec95[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:05:58 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1259.104 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: 2ff79237-de29-4765-ac91-35b02c894d0c[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:06:00 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 21.790 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 046c62e5-4faf-4717-9c21-78da9be269b5[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:08 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 212.420 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 100e7abf-7cde-4ea5-8c89-87f1acedbb0a[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:23 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/detail/7c498460-6d73-4a6e-a34b-5071c65da826[39m
+[31mStatus and Content Length: 200 1326 - 28.051 ms[39m
+[36mUser Agent: axios/1.6.0[39m
+[34mRequest ID: 02fa1c8e-3b41-4aa7-9453-56c03d671a11[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:26 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/create-checkout-session[39m
+[31mStatus and Content Length: 200 410 - 828.623 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: f4757704-728b-4e97-99a3-46265c49de37[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:52 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 5.501 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: b79a7af1-26c7-42c6-a312-2abf07f0e1ff[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:52 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1.438 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: afaa526a-a0db-4771-83bd-350c3cb7a549[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:52 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1.654 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: 35fc5ed1-cd80-4936-b2cb-675ed099ebfe[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:53 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1432.961 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: ba2b12fa-1988-42e5-a82a-77cd24e884b8[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:22:55 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 23.647 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: db703cf2-1427-4747-8ee8-b5bc6e1c410f[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:29:37 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/detail/7c498460-6d73-4a6e-a34b-5071c65da826[39m
+[31mStatus and Content Length: 200 1326 - 219.474 ms[39m
+[36mUser Agent: axios/1.6.0[39m
+[34mRequest ID: 2be3a0c9-5722-4944-a9ba-b84d039b1a77[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:29:41 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/create-checkout-session[39m
+[31mStatus and Content Length: 200 410 - 791.412 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 896bfd8f-eeaf-4128-8cc0-65ea92ade1f6[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:29:57 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 4.355 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: d33f964b-90f0-450b-8ab2-6cc7a75172d9[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:29:57 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 2.122 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: 4dbb67be-f9ce-46b6-8505-4bc2c01deb5c[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:29:57 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1.572 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: 34c71eae-deb3-4f57-afa6-df04aae0009a[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:29:59 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/payment/webhook-stripe[39m
+[31mStatus and Content Length: 200 undefined - 1530.451 ms[39m
+[36mUser Agent: Stripe/1.0 (+https://stripe.com/docs/webhooks)[39m
+[34mRequest ID: 86263a0c-0bf7-4a03-8b7b-ffeff7d81400[39m
+[33mDate and Time: Tue, 28 Nov 2023 17:30:00 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 27.127 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m

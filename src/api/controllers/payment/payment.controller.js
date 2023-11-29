@@ -2,7 +2,10 @@
 import Stripe from 'stripe';
 import config from '../../../config/index.js';
 import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
-import { findShoppingCart } from '../../services/profileBuyer.service.js';
+import {
+  findShoppingCart,
+  updateShoppingCart
+} from '../../services/profileBuyer.service.js';
 import {
   createOrder,
   fullFillOrder,
@@ -11,11 +14,9 @@ import {
 const stripe = new Stripe(config.stripe.stripeSecret);
 
 export const createSession = async (req, res) => {
-  const { cartId } = req.body;
+  const { cartId, buyerId } = req.body;
 
   try {
-    console.log('cartId:', cartId);
-
     // * Obtengo el carrito de compras para obtener los productos
     const cartShopping = await findShoppingCart(cartId);
     if (cartShopping.error) {
@@ -29,7 +30,7 @@ export const createSession = async (req, res) => {
       return {
         price_data: {
           currency: 'mxn',
-          unit_amount: product.Product.price,
+          unit_amount: product.Product.price * 100,
           product_data: {
             name: product.Product.name,
             images: [product.Product.Images[0].url]
@@ -38,13 +39,32 @@ export const createSession = async (req, res) => {
         quantity: product.quantity
       };
     });
-
+    // ? Creo la sesion de pago
     const session = await stripe.checkout.sessions.create({
       line_items: productsStripe,
       mode: 'payment',
+      // * aqui guardo el id del carrito de compras
+      client_reference_id: cartId,
+      // * aqui guardo el id del comprador
+      customer: buyerId,
+      shipping_address_collection: {
+        allowed_countries: ['MX']
+      },
       success_url: 'http://localhost:3000/shop/checkout/success',
       cancel_url: 'http://localhost:4000/apiEcomerce/1.0/payment/cancel'
     });
+
+    // ? Actualizo el estado del carrito de compras
+    const updateShoppingCartStatus = await updateShoppingCart(
+      cartId,
+      'pending_payment'
+    );
+
+    // ? Verifico si hubo un error al actualizar el estado del carrito de compras
+    if (updateShoppingCartStatus.error) {
+      return getResponse500(res, updateShoppingCartStatus.data);
+    }
+
     return getResponse200(res, session.url, 'session');
   } catch (error) {
     console.log(error);
@@ -70,7 +90,9 @@ export const webHookStripe = async (req, res) => {
       await createOrder(session);
       await sendEmailToBuyer(session);
       if (session.payment_status === 'paid') {
-        await fullFillOrder(session);
+        const sessionAsync = event.data.object;
+        console.log('📦 Entre al evento de que el pedido se pago');
+        await fullFillOrder(sessionAsync);
       }
       break;
     case 'checkout.session.async_payment_succeeded':

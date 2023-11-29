@@ -7,7 +7,7 @@ resendInstance.domains.verify('6da95246-a7be-4aff-b681-600d31ae4d8e');
 export const sendEmail = async (email, subject, html) => {
   try {
     const response = await resendInstance.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
+      from: 'no reply <noreply@servimahz.com.mx>',
       to: email,
       subject,
       html
