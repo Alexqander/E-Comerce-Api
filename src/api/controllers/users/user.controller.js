@@ -28,6 +28,8 @@ export const getUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   const { id } = req.params;
+  console.log('Informacion a actualizar');
+  console.log(req.body);
   const user = await modifiedUser(id, req.body);
   user.error
     ? getResponse500(res, user.data.message)
