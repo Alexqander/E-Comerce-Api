@@ -14,7 +14,7 @@ import {
 const stripe = new Stripe(config.stripe.stripeSecret);
 
 export const createSession = async (req, res) => {
-  const { cartId, buyerId } = req.body;
+  const { cartId } = req.body;
 
   try {
     // * Obtengo el carrito de compras para obtener los productos
@@ -45,8 +45,6 @@ export const createSession = async (req, res) => {
       mode: 'payment',
       // * aqui guardo el id del carrito de compras
       client_reference_id: cartId,
-      // * aqui guardo el id del comprador
-      customer: buyerId,
       shipping_address_collection: {
         allowed_countries: ['MX']
       },
@@ -87,12 +85,16 @@ export const webHookStripe = async (req, res) => {
   switch (event.type) {
     case 'checkout.session.completed':
       const session = event.data.object;
-      await createOrder(session);
       await sendEmailToBuyer(session);
       if (session.payment_status === 'paid') {
         const sessionAsync = event.data.object;
         console.log('📦 Entre al evento de que el pedido se pago');
         await fullFillOrder(sessionAsync);
+        const order = await createOrder(session);
+        if (order.error) {
+          console.log('📦 Error al crear la orden');
+          console.log(order.data);
+        }
       }
       break;
     case 'checkout.session.async_payment_succeeded':

@@ -7,7 +7,8 @@ import {
   updateProductSeller,
   updateInfoProfileSeller,
   getInfoTransactionsProductSeller,
-  getInfoProductsSeller
+  getInfoProductsSeller,
+  getStatsSeller
 } from '../controllers/profileSeller/profileSeller.controller.js';
 import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
 
@@ -17,6 +18,9 @@ const router = Router();
 router.get('/profile/:id', getInfoProfileSeller);
 router.post('/profile', createInfoProfileSeller);
 router.put('/profile', updateInfoProfileSeller);
+// * stats del vendedor
+
+router.get('/profile/stats/:id', getStatsSeller);
 
 // Productos
 router.get(

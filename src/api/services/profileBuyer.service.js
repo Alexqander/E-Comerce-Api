@@ -267,7 +267,13 @@ export const findShoppingCart = async (id) => {
                 id: true,
                 Images: true,
                 name: true,
-                price: true
+                price: true,
+                store: {
+                  select: {
+                    sellerId: true,
+                    name: true
+                  }
+                }
               }
             },
             quantity: true
@@ -463,11 +469,83 @@ export const deleteShoppingCartService = async (id) => {
   }
 };
 
-// * 4. Direcciones
-export const createShippingAddressService = async (addressData) => {
+// * Ordenes de compra
+export const fetchOrdersByBuyer = async (id) => {
   try {
-    const newAddress = await prisma.address.create({
-      data: addressData
+    const orders = await prisma.orders.findMany({
+      where: {
+        buyerId: id
+      },
+      orderBy: {
+        orderedAt: 'desc'
+      }
+    });
+    return getMessage(false, orders, 'Data successfully obtained');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error fetching orders');
+  }
+};
+
+export const fetchOrderById = async (id) => {
+  try {
+    const order = await prisma.orders.findUnique({
+      where: {
+        id
+      },
+      select: {
+        id: true,
+        buyer: {
+          select: {
+            id: true,
+            shippingAddresses: true,
+            billingAddresses: true
+          }
+        },
+        orderedAt: true,
+        orderStatus: true,
+        orderItems: {
+          select: {
+            id: true,
+            price: true,
+            Product: {
+              select: {
+                id: true,
+                name: true,
+                price: true,
+                Images: true,
+                store: {
+                  select: {
+                    name: true
+                  }
+                }
+              }
+            },
+            quantity: true
+          }
+        }
+      }
+    });
+    return getMessage(false, order, 'Data successfully obtained');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, error.message, 'Error fetching order');
+  }
+};
+
+// * 4. Direcciones
+export const createShippingAddressService = async (addressData, buyerId) => {
+  const { city, country, line1, postal_code: postalCode, state } = addressData;
+
+  try {
+    const newAddress = await prisma.shippingDirections.create({
+      data: {
+        street: line1,
+        city,
+        state,
+        postalCode,
+        country,
+        buyerId
+      }
     });
     return getMessage(false, newAddress, 'Data successfully created');
   } catch (error) {

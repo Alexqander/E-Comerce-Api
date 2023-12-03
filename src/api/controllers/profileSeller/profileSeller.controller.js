@@ -9,6 +9,7 @@ import {
   fetchProductTransactions,
   fetchSellerProducts,
   fetchSellerProfileInfo,
+  fetchStatsSeller,
   removeProduct,
   updateExistingProduct,
   updateSellerProfileInfo
@@ -25,8 +26,19 @@ export const getInfoProfileSeller = async (req, res) => {
     : getResponse404(res, 'Seller profile info not found');
 };
 
+export const getStatsSeller = async (req, res) => {
+  const { id } = req.params;
+  const result = await fetchStatsSeller(id); // Asumiendo que el ID del vendedor está en req.user.id
+  if (result.error) {
+    return getResponse500(res, result);
+  }
+  return result.data
+    ? getResponse200(res, result.data, 'ok')
+    : getResponse404(res, 'Seller profile info not found');
+};
+
 export const getInfoProductsSeller = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
   const result = await fetchSellerProducts(id);
   result.error
     ? getResponse500(res, result)

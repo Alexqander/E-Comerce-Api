@@ -14,33 +14,33 @@ import {
 import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
 const router = Router();
 // * /apiEcomerce/1.0/orders
-router.get('/', checkAuth, checkRoleAuth(['VENDEDOR', 'CLIENTE']), getOrders);
-router.get('/:id', checkAuth, checkRoleAuth(['VENDEDOR', 'CLIENTE']), getOrder);
+router.get('/', checkAuth, checkRoleAuth(['VENDEDOR', 'USER']), getOrders);
+router.get('/:id', checkAuth, checkRoleAuth(['VENDEDOR', 'USER']), getOrder);
 //* Endpoint para consultar una orden de compra por el id del cliente
 router.get(
   '/user/:id',
   checkAuth,
-  checkRoleAuth(['VENDEDOR', 'CLIENTE']),
+  checkRoleAuth(['VENDEDOR', 'USER']),
   getOrder
 );
 router.post(
   '/',
   checkAuth,
-  checkRoleAuth(['VENDEDOR', 'CLIENTE']),
+  checkRoleAuth(['VENDEDOR', 'USER']),
   validateSchema(OrdersSchema),
   createOrder
 );
 router.put(
   '/:id',
   checkAuth,
-  checkRoleAuth(['VENDEDOR', 'CLIENTE']),
+  checkRoleAuth(['VENDEDOR', 'USER']),
   validateSchema(OrderUpdateSchema),
   updateOrder
 );
 router.delete(
   '/:id',
   checkAuth,
-  checkRoleAuth(['VENDEDOR', 'CLIENTE']),
+  checkRoleAuth(['VENDEDOR', 'USER']),
   deleteOrder
 );
 

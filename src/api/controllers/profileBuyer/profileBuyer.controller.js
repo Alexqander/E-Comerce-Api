@@ -18,7 +18,9 @@ import {
   updateBuyerInfoService,
   updateShoppingCartService,
   updateWishListService,
-  findShoppingCart
+  findShoppingCart,
+  fetchOrdersByBuyer,
+  fetchOrderById
 } from '../../services/profileBuyer.service.js';
 
 // * 1. Información del Comprador
@@ -177,6 +179,24 @@ export const deleteShoppingCart = async (req, res) => {
   result.error
     ? getResponse500(res, result)
     : getResponse200(res, result.data, 'Shopping cart deleted successfully');
+};
+
+// * Ordenes de compra
+// * Endpoint para consultar una orden de compra por el id del cliente
+export const getOrdersBuyer = async (req, res) => {
+  const { id } = req.params;
+  const result = await fetchOrdersByBuyer(id);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(res, result.data, 'Buyer info fetched successfully');
+};
+
+export const getOrderById = async (req, res) => {
+  const { id } = req.params;
+  const result = await fetchOrderById(id);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(res, result.data, 'Buyer info fetched successfully');
 };
 
 // * 4. Direcciones

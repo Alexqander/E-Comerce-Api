@@ -13,6 +13,8 @@ import {
   getInfoProductsWishListBuyer,
   getInfoWishListsBuyer,
   getLastShoppingCart,
+  getOrderById,
+  getOrdersBuyer,
   getShoppingCart,
   removeProductFromWishList,
   removeProductToShopingCart,
@@ -108,5 +110,19 @@ router.delete(
 // ? Addresses
 router.post('/profile/shipping', createShippingAddressBuyer);
 router.post('/profile/billing', createBillingAddressBuyer);
+
+// ? Orders
+router.get(
+  '/profile/orders/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  getOrdersBuyer
+);
+router.get(
+  '/profile/orders/detail/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  getOrderById
+);
 
 export default router;

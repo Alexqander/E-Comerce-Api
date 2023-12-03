@@ -22,6 +22,7 @@ export const fetchSellerProfileInfo = async (sellerId) => {
 };
 
 export const fetchSellerProducts = async (storeId) => {
+  console.log('🛒StoreId', storeId);
   try {
     const products = await prisma.product.findMany({
       where: { storeId },
@@ -55,6 +56,44 @@ export const fetchSellerProducts = async (storeId) => {
     return getMessage(false, products, 'Products successfully fetched');
   } catch (error) {
     return getMessage(true, error.message, 'Error fetching products');
+  }
+};
+
+export const fetchStatsSeller = async (sellerId) => {
+  try {
+    const store = await prisma.store.findFirst({
+      where: { sellerId }
+    });
+    console.log('🛒Store', store);
+    const totalProducts = await prisma.product.count({
+      where: {
+        storeId: store.id
+      }
+    });
+    console.log('🧩 Products', totalProducts);
+    const totalOrders = await prisma.transactionItem.count({
+      where: { sellerId }
+    });
+    console.log('📦 Orders', totalOrders);
+
+    const totalReviews = await prisma.reviews.count({
+      where: {
+        product: {
+          storeId: store.id
+        }
+      }
+    });
+
+    console.log('📝 Reviews', totalReviews);
+
+    return getMessage(
+      false,
+      { totalProducts, totalOrders, totalReviews },
+      'Stats successfully fetched'
+    );
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, error.message, 'Error fetching stats');
   }
 };
 

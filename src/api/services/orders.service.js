@@ -16,14 +16,7 @@ export const findOrderById = async (id) => {
         id
       },
       include: {
-        user: {
-          select: {
-            email: true,
-            name: true,
-            lastName: true,
-            phoneNumber: true
-          }
-        }
+        orderItems: true
       }
     });
 
@@ -35,7 +28,6 @@ export const findOrderById = async (id) => {
   }
 };
 
-export const findOrderByUserId = async (id) => {};
 export const sevedOrder = async (order) => {
   try {
     const newOrder = await prisma.orders.create({
@@ -49,6 +41,19 @@ export const sevedOrder = async (order) => {
     return getMessage(true, error.message, 'Error creating order');
   }
 };
+
+export const sevedOrderItems = async (orderItems) => {
+  try {
+    const newOrderItems = await prisma.orderItem.createMany({
+      data: orderItems
+    });
+
+    return getMessage(false, newOrderItems, 'Order created successfully');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error creating order');
+  }
+};
+
 export const modifiedOrder = async (id, order) => {
   try {
     const updateOrder = await prisma.orders.update({
