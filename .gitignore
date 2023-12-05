@@ -5,4 +5,5 @@ package-lock.json
 thunder-tests
 uploads
 src/logs/
+src/config/logs/
 
