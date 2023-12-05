@@ -9,6 +9,7 @@ services:
       POSTGRES_PASSWORD: 995410
     ports:
       - "5432:5432"
+    restart: always
     volumes:
       - /home/ubuntu/postgres_data:/var/lib/postgresql/data
 
