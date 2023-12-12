@@ -563,3 +563,18 @@ export const createBillingAddressService = async (addressData) => {
     return getMessage(true, error.message, 'Error creating billing address');
   }
 };
+
+// * 5 Reviews
+export const addProductReview = async (productReview) => {
+  try {
+    const newReview = await prisma.reviews.create({
+      data: {
+        ...productReview
+      }
+    });
+
+    return getMessage(false, newReview, 'Product review successfully created');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error creating product review');
+  }
+};

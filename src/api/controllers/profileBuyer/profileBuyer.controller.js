@@ -20,7 +20,8 @@ import {
   updateWishListService,
   findShoppingCart,
   fetchOrdersByBuyer,
-  fetchOrderById
+  fetchOrderById,
+  addProductReview
 } from '../../services/profileBuyer.service.js';
 
 // * 1. Información del Comprador
@@ -212,4 +213,12 @@ export const createBillingAddressBuyer = async (req, res) => {
   result.error
     ? getResponse500(res, result)
     : getResponse200(res, result.data, 'Billing address created successfully');
+};
+
+// * 5. Reviews
+export const createProductReview = async (req, res) => {
+  const result = await addProductReview(req.body);
+  result.error
+    ? getResponse500(res, result)
+    : getResponse200(res, result.data, 'Review created successfully');
 };
