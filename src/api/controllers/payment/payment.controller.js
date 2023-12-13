@@ -52,9 +52,6 @@ export const createSession = async (req, res) => {
         'https://ecomerce-web-client-alexqander.vercel.app/shop/checkout/success',
       cancel_url: 'https://ecomerce-web-client.vercel.app/shop/checkout/cancel'
     });
-    // * development: http://localhost:3000/shop/checkout/success
-    // * development: http://localhost:3000/shop/checkout/cancel
-    // * https://ecomerce-web-client-alexqander.vercel.app/
 
     // ? Actualizo el estado del carrito de compras
     const updateShoppingCartStatus = await updateShoppingCart(
