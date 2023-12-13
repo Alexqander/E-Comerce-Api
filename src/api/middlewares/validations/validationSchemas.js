@@ -26,8 +26,15 @@ export const validateSchema = (schema) => {
     const valid = validate(req.body);
     if (!valid) {
       //! Si la validación falla, envía una respuesta 400 con los detalles del error
-      const errors = new ValidationError(validate.errors);
-      res.status(400).json({ errors });
+      const error = new ValidationError(validate.errors);
+      console.log(error);
+      res.status(400).json({
+        error: {
+          name: error.name,
+          message: error.message,
+          details: error.errors
+        }
+      });
     } else {
       // ? Si la validación es exitosa, pasa al siguiente middleware
       next();

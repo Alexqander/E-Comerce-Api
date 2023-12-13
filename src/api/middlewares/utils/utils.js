@@ -3,7 +3,7 @@ import { getResponse404 } from '../../../helpers/Responses.js';
 const router = new Router();
 
 // ? Manejo de errores de rutas
-export const handlRoutesErrors = router.all('*', (req, res) => {
+export const handleRoutesErrors = router.all('*', (req, res) => {
   return getResponse404(res);
 });
 

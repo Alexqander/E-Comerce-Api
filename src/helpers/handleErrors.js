@@ -44,10 +44,13 @@ export class ParseError extends Error {
 }
 
 export class ValidationError extends Error {
-  constructor(message) {
+  constructor(errors) {
+    const message = errors
+      .map((error) => `${error.dataPath} ${error.message}`)
+      .join(', ');
     super(message);
     this.name = 'ValidationError';
-    this.message = message;
+    this.errors = errors;
   }
 }
 
@@ -69,5 +72,11 @@ export class NotFoundError extends Error {
   constructor(message) {
     super(message);
     this.name = 'NotFoundError';
+  }
+}
+export class BadRequestError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'BadRequestError';
   }
 }

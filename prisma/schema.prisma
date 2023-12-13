@@ -3,47 +3,273 @@
 
 generator client {
   provider = "prisma-client-js"
-} 
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  name      String?
-  password  String
+  id                  String               @id @default(uuid())
+  email               String               @unique
+  phoneNumber         String?              @unique
+  name                String?
+  lastName            String?
+  password            String
+  profilePicture      String?
+  roleId              Int
+  role                Roles                @relation(fields: [roleId], references: [id])
+  buyerProfile        BuyerProfile?        
+  sellerProfile       SellerProfile?       
+  courierProfile      CourierProfile?     
+  Reviews             Reviews[]
+  Sessions            Sessions[]
+  requestResetPassword ResuqestResetPassword[]
+  updatedAt           DateTime             @updatedAt
+  createdAt           DateTime             @default(now())
+}
+
+model BuyerProfile {
+  id                  String      @id @default(uuid())
+  user                User        @relation(fields: [userId], references: [id])
+  userId              String      @unique
+  ShoppingCart        ShoppingCart[]
+  shippingAddresses   ShippingDirections[] // Usar ShippingDirections para direcciones de envío
+  billingAddresses    Address[]             // Usar Address para direcciones de facturación
+  Transactions        Transactions[]
+  Orders              Orders[]
+  WishList            WishList[]
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+
+model SellerProfile {
+  id          String   @id @default(uuid())
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String   @unique
+  store       Store[]
+  transactionItems TransactionItem[] // Relación con TransactionItem
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CourierProfile {
+  id           String    @id @default(uuid())
+  user         User      @relation(fields: [userId], references: [id])
+  userId       String    @unique
+  vehicle      String?    // E.g., "Bike", "Car", "Van", etc.
+  availability String?    // E.g., "Full-Time", "Part-Time", "Weekends", etc.
+  deliveryArea Json?      // Podría ser un JSON con coordenadas o zonas.
+  orders       Orders[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+model Store {
+  id          String    @id @default(uuid())
+  name        String
+  seller      SellerProfile @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+model ResuqestResetPassword {
+  id              String   @id @default(uuid())
+  phoneNumber     String
+  codeVerify      String
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  expiresAt       DateTime
+}
+
+model Roles {
+  id        Int   @id @default(autoincrement())
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  users     User[]
 }
 
 model Product {
-  id        String   @id @default(uuid())
-  name      String
-  price     Float
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  category Category @relation(fields: [categoryId], references: [id])
-  categoryId String
+  id             String        @id @default(uuid())
+  name           String
+  price          Float
+  description    String
+  stock          Int
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime?     @updatedAt
+  store          Store          @relation(fields: [storeId], references: [id])
+  storeId        String
+  cartItems   CartItem[]
+  SubCategory    SubCategory   @relation(fields: [subCategoryId], references: [id])
+  subCategoryId  Int
+  Reviews        Reviews[]
+  Images         Images[]
+  wishListItems  WishListItem[]
+  transactionItems TransactionItem[] // Relación con TransactionItem
+  orderItems  OrderItem[]
 }
 
 model Category {
-  id        String   @id @default(uuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  products  Product[]
+  id          Int        @id @default(autoincrement())
+  name        String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  SubCategory SubCategory[]
 }
 
+model SubCategory {
+  id          Int   @id @default(autoincrement())
+  name        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  description String
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  Product     Product[]
+}
 
-model Order {
+model ShoppingCart {
+  id          String    @id @default(uuid())
+  quantity    Int
+  orderStatus String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  buyer       BuyerProfile @relation(fields: [buyerId], references: [id])
+  buyerId     String
+  cartItems   CartItem[]
+}
+
+model CartItem {
+    id            String      @id @default(uuid())
+    cartId        String
+    productId     String
+    quantity      Int
+    ShoppingCart  ShoppingCart @relation(fields: [cartId], references: [id])
+    Product       Product      @relation(fields: [productId], references: [id])
+}
+
+model WishList {
   id        String   @id @default(uuid())
-  client    String
-  totalAmount Float
-  Address   String
+  name      String
+  buyer     BuyerProfile @relation(fields: [buyerId], references: [id])
+  buyerId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  wishListItems  WishListItem[]
+}
+model WishListItem {
+  id         String      @id @default(uuid())
+  wishListId String
+  productId  String
+  note       String?     // Nota personal opcional
+  addedAt    DateTime    @default(now()) // Fecha en que se añadió el producto
+  WishList   WishList    @relation(fields: [wishListId], references: [id])
+  Product    Product     @relation(fields: [productId], references: [id])
+}
+
+model Reviews {
+  id        String   @id @default(uuid())
+  rating    Int
+  comment   String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Images {
+  id        String  @id @default(uuid())
+  url       String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+}
+
+model Orders {
+  id          String    @id @default(uuid())
+  orderedAt   DateTime  @default(now())
+  deliverDate DateTime?
+  orderStatus String
+  orderItems  OrderItem[]
+  courierId    String?
+  courier      CourierProfile?  @relation(fields: [courierId], references: [id])
+  buyer        BuyerProfile @relation(fields: [buyerId], references: [id])
+  buyerId      String
+  deliveryStatus String         // E.g., "Waiting for Pickup", "In Transit", "Delivered", etc.
+}
+model OrderItem {
+  id        String      @id @default(uuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  Order     Orders      @relation(fields: [orderId], references: [id])
+  Product   Product     @relation(fields: [productId], references: [id])
+}
+model ShippingDirections {
+  id             String        @id @default(uuid())
+  street         String
+  city           String
+  state          String
+  postalCode     String
+  country        String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  buyer          BuyerProfile  @relation(fields: [buyerId], references: [id])
+  buyerId        String
+}
+
+model Transactions {
+  id          String            @id @default(uuid())
+  stripeId    String            @unique
+  buyer       BuyerProfile      @relation(fields: [buyerId], references: [id])
+  buyerId     String
+  totalAmount Float
+  items       TransactionItem[] // Lista de items en la transacción
+  paymentMethod String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+model TransactionItem {
+  id           String       @id @default(uuid())
+  transaction  Transactions @relation(fields: [transactionId], references: [id])
+  transactionId String
+  product      Product      @relation(fields: [productId], references: [id])
+  productId    String
+  seller       SellerProfile @relation(fields: [sellerId], references: [id])
+  sellerId     String
+  quantity     Int          // Cantidad del producto comprado
+  unitPrice    Float        // Precio del producto al momento de la transacción
+  total        Float        // unitPrice * quantity
+  discount     Float?       // Cualquier descuento aplicado a este producto
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+model Sessions {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  token     String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+model Address {
+  id             String        @id @default(uuid())
+  street         String
+  interiorNumber String
+  exteriorNumber String
+  city           String
+  state          String
+  postalCode     String
+  country        String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  buyer          BuyerProfile? @relation(fields: [buyerId], references: [id])
+  buyerId        String?       @unique
+  // Si en el futuro otros perfiles necesitan direcciones de facturación, puedes agregar más relaciones aquí.
 }

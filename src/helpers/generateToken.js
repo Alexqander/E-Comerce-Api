@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/index.js';
 
-export const tokenSign = async (user, expiresIn) => {
+export const tokenSign = async (user) => {
   // ? Genera token
   return jwt.sign(
     {
@@ -10,7 +10,7 @@ export const tokenSign = async (user, expiresIn) => {
     },
     config.jwt.jwtSecret, // ? Clave secreta
     {
-      expiresIn // ? Tiempo de expiracion
+      expiresIn: config.jwt.jwtExpire // ? Tiempo de expiracion
     }
   );
 };

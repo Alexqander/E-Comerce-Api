@@ -1,12 +1,49 @@
 import { Router } from 'express';
 
-import { getUsers } from '../controllers/user.controller.js';
-
+import {
+  deleteUser,
+  getUser,
+  getUsers,
+  updateProfilePicture,
+  updateUser
+} from '../controllers/users/user.controller.js';
+import { validateSchema } from '../middlewares/validations/validationSchemas.js';
+import { UserSchema } from '../middlewares/validations/dtos/user.dto.js';
+import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
+import multer from 'multer';
 const router = Router();
-// * /apiEcomerce/1.0/users/
-router.get('/', getUsers);
-router.post('/save');
-router.put('/update');
-router.delete('/delete');
 
+const upload = multer({ storage: multer.memoryStorage() });
+
+// * /apiEcomerce/1.0/users/
+router.get('/', checkAuth, checkRoleAuth(['ADMIN']), getUsers);
+router.get(
+  '/:id',
+  checkAuth,
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
+  getUser
+);
+router.put(
+  '/:id',
+  checkAuth,
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
+  validateSchema(UserSchema),
+  updateUser
+);
+router.patch(
+  '/image/:id',
+  checkAuth,
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
+  upload.single('imageFile'),
+  updateProfilePicture
+);
+router.delete(
+  '/:id',
+  checkAuth,
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
+  deleteUser
+);
+
+/*   checkAuth,
+  checkRoleAuth(['ADMIN', 'USUARIO', 'VENDEDOR', 'REPARTADOR']), */
 export default router;

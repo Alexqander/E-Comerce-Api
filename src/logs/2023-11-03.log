@@ -1,0 +1,27 @@
+::ffff:127.0.0.1 - - [03/Nov/2023:17:23:46 +0000] "POST /apiEcomerce/1.0/auth/login HTTP/1.1" 404 36 "-" "Thunder Client (https://www.thunderclient.com)"
+POST /apiEcomerce/1.0/auth/login 404 36 - 260.952 ms
+  Request Headers: -
+  Request Body: -
+  Response Body: -
+GET /apiEcomerce/1.0/roles/ 401 26 - 178.916 ms
+  Request Headers: -
+  Request Body: -
+  Response Body: -
+GET /apiEcomerce/1.0/roles/ 401 26 - 209.832 ms
+  Request Headers: -
+  Request Body: -
+  Response Body: -
+GET /apiEcomerce/1.0/roles/ 401 26 - 169.218 ms
+  Request Headers: -
+  Request Body: -
+  Response Body: -
+Request ID: c52dbb27-8e8d-4a0e-ad45-0902be53dad0
+  Date and Time: Fri, 03 Nov 2023 17:40:03 GMT
+  Method and URL: POST /apiEcomerce/1.0/auth/login
+  Status and Content Length: 404 36 - 219.503 ms
+  User Agent: Thunder Client (https://www.thunderclient.com)
+[34mRequest ID: 2a31e3e3-0809-4b83-be52-1553e7003880[39m
+[33mDate and Time: Fri, 03 Nov 2023 17:44:41 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/auth/login[39m
+[31mStatus and Content Length: 404 36 - 230.227 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m

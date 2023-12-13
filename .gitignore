@@ -1,8 +1,10 @@
 node_modules
-.env
 .vscode/*
 .idea/*
 package-lock.json
 thunder-tests
 uploads
-prisma/migrations
+src/logs/
+.env
+src/config/logs/
+

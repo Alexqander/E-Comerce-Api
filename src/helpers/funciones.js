@@ -12,3 +12,9 @@ export function generateUid() {
   const uid = uuidv4();
   return uid;
 }
+
+export const ORDERSTATUS = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELED: 'CANCELED'
+};

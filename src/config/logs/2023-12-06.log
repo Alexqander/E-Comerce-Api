@@ -1,0 +1,15 @@
+[34mRequest ID: 55f0ebd0-a5b5-40d2-b968-79dd0de92cdf[39m
+[33mDate and Time: Wed, 06 Dec 2023 19:13:27 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/auth/login[39m
+[31mStatus and Content Length: 200 895 - 657.806 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36[39m
+[34mRequest ID: 293de26b-c18a-4112-a56c-f0d300a1f836[39m
+[33mDate and Time: Wed, 06 Dec 2023 19:36:06 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/products/365a62ba-65f7-4225-b670-688f630ee7a9[39m
+[31mStatus and Content Length: 401 26 - 150.347 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: b79034f1-c81c-40ed-92bd-644ef6bc08ef[39m
+[33mDate and Time: Wed, 06 Dec 2023 19:36:12 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/e5080d9c-1f3c-4b33-b62d-b3b5fcf7c0ef[39m
+[31mStatus and Content Length: 404 43 - 33.600 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
