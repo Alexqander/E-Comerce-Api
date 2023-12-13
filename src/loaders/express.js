@@ -10,7 +10,10 @@ export default async ({ app }) => {
     cors({
       origin: [
         'http://localhost:3000',
-        'https://ecomerce-web-client.vercel.app'
+        'https://ecomerce-web-client.vercel.app',
+        'https://ecomerce-web-client-alexqander.vercel.app',
+        'https://ecomerce-web-client-git-main-alexqander.vercel.app',
+        'https://ecomerce-web-client-5q6k3hpu3-alexqander.vercel.app'
       ],
       methods: 'GET,PUT,PATCH,POST,DELETE'
     })
