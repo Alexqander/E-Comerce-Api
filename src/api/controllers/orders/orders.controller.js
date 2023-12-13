@@ -1,7 +1,10 @@
 import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
 import {
+  assignOrderToDelivery,
   findOrderById,
+  findOrderItem,
   findOrders,
+  findRepartidores,
   modifiedOrder,
   removeOrder,
   sevedOrder
@@ -39,4 +42,44 @@ export const deleteOrder = async (req, res) => {
   order.error
     ? getResponse500(res, order.data.message, res)
     : getResponse200(res, order.data, 'ok');
+};
+
+export const getRepartidores = async (req, res, next) => {
+  try {
+    const repartidores = await findRepartidores();
+    repartidores.error
+      ? getResponse500(res, repartidores.data, res)
+      : getResponse200(res, repartidores.data, 'ok');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+export const getOrderItem = async (req, res, next) => {
+  try {
+    console.log('🧩 Entre a la funcion te obtener el order Item');
+    const { id } = req.params;
+    const orderItem = await findOrderItem(id);
+    orderItem.error
+      ? getResponse500(res, orderItem.data, orderItem.message)
+      : getResponse200(res, orderItem.data, 'ok');
+  } catch (error) {
+    console.log('❌Error', error);
+    next(error);
+  }
+};
+
+export const asignarRepartidor = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const order = await assignOrderToDelivery(id, req.body);
+    order.error
+      ? getResponse500(res, order.data, order.message)
+      : getResponse200(res, order.data, 'ok');
+  } catch (error) {
+    console.log('❌Error', error);
+    next(error);
+  }
 };

@@ -1,59 +1,58 @@
-import { getResponse200, getResponse500 } from '../../../helpers/Responses.js';
 import {
-  createProfileInfo,
-  fetchAssignedOrders,
-  fetchProfileInfo,
-  modifyAssignedOrder,
-  modifyProfileInfo
+  getResponse200,
+  getResponse404,
+  getResponse500
+} from '../../../helpers/Responses.js';
+import {
+  fetchOrdersDelivered,
+  fetchOrdersToDeliver,
+  updateOrderStatus
 } from '../../services/profile.courier.service.js';
 
-export const getInfoProfile = async (req, res) => {
-  const profile = await fetchProfileInfo(req.userId);
-  profile.error
-    ? getResponse500(res, profile)
-    : getResponse200(res, profile.data, 'Profile info retrieved successfully');
+// * Obtener los pedidos que tenga que entregar el repartidor
+export const getOrdersToDeliver = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const result = await fetchOrdersToDeliver(id); // Asumiendo que el ID del repartidor está en req.user.id
+    if (result.error) {
+      return getResponse500(res, result);
+    }
+    return result.data
+      ? getResponse200(res, result.data, 'ok')
+      : getResponse404(res, 'Orders for courier not found');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
-export const createInfoProfile = async (req, res) => {
-  const profile = await createProfileInfo(req.userId, req.body);
-  profile.error
-    ? getResponse500(res, profile)
-    : getResponse200(res, profile.data, 'Profile info created successfully');
+// * Obtener el historial de pedidos que ha repartido un repartidor
+export const getOrdersDelivered = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await fetchOrdersDelivered(id); // Asumiendo que el ID del repartidor está en req.user.id
+    if (result.error) {
+      return getResponse500(res, result);
+    }
+    return result.data
+      ? getResponse200(res, result.data, 'ok')
+      : getResponse404(res, 'Orders for courier not found');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
-export const updateInfoProfile = async (req, res) => {
-  const updatedProfile = await modifyProfileInfo(req.userId, req.body);
-  updatedProfile.error
-    ? getResponse500(res, updatedProfile)
-    : getResponse200(
-        res,
-        updatedProfile.data,
-        'Profile info updated successfully'
-      );
-};
-
-export const getInfoOrdersAsigned = async (req, res) => {
-  const orders = await fetchAssignedOrders(req.userId);
-  orders.error
-    ? getResponse500(res, orders)
-    : getResponse200(
-        res,
-        orders.data,
-        'Assigned orders retrieved successfully'
-      );
-};
-
-export const updateOrderAsigned = async (req, res) => {
-  const updatedOrder = await modifyAssignedOrder(
-    req.userId,
-    req.params.id,
-    req.body
-  );
-  updatedOrder.error
-    ? getResponse500(res, updatedOrder)
-    : getResponse200(
-        res,
-        updatedOrder.data,
-        'Assigned order updated successfully'
-      );
+// * Modificar el estado de un pedido
+export const modifiedOrderStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { deliveryStatus } = req.body;
+    const orderModified = await updateOrderStatus(id, deliveryStatus);
+    return getResponse200(res, orderModified, 'ok');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };

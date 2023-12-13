@@ -26,21 +26,21 @@ router.get(
 router.put(
   '/:id',
   checkAuth,
-  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTADOR']),
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
   validateSchema(UserSchema),
   updateUser
 );
 router.patch(
   '/image/:id',
   checkAuth,
-  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTADOR']),
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
   upload.single('imageFile'),
   updateProfilePicture
 );
 router.delete(
   '/:id',
   checkAuth,
-  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTADOR']),
+  checkRoleAuth(['ADMIN', 'USER', 'VENDEDOR', 'REPARTIDOR']),
   deleteUser
 );
 

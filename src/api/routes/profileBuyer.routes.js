@@ -4,22 +4,22 @@ import {
   createAndAddProductsToShoppingCart,
   createBillingAddressBuyer,
   createInfoBuyer,
+  createProductReview,
   createShippingAddressBuyer,
   createShoppingCartBuyer,
   createWishListBuyer,
   deleteShoppingCart,
-  deleteWishListBuyer,
   getInfoBuyer,
-  getInfoProductsWishListBuyer,
   getInfoWishListsBuyer,
   getLastShoppingCart,
+  getOrderById,
+  getOrdersBuyer,
   getShoppingCart,
   removeProductFromWishList,
   removeProductToShopingCart,
   savedProductsToShoppingCart,
   updateInfoBuyer,
-  updateShoppingCartBuyer,
-  updateWishListBuyer
+  updateShoppingCartBuyer
 } from '../controllers/profileBuyer/profileBuyer.controller.js';
 import { validateSchema } from '../middlewares/validations/validationSchemas.js';
 import {
@@ -36,13 +36,30 @@ router.post('/profile', createInfoBuyer);
 router.put('/profile', updateInfoBuyer);
 
 // ? WishLists
-router.get('/profile/wishLists', getInfoWishListsBuyer);
-router.post('/profile/wishLists', createWishListBuyer);
-router.patch('/profile/wishLists/:id', addProductToWishList);
-router.patch('/profile/wishLists/:id', removeProductFromWishList);
-router.put('/profile/wishLists/:id', updateWishListBuyer);
-router.delete('/profile/wishLists/:id', deleteWishListBuyer);
-router.get('/profile/wishLists/:id/products', getInfoProductsWishListBuyer);
+router.get(
+  '/profile/wishLists/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  getInfoWishListsBuyer
+);
+router.post(
+  '/profile/wishLists',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  createWishListBuyer
+);
+router.patch(
+  '/profile/wishLists/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  addProductToWishList
+);
+router.patch(
+  '/profile/wishLists/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  removeProductFromWishList
+);
 
 // ? ShoppingCart
 // * 1. Obtener el último carrito de compras
@@ -108,5 +125,28 @@ router.delete(
 // ? Addresses
 router.post('/profile/shipping', createShippingAddressBuyer);
 router.post('/profile/billing', createBillingAddressBuyer);
+
+// ? Orders
+router.get(
+  '/profile/orders/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  getOrdersBuyer
+);
+router.get(
+  '/profile/orders/detail/:id',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  getOrderById
+);
+
+// ? Reviews
+
+router.post(
+  '/profile/reviews/new',
+  checkAuth,
+  checkRoleAuth(['USER']),
+  createProductReview
+);
 
 export default router;

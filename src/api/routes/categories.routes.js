@@ -6,7 +6,6 @@ import {
   getAllCategoriesWithSubcategories,
   getAllSubCategories,
   getCategories,
-  getCategoryById,
   getSubCategories,
   getSubCategoryByCategoryId
 } from '../controllers/categories/categories.controller.js';
@@ -20,7 +19,6 @@ router.get('/sub/', getSubCategories);
 router.get('/with/all', getAllCategoriesWithSubcategories);
 router.get('/sub/all', getAllSubCategories);
 router.get('/sub/:id', getSubCategoryByCategoryId);
-router.get('/:id', getCategoryById);
 router.post('/', createCategory);
 router.post('/sub/', validateSchema(SubCategorySchemaCreate), creatSubcategory);
 router.put('/:id');

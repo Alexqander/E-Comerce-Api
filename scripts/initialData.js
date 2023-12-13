@@ -21,12 +21,12 @@ async function main() {
     }),
     prisma.category.createMany({
       data: [
-        { name: 'Electrónicos' },
-        { name: 'Moda' },
-        { name: 'Hogar y Cocina' },
-        { name: 'Salud y Belleza' },
-        { name: 'Deportes y Aire Libre' },
-        { name: 'Juguetes y Juegos' }
+        { name: 'Electrónicos' }, // 1
+        { name: 'Moda' }, // 2
+        { name: 'Hogar y Cocina' }, // 3
+        { name: 'Salud y Belleza' }, // 4
+        { name: 'Deportes y Aire Libre' }, // 5
+        { name: 'Juguetes y Juegos' } // 6
       ]
     }),
     prisma.subCategory.createMany({
@@ -43,96 +43,64 @@ async function main() {
             'Laptops, desktops, periféricos y accesorios relacionados.'
         },
         {
-          name: 'Audio y Equipos de Sonido',
-          categoryId: 1,
-          description: 'Audífonos, altavoces, sistemas de sonido y más.'
-        },
-
-        {
-          name: 'Ropa para Hombres',
+          name: 'Ropa para Hombre',
           categoryId: 2,
-          description: 'Camisas, pantalones, trajes y ropa casual para hombres.'
+          description: 'Camisas, pantalones, jeans, trajes y más.'
         },
         {
-          name: 'Ropa para Mujeres',
+          name: 'Ropa para Mujer',
           categoryId: 2,
-          description: 'Vestidos, blusas, pantalones y moda femenina.'
+          description: 'Camisas, Vestidos, jeans, blusas y más.'
         },
         {
-          name: 'Calzado',
-          categoryId: 2,
-          description: 'Zapatos, botas, sandalias y más para todos.'
-        },
-        {
-          name: 'Accesorios',
-          categoryId: 2,
-          description: 'Bolsos, relojes, joyería y otros accesorios.'
-        },
-
-        {
-          name: 'Muebles',
+          name: 'Linea Blanca',
           categoryId: 3,
-          description: 'Muebles para sala, comedor, dormitorio y más.'
+          description: 'Refrigeradoras, lavadoras, cocinas y más.'
         },
         {
-          name: 'Electrodomésticos',
+          name: 'Productos de Cocina',
           categoryId: 3,
-          description: 'Refrigeradores, microondas, lavadoras y otros aparatos.'
+          description: 'Ollas, sartenes, cubiertos y más.'
         },
         {
-          name: 'Decoración',
+          name: 'Productos de limpieza',
           categoryId: 3,
-          description: 'Artículos decorativos para el hogar y la oficina.'
+          description: 'Detergentes, jabones, desinfectantes y más.'
         },
-
         {
-          name: 'Maquillaje',
+          name: 'Cuidado Personal',
           categoryId: 4,
-          description: 'Productos de maquillaje para rostro, ojos y labios.'
+          description: 'Cremas, jabones, desodorantes y más.'
         },
         {
-          name: 'Cuidado del Cabello',
+          name: 'Fragancias para Mujer',
           categoryId: 4,
-          description: 'Shampoos, acondicionadores, tratamientos y más.'
+          description: 'Perfumes, colonias y más.'
         },
         {
-          name: 'Productos para la Piel',
+          name: 'Fragancias para Hombre',
           categoryId: 4,
-          description:
-            'Cremas, lociones, protectores solares y cuidado de la piel.'
+          description: 'Perfumes, colonias y más.'
         },
-
         {
-          name: 'Ropa y Calzado Deportivo',
+          name: 'Accesorios deportivos',
           categoryId: 5,
-          description:
-            'Ropa y calzado para deportes y actividades al aire libre.'
+          description: 'Balones, raquetas, guantes y más.'
         },
         {
-          name: 'Equipo de Entrenamiento',
+          name: 'Ropa deportiva',
           categoryId: 5,
-          description: 'Pesas, bandas de resistencia y equipo de gimnasio.'
+          description: 'Camisetas, shorts, sudaderas y más.'
         },
         {
-          name: 'Accesorios para Deportes',
-          categoryId: 5,
-          description: 'Balones, raquetas y otros accesorios deportivos.'
-        },
-
-        {
-          name: 'Juguetes Educativos',
+          name: 'Juguetes para Niños',
           categoryId: 6,
-          description: 'Juguetes que promueven el aprendizaje y desarrollo.'
+          description: 'Muñecas, carros, peluches y más.'
         },
         {
-          name: 'Juegos de Mesa',
+          name: 'Videojuegos y Consolas',
           categoryId: 6,
-          description: 'Juegos para disfrutar en familia o con amigos.'
-        },
-        {
-          name: 'Juguetes para Bebés',
-          categoryId: 6,
-          description: 'Juguetes seguros y divertidos para los más pequeños.'
+          description: 'Playstation, Xbox, Nintendo y más.'
         }
       ]
     })

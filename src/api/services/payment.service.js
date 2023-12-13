@@ -1,6 +1,11 @@
 import { sendEmail } from '../../config/resend.js';
-import { updateShoppingCart } from './profileBuyer.service.js';
-
+import { getMessage } from '../../helpers/Messages.js';
+import { findOrderById } from './orders.service.js';
+import {
+  findShoppingCart,
+  updateShoppingCart
+} from './profileBuyer.service.js';
+import { prisma } from '../../loaders/database.js';
 export const fullFillOrder = async (session) => {
   try {
     console.log('📦 Fullfilling order', session);
@@ -20,7 +25,95 @@ export const fullFillOrder = async (session) => {
 };
 
 export const createOrder = async (session) => {
-  console.log('Creating order', session);
+  try {
+    console.log('📦 Creando una nueva orden');
+    const {
+      city,
+      country,
+      line1,
+      line2,
+      postal_code: postalCode,
+      state
+    } = session.shipping_details.address;
+    const cartId = session.client_reference_id;
+    const cartPaid = await findShoppingCart(cartId);
+    if (cartPaid.error) throw new Error(cartPaid.data);
+    const buyerId = cartPaid.data.buyerId;
+
+    const transactioData = {
+      stripeId: session.id,
+      buyerId,
+      totalAmount: session.amount_total,
+      paymentMethod: session.payment_method_types[0]
+    };
+
+    const addressData = {
+      city,
+      country,
+      street: `${line1} ${line2}`,
+      postalCode,
+      state,
+      buyerId
+    };
+
+    const orderData = {
+      orderStatus: 'registered',
+      buyerId,
+      deliveryStatus: 'pending'
+    };
+
+    // ? Iniciar una transacción
+    const transaction = await prisma.$transaction(async (prisma) => {
+      // * Primero, crear la orden
+      const newOrder = await prisma.orders.create({
+        data: orderData
+      });
+      const newTransaction = await prisma.transactions.create({
+        data: transactioData
+      });
+      console.log('📦 Transaccion creada', newTransaction);
+      const transactionItemsData = cartPaid.data.cartItems.map((item) => ({
+        transactionId: newTransaction.id,
+        productId: item.Product.id,
+        sellerId: item.Product.store.sellerId,
+        quantity: item.quantity,
+        unitPrice: item.Product.price,
+        total: item.Product.price * item.quantity
+      }));
+
+      // ? con el id de la transaccion, crear los items de la transaccion
+      await prisma.transactionItem.createMany({
+        data: transactionItemsData
+      });
+
+      // * Luego, crear la dirección de envío
+      const shippingAddress = await prisma.shippingDirections.create({
+        data: addressData
+      });
+      // * Luego registro la transaccion para poder registrar el pago
+      // ? Luego, con el ID de la nueva orden, crear los ítems de la orden
+      const orderItemsData = cartPaid.data.cartItems.map((item) => ({
+        orderId: newOrder.id,
+        productId: item.Product.id,
+        price: item.Product.price,
+        quantity: item.quantity
+      }));
+      await prisma.orderItem.createMany({
+        data: orderItemsData
+      });
+      console.log('📦 direccion de envio', shippingAddress);
+      return newOrder;
+    });
+
+    // ? Si todo va bien, seguir con el flujo normal
+    const orderUpdated = await findOrderById(transaction.id);
+    if (orderUpdated.error) return { error: true, data: orderUpdated.data };
+
+    console.log('📦 Order created', orderUpdated.data);
+    return getMessage(false, orderUpdated.data, 'Order created successfully');
+  } catch (error) {
+    return { error: true, data: error.message };
+  }
 };
 
 export const sendEmailToBuyer = async (session) => {

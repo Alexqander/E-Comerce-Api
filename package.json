@@ -7,6 +7,9 @@
   "prisma": {
     "schema": "prisma/schema.prisma"
   },
+  "engines": {
+    "node": ">=18.0.0 <20.0.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.js",
@@ -16,10 +19,10 @@
     "data": "node ./scripts/initialData.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alexander Machado Ambrocio",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^5.5.2",
+    "@prisma/client": "^5.7.0",
     "@sinclair/typebox": "^0.28.11",
     "ajv": "^8.12.0",
     "ajv-errors": "^3.0.0",
