@@ -2003,3 +2003,308 @@
 [32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
 [31mStatus and Content Length: 200 1070 - 18.423 ms[39m
 [36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: abb35dd3-3aa2-4b0c-b3b3-1421e01f17eb[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:24:17 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/auth/login[39m
+[31mStatus and Content Length: 200 873 - 589.325 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 0bcdd83d-c06d-4ee3-9403-b0ea40e978b2[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:24:17 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 157.181 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: e482c2a2-0a93-433c-83f4-82aa4ead9261[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:24:27 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 3694 - 129.575 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: d0f50e90-761b-4195-84eb-647a3ad94e54[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:24:27 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 1070 - 31.855 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 3faa6796-4ff3-48ab-974c-b3b57040daf1[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:24:29 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 20.239 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 88ddb1a1-c893-4658-bbda-b90ed8d68862[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:24:34 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 801 - 57.078 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 524c79ba-729a-4952-9697-b28724347a07[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:25:50 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 801 - 18.208 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 7b301d01-67b5-45d5-ac36-06edc1ca0d0f[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:26:02 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/profileBuyer/profile/reviews/new[39m
+[31mStatus and Content Length: 200 386 - 22.018 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 77c2ec81-8aef-40bc-94f7-cf50243e79f8[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:26:06 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 19.819 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: a0ba4fd2-36ec-47bf-a296-4477d8d05c48[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:26:33 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 18.172 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: e5aee029-9107-47fe-92a2-f6f161730878[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:26:47 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 13.890 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 7f7e8aaa-0d56-4ed2-b150-93f014d1d104[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:26:49 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 31.491 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 0dce6163-4c82-401d-87f4-e31b6a75e393[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:27:59 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 18.749 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: d727487c-1fd4-44c1-b902-3a68d2993029[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:28:43 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 54.171 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 1b3e9370-1892-48a8-81ce-6de43ed6d85c[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:28:45 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 66.138 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 4aacb7c1-2311-4283-b080-a8e7ff281e1a[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:35:07 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 83.745 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: d3d04117-9308-4428-aa1a-2c93cb267c59[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:35:09 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 67.489 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 219efde3-426d-4ca6-860e-a10fb9d4c94f[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:35:54 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 19.002 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 859a2664-3367-418d-aa99-56b47547a0d1[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:36:09 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 15.745 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 4eb2a8af-b502-4c27-a802-f9024657fa61[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:36:16 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 18.041 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 9324642c-09f0-40a1-b832-5c408df898a0[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:36:49 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 19.048 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 8129416d-4027-46c2-a526-ac8e394c8dee[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:37:57 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 19.019 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: c92731bc-440f-429e-b119-31323c91e4b7[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:39:15 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 20.957 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 76533c3b-7056-47f2-9205-cf46421f202a[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:39:21 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 1021 - 16.324 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: f9d7dc2a-5848-47ef-bb71-acceaca345d4[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:09 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 3694 - 34.335 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: ec72a10d-7ece-4177-979a-0243b0b09478[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:09 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 1070 - 14.586 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 320f25ff-0ca4-45a5-bd5c-e23cc4a62c6e[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:12 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 147.283 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 2fc10085-249e-4049-9df3-b1351c2d928e[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:13 GMT[39m
+[32mMethod and URL: PATCH /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 500 348 - 389.555 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 8dea75ce-2ee5-4679-934e-cd0e87595d4b[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:17 GMT[39m
+[32mMethod and URL: PATCH /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 500 348 - 32.886 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: d3c9619e-c2ea-48ed-867e-785a76048bba[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:23 GMT[39m
+[32mMethod and URL: PATCH /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 500 348 - 25.039 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: f6a0b0c3-7a3b-4fc6-a188-8e9c692f1f06[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:25 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 3694 - 9.525 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 2f64f80e-ba7e-49f0-85ec-87f43c587dd9[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:25 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 1070 - 5.837 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 04fad40f-b7ca-4ea9-99bb-fdc3486ec75d[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:27 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 21.263 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: feb587ad-7874-4737-951d-08570aa82ffd[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:32 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 16.882 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 05e624db-be58-48a2-9dcf-022bdc27c6bb[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:42:38 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/wishLists/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 200 1755 - 38.030 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 4a1bc69c-11d0-463c-8e96-9cdb9b8d0dce[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:44:11 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 3694 - 11.314 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: ea0d1819-55e5-454a-bf9f-ce0557baa2f5[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:44:11 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 1070 - 6.457 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: ebc5481c-a41b-4d30-a4c2-c1a638f183f4[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:44:13 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 21.198 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 273475b6-7e6c-47bf-a252-2e77f3fc7b4b[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:44:13 GMT[39m
+[32mMethod and URL: PATCH /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 500 348 - 20.913 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 5785ec22-bd7c-4cbb-96d6-8c614de6be62[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:44:21 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 304 undefined - 18.474 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: da8338a7-6d06-41d3-ba88-08c137fc9d9c[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:44:26 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/wishLists/c1890277-9313-44ac-b14b-7a5d40b3beca[39m
+[31mStatus and Content Length: 200 1755 - 20.619 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 5f6d8baf-8dea-43fb-8115-2e9d11297e93[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:45:09 GMT[39m
+[32mMethod and URL: PATCH /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 401 26 - 0.356 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: f528a8a0-11a1-4dbb-aa92-83dd7269af4e[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:45:35 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/auth/logOutSession/[39m
+[31mStatus and Content Length: 200 418 - 40.604 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 502f4976-d824-41f6-a30b-ff4039752bf1[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:45:41 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/auth/login[39m
+[31mStatus and Content Length: 404 36 - 66.846 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: ddce21d9-be91-4a7e-9a33-0cf28cdb59f4[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:45:51 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/auth/login[39m
+[31mStatus and Content Length: 200 895 - 151.618 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 6216becc-11ea-4c3e-82d3-7ebf7cf1f3fb[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:46:35 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/users[39m
+[31mStatus and Content Length: 200 3452 - 81.822 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: d8f2020d-cedb-47a5-9383-d0116d1f1446[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:46:36 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/users[39m
+[31mStatus and Content Length: 200 3452 - 23.520 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 33098414-bbb7-4b80-ba94-79224dac09fd[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:49:54 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 401 26 - 2.683 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: 8d89bbad-529e-4d75-9044-f6ce39e5e618[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:50:03 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 401 26 - 4.158 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: a2c5c976-d372-456c-b533-6536cad7bf6a[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:50:11 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/wishLists/8e9c4c4b-fe00-44bb-8d65-f13cc5292560[39m
+[31mStatus and Content Length: 404 36 - 2.962 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: ccfe7bf4-ef4f-4494-b618-e499bccdf570[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:52:01 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/transactions[39m
+[31mStatus and Content Length: 200 973 - 41.924 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: fab0fb7e-e342-476d-be89-7d8d82d050df[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:53:18 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 107 - 26.037 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: 53bf9411-ae0c-4e6c-b7d7-73696d9600c9[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:54:56 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 135 - 58.787 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: 6c49ea1b-51aa-4911-b898-e267f0fcd2e5[39m
+[33mDate and Time: Wed, 13 Dec 2023 14:55:14 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/users[39m
+[31mStatus and Content Length: 200 3452 - 58.147 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 231ff5de-8a97-465b-8ef5-b55fab7d3e08[39m
+[33mDate and Time: Wed, 13 Dec 2023 15:15:03 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0undefined[39m
+[31mStatus and Content Length: 404 36 - 3.996 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 6df5b188-d6f6-40b7-ac15-9a22f030b462[39m
+[33mDate and Time: Wed, 13 Dec 2023 15:16:37 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 135 - 50.762 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 04af0fb4-fadc-4cca-9ba1-68480387b658[39m
+[33mDate and Time: Wed, 13 Dec 2023 15:16:37 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 135 - 16.763 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: c67394aa-f18e-41a3-908a-221746a8cd3c[39m
+[33mDate and Time: Wed, 13 Dec 2023 15:17:52 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 135 - 18.488 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: f0dacee9-ed0e-415d-9dbd-e5e6a2277fcc[39m
+[33mDate and Time: Wed, 13 Dec 2023 15:18:48 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 135 - 22.832 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: dbd58263-fb77-4501-a2a5-07553b71fbcf[39m
+[33mDate and Time: Wed, 13 Dec 2023 15:19:24 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 135 - 17.559 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 3c4da576-7efe-4bbe-b115-a972e018ed0b[39m
+[33mDate and Time: Wed, 13 Dec 2023 15:19:48 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileAdmin/stats/overview[39m
+[31mStatus and Content Length: 200 135 - 16.711 ms[39m
+[36mUser Agent: axios/1.6.2[39m

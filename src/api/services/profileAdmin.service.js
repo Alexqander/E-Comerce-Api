@@ -156,10 +156,14 @@ export const fetchGeneralStats = async () => {
     // Aquí puedes hacer varias consultas para obtener diferentes estadísticas y luego combinarlas en un objeto.
     const userCount = await prisma.user.count();
     const productCount = await prisma.product.count();
+    const orderCount = await prisma.orders.count();
+    const transactionCount = await prisma.transactions.count();
     // ... otras estadísticas
     const stats = {
       users: userCount,
-      products: productCount
+      products: productCount,
+      orders: orderCount,
+      transactions: transactionCount
       // ... otros datos
     };
     return getMessage(false, stats, 'General statistics fetched successfully.');
