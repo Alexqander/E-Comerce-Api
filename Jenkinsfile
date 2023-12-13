@@ -39,6 +39,14 @@ pipeline {
             }
         }
 
+        stage('🔍 Análisis SonarQube') {
+            steps {
+                withSonarQubeEnv('Fast-shop-api') {
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+
         stage('🚀 Desplegar Aplicación') {
             steps {
                 script {
