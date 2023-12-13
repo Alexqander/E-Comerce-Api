@@ -48,9 +48,12 @@ export const createSession = async (req, res) => {
       shipping_address_collection: {
         allowed_countries: ['MX']
       },
-      success_url: 'http://localhost:3000/shop/checkout/success',
-      cancel_url: 'http://localhost:4000/apiEcomerce/1.0/payment/cancel'
+      success_url:
+        'https://ecomerce-web-client.vercel.app/shop/checkout/success',
+      cancel_url: 'https://ecomerce-web-client.vercel.app/shop/checkout/cancel'
     });
+    // * development: http://localhost:3000/shop/checkout/success
+    // * development: http://localhost:3000/shop/checkout/cancel
 
     // ? Actualizo el estado del carrito de compras
     const updateShoppingCartStatus = await updateShoppingCart(
