@@ -738,3 +738,108 @@
 [32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/wishLists/5c61d3da-f348-4564-a95b-242a50df0b60[39m
 [31mStatus and Content Length: 404 36 - 1.343 ms[39m
 [36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: b060bcb1-1257-440a-b1b7-7ecfbdd6afe2[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:34:07 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 107.481 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 493526b6-6ffb-4262-89dd-d3ddb44b9a05[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:35:08 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 3694 - 45.931 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: eb652d96-9637-4538-b7ec-4bc5bbd44c1c[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:35:08 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 1070 - 16.304 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 7b3f622a-e704-41aa-8332-7fe6c2a45b4c[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:35:10 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 3694 - 12.877 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 9216cdeb-f21c-4693-a9c3-43aa0b485277[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:35:10 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 1070 - 11.576 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 2f619774-5315-44cb-b8b7-f14ca834a9f8[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:35:10 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileBuyer/profile/shoppingCart/5c61d3da-f348-4564-a95b-242a50df0b60[39m
+[31mStatus and Content Length: 304 undefined - 37.001 ms[39m
+[36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: e68a20eb-9c33-4d09-9ecb-4ae8fcf62c3a[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:35:41 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 801 - 33.928 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: 8a70458d-2f94-4233-85db-8ede43134ecd[39m
+[33mDate and Time: Tue, 12 Dec 2023 07:35:42 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/bc7c655c-7f7f-4b68-a9fe-1eeeec47723c[39m
+[31mStatus and Content Length: 200 801 - 13.366 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: c69a341a-8987-455d-86be-a1864b4c120b[39m
+[33mDate and Time: Tue, 12 Dec 2023 21:48:26 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/users[39m
+[31mStatus and Content Length: 401 26 - 11.112 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: 55f4c223-ae9f-499b-bf9c-66f470f38314[39m
+[33mDate and Time: Tue, 12 Dec 2023 21:48:42 GMT[39m
+[32mMethod and URL: POST /apiEcomerce/1.0/auth/login[39m
+[31mStatus and Content Length: 200 895 - 296.180 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: b89c920b-554e-4e7d-9b4d-9b98a6a5a54c[39m
+[33mDate and Time: Tue, 12 Dec 2023 21:48:58 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/users[39m
+[31mStatus and Content Length: 200 3284 - 68.026 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: aa535bd4-bfe0-4be8-b1c9-298180ec6d93[39m
+[33mDate and Time: Tue, 12 Dec 2023 21:51:38 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profile/repartidor/deliver/3aa20c4e-325b-4d87-b8dd-fe8e351cb2f0[39m
+[31mStatus and Content Length: 404 36 - 2.665 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: f5a5d2e3-a1a7-4dcc-a329-23cabd3389d1[39m
+[33mDate and Time: Tue, 12 Dec 2023 21:52:32 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profile/repartidor/deliver/3aa20c4e-325b-4d87-b8dd-fe8e351cb2f0[39m
+[31mStatus and Content Length: 404 36 - 4.854 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: 0b17dc6b-5c92-4826-9a11-6fb4d79f431e[39m
+[33mDate and Time: Tue, 12 Dec 2023 21:53:04 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileCourier/profile/repartidor/deliver/3aa20c4e-325b-4d87-b8dd-fe8e351cb2f0[39m
+[31mStatus and Content Length: 200 46 - 23.177 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: 1b0273eb-c744-4a2a-8841-0b2ae8283ff4[39m
+[33mDate and Time: Tue, 12 Dec 2023 21:53:43 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileCourier/profile/repartidor/history/3aa20c4e-325b-4d87-b8dd-fe8e351cb2f0[39m
+[31mStatus and Content Length: 200 46 - 14.834 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: b7907533-e3f7-4af9-8d94-23c726346c05[39m
+[33mDate and Time: Tue, 12 Dec 2023 22:12:23 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/orders/ecdfa858-731b-49bb-9632-f574bc0821f2[39m
+[31mStatus and Content Length: undefined undefined - undefined ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: f3e95c78-ad54-46af-bf10-b18e0114e883[39m
+[33mDate and Time: Tue, 12 Dec 2023 22:13:26 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/orders/ecdfa858-731b-49bb-9632-f574bc0821f2[39m
+[31mStatus and Content Length: 500 1091 - 15.944 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: e7ab79c3-3940-4afd-831a-d26ae508c976[39m
+[33mDate and Time: Tue, 12 Dec 2023 22:14:04 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/orders/ecdfa858-731b-49bb-9632-f574bc0821f2[39m
+[31mStatus and Content Length: 500 1091 - 19.905 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: b10f0ae1-8c30-4b24-b281-a66cd6eea118[39m
+[33mDate and Time: Tue, 12 Dec 2023 22:14:23 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/orders/ecdfa858-731b-49bb-9632-f574bc0821f2[39m
+[31mStatus and Content Length: 500 1252 - 18.554 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: 92992468-26a9-4813-9d66-87a7ca2ae502[39m
+[33mDate and Time: Tue, 12 Dec 2023 22:15:15 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/orders/ecdfa858-731b-49bb-9632-f574bc0821f2[39m
+[31mStatus and Content Length: 200 3653 - 86.435 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m
+[34mRequest ID: e8c2e9dc-597d-4ba9-92e9-2212a6ae7ea9[39m
+[33mDate and Time: Tue, 12 Dec 2023 22:16:41 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/profileSeller/profile/orders/ecdfa858-731b-49bb-9632-f574bc0821f2[39m
+[31mStatus and Content Length: 200 4109 - 60.740 ms[39m
+[36mUser Agent: Thunder Client (https://www.thunderclient.com)[39m

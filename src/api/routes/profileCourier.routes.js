@@ -1,19 +1,21 @@
 import { Router } from 'express';
 import {
-  createInfoProfile,
-  getInfoOrdersAsigned,
-  getInfoProfile,
-  updateInfoProfile,
-  updateOrderAsigned
+  getOrdersDelivered,
+  getOrdersToDeliver,
+  modifiedOrderStatus
 } from '../controllers/profileCourier/profileCourier.controller.js';
+import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
 
 const router = Router();
-// Información del perfil
-router.get('/profile', getInfoProfile);
-router.post('/profile', createInfoProfile);
-router.put('/profile', updateInfoProfile);
-// Ordenes asignadas
-router.get('/profile/orders', getInfoOrdersAsigned);
-router.put('/profile/orders/:id', updateOrderAsigned);
+// *  Información de las ordenes que tiene que entregar un repartidor
+
+router.get(
+  '/profile/repartidor/deliver/:id',
+  checkAuth,
+  checkRoleAuth(['REPARTIDOR']),
+  getOrdersToDeliver
+);
+router.get('/profile/repartidor/history/:id', getOrdersDelivered);
+router.patch('/profile/repartidor/deliver/:id', modifiedOrderStatus);
 
 export default router;

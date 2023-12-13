@@ -189,3 +189,118 @@ export const removeProduct = async (productId) => {
     return getMessage(true, error.message, 'Error deleting product');
   }
 };
+
+// * Funciones para obtener las ordenes de compra de un vendedor
+
+export const fetchOrdersBySeller = async (sellerId) => {
+  try {
+    const orders = await prisma.orderItem.findMany({
+      orderBy: {
+        Order: {
+          orderedAt: 'desc'
+        }
+      },
+      where: {
+        Product: {
+          store: {
+            sellerId
+          }
+        }
+      },
+      select: {
+        id: true,
+        quantity: true,
+        Order: {
+          select: {
+            id: true,
+            buyer: {
+              select: {
+                user: {
+                  select: {
+                    name: true,
+                    lastName: true,
+                    email: true,
+                    phoneNumber: true
+                  }
+                },
+                shippingAddresses: {
+                  take: 1,
+                  orderBy: {
+                    createdAt: 'desc'
+                  },
+                  select: {
+                    city: true,
+                    state: true,
+                    street: true,
+                    country: true,
+                    postalCode: true
+                  }
+                }
+              }
+            },
+            orderStatus: true,
+            orderedAt: true,
+            deliverDate: true,
+            deliveryStatus: true
+          }
+        },
+        Product: {
+          select: {
+            name: true,
+            price: true,
+            description: true,
+            store: {
+              select: {
+                name: true,
+                seller: {
+                  select: {
+                    id: true,
+                    store: true
+                  }
+                }
+              }
+            },
+            Images: {
+              take: 1,
+              select: {
+                url: true
+              }
+            }
+          }
+        }
+      }
+    });
+    return getMessage(false, orders, 'Orders successfully fetched');
+  } catch (error) {
+    console.log(error);
+    return getMessage(true, error.message, 'Error fetching orders');
+  }
+};
+
+// * Cambiar el estado de una orden de compra
+
+export const updateOrderStatus = async (orderId, status) => {
+  try {
+    const order = await prisma.orderItem.update({
+      where: { id: orderId },
+      data: { status }
+    });
+    return getMessage(false, order, 'Order status successfully updated');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error updating order status');
+  }
+};
+
+// * Asignar la orden a un repartidor
+
+export const assignOrderToDelivery = async (orderId, deliveryId) => {
+  try {
+    const order = await prisma.orderItem.update({
+      where: { id: orderId },
+      data: { deliveryId }
+    });
+    return getMessage(false, order, 'Order successfully assigned to delivery');
+  } catch (error) {
+    return getMessage(true, error.message, 'Error assigning order to delivery');
+  }
+};

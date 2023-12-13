@@ -6,12 +6,14 @@ import {
 import {
   createNewProduct,
   createSellerProfileInfo,
+  fetchOrdersBySeller,
   fetchProductTransactions,
   fetchSellerProducts,
   fetchSellerProfileInfo,
   fetchStatsSeller,
   removeProduct,
   updateExistingProduct,
+  updateOrderStatus,
   updateSellerProfileInfo
 } from '../../services/profileSeller.service.js';
 
@@ -85,4 +87,49 @@ export const deleteProductSeller = async (req, res) => {
   result.error
     ? getResponse500(res, result)
     : getResponse200(res, result.data, 'ok');
+};
+
+// * Enpoints para ver las ordenes de compra de un vendedor
+
+export const getOrdersSeller = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await fetchOrdersBySeller(id);
+    result.error
+      ? getResponse500(res, result)
+      : getResponse200(res, result.data, 'Seller info fetched successfully');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+// * Cambiar el estado de una orden de compra
+
+export const changeOrderStatus = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+    const result = await updateOrderStatus(id, status);
+    result.error
+      ? getResponse500(res, result)
+      : getResponse200(res, result.data, 'Seller info fetched successfully');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+// * Asignar una orden de compra a un repartidor
+export const assingOrder = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { sellerId } = req.body;
+    const result = await updateOrderStatus(id, sellerId);
+    result.error
+      ? getResponse500(res, result)
+      : getResponse200(res, result.data, 'Seller info fetched successfully');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };

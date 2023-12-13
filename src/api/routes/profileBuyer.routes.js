@@ -37,7 +37,7 @@ router.put('/profile', updateInfoBuyer);
 
 // ? WishLists
 router.get(
-  '/profile/wishLists',
+  '/profile/wishLists/:id',
   checkAuth,
   checkRoleAuth(['USER']),
   getInfoWishListsBuyer

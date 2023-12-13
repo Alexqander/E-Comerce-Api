@@ -9,7 +9,10 @@ import {
   getOrder,
   createOrder,
   updateOrder,
-  deleteOrder
+  deleteOrder,
+  getRepartidores,
+  getOrderItem,
+  asignarRepartidor
 } from '../controllers/orders/orders.controller.js';
 import { checkAuth, checkRoleAuth } from '../middlewares/auth/auth.js';
 const router = Router();
@@ -42,6 +45,29 @@ router.delete(
   checkAuth,
   checkRoleAuth(['VENDEDOR', 'USER']),
   deleteOrder
+);
+
+// * Obtener a los vendedores para asignarles una orden
+router.get(
+  '/profile/repartidores',
+  checkAuth,
+  checkRoleAuth(['VENDEDOR', 'USER']),
+  getRepartidores
+);
+
+// * Obtener el orderItem de una orden de compra
+router.get(
+  '/profile/orderItem/:id',
+  checkAuth,
+  checkRoleAuth(['VENDEDOR', 'USER']),
+  getOrderItem
+);
+
+router.patch(
+  '/profile/repartidor/deliver/:id',
+  checkAuth,
+  checkRoleAuth(['VENDEDOR', 'USER']),
+  asignarRepartidor
 );
 
 export default router;

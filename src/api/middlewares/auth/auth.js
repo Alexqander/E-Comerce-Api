@@ -23,6 +23,7 @@ export const checkAuth = async (req, res, next) => {
     }
   } catch (error) {
     console.error(error);
+    return getResponse401(res);
   }
 };
 
@@ -46,5 +47,6 @@ export const checkRoleAuth = (roles) => async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
+    return getResponse401(res);
   }
 };

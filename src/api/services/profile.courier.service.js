@@ -1,58 +1,96 @@
 import { prisma } from '../../loaders/database.js';
 import { getMessage } from '../../helpers/Messages.js';
-export const fetchProfileInfo = async (userId) => {
+
+// * Obtener los pedidos que tenga por entregar un repartidor
+export const fetchOrdersToDeliver = async (courierId) => {
   try {
-    const profile = await prisma.curierProfile.findUnique({
-      where: { userId }
+    const orders = await prisma.orders.findMany({
+      where: {
+        courierId,
+        deliveryStatus: 'EN CAMINO' // Ajusta esto según tus estados de pedido
+      },
+      include: {
+        orderItems: {
+          include: {
+            Product: true
+          }
+        },
+        buyer: {
+          select: {
+            user: {
+              select: {
+                name: true,
+                lastName: true,
+                email: true,
+                phoneNumber: true
+              }
+            },
+            shippingAddresses: {
+              take: 1,
+              orderBy: {
+                createdAt: 'desc'
+              },
+              select: {
+                city: true,
+                state: true,
+                street: true,
+                country: true,
+                postalCode: true
+              }
+            }
+          }
+        }
+      }
     });
-    return getMessage(false, profile, 'Data successfully obtained');
+    return getMessage(false, orders, 'Orders for courier fetched successfully');
   } catch (error) {
-    return getMessage(true, error.message, 'Error fetching profile info');
+    return getMessage(true, error.message, 'Error fetching orders for courier');
   }
 };
 
-export const createProfileInfo = async (userId, profileData) => {
+// * Obtener el historial de pedidos que ha repartido un repartidor
+export const fetchOrdersDelivered = async (courierId) => {
   try {
-    const newProfile = await prisma.curierProfile.create({
-      data: { ...profileData, userId }
+    const orders = await prisma.orders.findMany({
+      where: {
+        courierId,
+        deliveryStatus: 'Delivered' // Ajusta esto según tus estados de pedido
+      },
+      include: {
+        orderItems: {
+          include: {
+            Product: true
+          }
+        },
+        buyer: {
+          select: {
+            user: {
+              select: {
+                name: true,
+                lastName: true,
+                email: true,
+                phoneNumber: true
+              }
+            }
+          }
+        }
+      }
     });
-    return getMessage(false, newProfile, 'Profile successfully created');
+    return getMessage(false, orders, 'Orders for courier fetched successfully');
   } catch (error) {
-    return getMessage(true, error.message, 'Error creating profile info');
+    return getMessage(true, error.message, 'Error fetching orders for courier');
   }
 };
 
-export const modifyProfileInfo = async (userId, updates) => {
+// * Actualizar el estado de un pedido
+export const updateOrderStatus = async (orderId, status) => {
   try {
-    const updatedProfile = await prisma.curierProfile.update({
-      where: { userId },
-      data: updates
-    });
-    return getMessage(false, updatedProfile, 'Profile successfully updated');
-  } catch (error) {
-    return getMessage(true, error.message, 'Error updating profile info');
-  }
-};
-
-export const fetchAssignedOrders = async (userId) => {
-  try {
-    const orders = await prisma.order.findMany({
-      where: { courierId: userId }
-    });
-    return getMessage(false, orders, 'Orders successfully fetched');
-  } catch (error) {
-    return getMessage(true, error.message, 'Error fetching assigned orders');
-  }
-};
-
-export const modifyAssignedOrder = async (userId, orderId, updates) => {
-  try {
-    const order = await prisma.order.update({
+    const order = await prisma.orders.update({
       where: { id: orderId },
-      data: updates
+      data: { deliveryStatus: status }
     });
-    return getMessage(false, order, 'Order successfully updated');
+    return getMessage(false, order, 'Order status successfully updated');
   } catch (error) {
-    return getMessage(true, error.message, 'Error updating assigned order');
+    return getMessage(true, error.message, 'Error updating order status');
   }
 };
