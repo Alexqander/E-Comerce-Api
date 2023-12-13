@@ -1993,3 +1993,13 @@
 [32mMethod and URL: GET /apiEcomerce/1.0/auth/logOutSession/[39m
 [31mStatus and Content Length: 200 418 - 23.544 ms[39m
 [36mUser Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36[39m
+[34mRequest ID: 72d1905c-b19e-40b7-b18d-d0db12bbf2ee[39m
+[33mDate and Time: Wed, 13 Dec 2023 10:20:41 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/products/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 3694 - 48.967 ms[39m
+[36mUser Agent: axios/1.6.2[39m
+[34mRequest ID: e3632e0a-9f46-4e52-82b2-51acd1542a5b[39m
+[33mDate and Time: Wed, 13 Dec 2023 10:20:41 GMT[39m
+[32mMethod and URL: GET /apiEcomerce/1.0/categories/?page=1&limit=9[39m
+[31mStatus and Content Length: 200 1070 - 18.423 ms[39m
+[36mUser Agent: axios/1.6.2[39m
