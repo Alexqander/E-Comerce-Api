@@ -8,7 +8,10 @@ import { accessLogStream, assignId, morganFormat } from '../config/morgan.js';
 export default async ({ app }) => {
   app.use(
     cors({
-      origin: 'http://localhost:3000',
+      origin: [
+        'http://localhost:3000',
+        'https://ecomerce-web-client.vercel.app'
+      ],
       methods: 'GET,PUT,PATCH,POST,DELETE'
     })
   );
